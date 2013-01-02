@@ -7,12 +7,21 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <ServiceManagement/ServiceManagement.h>
+
+#import "NSFileManager+DirectoryLocations.h"
+
+#import "MASPreferencesWindowController.h"
+#import "PrefIndexViewController.h"
+#import "PrefConfigViewController.h"
+#import "StartAtLoginController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem * startStop;
     IBOutlet NSMenuItem * running;
+    IBOutlet NSButton *loginCheck;
     
     NSStatusItem * statusItem;
     
@@ -22,6 +31,7 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (strong) NSWindowController *preferencesWindow;
 
 -(IBAction)openHandleBar:(id)sender;
 

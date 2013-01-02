@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>HandleBarHelperApp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>04F386EB168E642600B4CB4A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>04F38AE31690EB8A00B4CB4A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
