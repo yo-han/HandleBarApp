@@ -16,7 +16,7 @@
 #import "PrefConfigViewController.h"
 #import "StartAtLoginController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     
     IBOutlet NSMenu *statusMenu;
     IBOutlet NSMenuItem * startStop;
@@ -24,10 +24,14 @@
     IBOutlet NSButton *loginCheck;
     
     NSStatusItem * statusItem;
+    NSTimer *updateStatusTimer;
     
     NSString * projectPath;
-    NSString * projectScriptUrl;
+    NSString * convertScriptUrl;
     NSString * handleBarViewUrl;
+    NSString * webserverScriptUrl;
+    
+    int viewPid;
 }
 
 @property (assign) IBOutlet NSWindow *window;

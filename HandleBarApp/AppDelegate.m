@@ -26,10 +26,16 @@
     
     NSString *dirMediaDone = [NSString stringWithFormat:@"%@/media/done",appSupportPath];
     NSString *dirMediaFailed = [NSString stringWithFormat:@"%@/media/failed",appSupportPath];
+    NSString *dirMediaConverted = [NSString stringWithFormat:@"%@/media/converted",appSupportPath];
+    NSString *dirMediaSubtitles = [NSString stringWithFormat:@"%@/media/subtitles",appSupportPath];
+    NSString *dirMediaImages = [NSString stringWithFormat:@"%@/media/images",appSupportPath];
     
     [self createDir:appSupportPath];
     [self createDir:dirMediaDone];
     [self createDir:dirMediaFailed];
+    [self createDir:dirMediaConverted];
+    [self createDir:dirMediaSubtitles];
+    [self createDir:dirMediaImages];
     
     bool b = [[NSFileManager defaultManager] fileExistsAtPath:dbFilePath];
 
@@ -40,15 +46,19 @@
         NSString *defaultDBPath = [NSString stringWithFormat:@"%@/handleBar.db",handleBarDir];
         NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/config.ini",handleBarDir];
         NSString *configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.ini"];
-        
+        NSError *err;
         [fileManager copyItemAtPath:defaultDBPath toPath:dbFilePath error:NULL];
-        [fileManager copyItemAtPath:defaultConfigPath toPath:configFilePath error:NULL];
+        [fileManager copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
+        NSLog(@"%@",err);
     }
 
     if([[NSFileManager defaultManager] fileExistsAtPath:configLinkFile] == NO) {
-                
+       
         [appSupportPath writeToFile:configLinkFile atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     }
+    
+    [self startStopConverter:@"start"];
+    [self performSelectorInBackground:@selector(startStopWebserver:) withObject:@"start"];
 }
 
 - (void)createDir:(NSString *)dir {
@@ -80,79 +90,76 @@
     
     NSString * path;
 	path = [[NSBundle mainBundle] bundlePath];
-	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar/run.py"];
-    
-    projectScriptUrl = [NSString stringWithContentsOfFile:projectPath	encoding:NSUTF8StringEncoding error:nil];
+	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar"];
+    convertScriptUrl = [projectPath stringByAppendingPathComponent:@"/convert.py"];
+    webserverScriptUrl = [projectPath stringByAppendingPathComponent:@"/view.py"];
 
 	// Handle basic error case:
-	if (projectScriptUrl == nil) {
-        NSLog(@"No python file found in: %@", projectScriptUrl);
+	if (convertScriptUrl == nil) {
+        NSLog(@"No python file found in: %@", convertScriptUrl);
 		exit(-1);
 	}
-    
-    [self startAll];
-    
-    [NSTimer scheduledTimerWithTimeInterval:1
-                                     target:self
-                                   selector:@selector(converterIsRunning)
-                                   userInfo:nil
-                                    repeats:YES];
 }
 
 - (void)converterIsRunning {
     
-    NSString *convertPid = [NSString stringWithFormat:@"%@/../../../../convert-daemon.pid",[projectPath stringByDeletingLastPathComponent]];
-    NSString *pidConverter = [NSString stringWithContentsOfFile:convertPid	encoding:NSUTF8StringEncoding error:nil];
+    NSString *pidConverter = [NSString stringWithContentsOfFile:@"/tmp/convert-daemon.pid"	encoding:NSUTF8StringEncoding error:nil];
     
     if(pidConverter == nil) {
         [running setTitle:@"Not running"];
         [startStop setTitle:@"Start"];
         [startStop setTag:0];
     } else {
-        [running setTitle:@"Running"];
+        [running setTitle:@"Idle"];
         [startStop setTitle:@"Stop"];
         [startStop setTag:1];
     }
+    
+    NSString *convertStatus = [NSString stringWithContentsOfFile:@"/tmp/handleBarCurrentStatus"	encoding:NSUTF8StringEncoding error:nil];
+    
+    if(convertStatus != nil)
+        [running setTitle:convertStatus];
+    
+    [statusMenu update];
 }
 
-- (void)startAll {
+- (void)startStopWebserver:(NSString *)action {
+    
+    
+   if(action == @"start") {
+       
+       NSString *cmd = @"/usr/bin/python";
+       NSArray *args = [NSArray arrayWithObjects:webserverScriptUrl,@"&", nil];
+    
+       viewPid = [self executeCommand:cmd args:args];
+       
+   } else {
+       
+       kill(viewPid, SIGKILL);
+   }
+}
 
-    PyObject* evalModule;
-    PyObject* evalDict;
-    PyObject* evalVal;
-    char* retString;
+- (void)startStopConverter:(NSString *)action {
     
-    PyRun_SimpleString([projectScriptUrl UTF8String]);
+    NSString *cmd = @"/usr/bin/python";
+    NSArray *args = [NSArray arrayWithObjects:convertScriptUrl,action, nil];
     
-    evalModule = PyImport_AddModule( (char*)"__main__" );
-    evalDict = PyModule_GetDict( evalModule );
-    evalVal = PyDict_GetItemString( evalDict, "currentHost" );
+    [self executeCommand:cmd args:args];
     
-    if( evalVal == NULL ) {
-        PyErr_Print();
-        //exit( 1 );
+    if(action == @"start") {
+        
+        updateStatusTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                          target:self
+                                                        selector:@selector(converterIsRunning)
+                                                        userInfo:nil
+                                                         repeats:YES];
+        
+        [[NSRunLoop currentRunLoop] addTimer:updateStatusTimer forMode:NSEventTrackingRunLoopMode];
         
     } else {
         
-        retString = PyString_AsString( evalVal );
-        handleBarViewUrl = [NSString stringWithFormat:@"%s", retString];
+        [updateStatusTimer invalidate];
     }
-}
-
-- (void)startAgain {
-    
-    PyRun_SimpleString([projectScriptUrl UTF8String]);
-}
-
-- (void)stopAllProccesses {
-    
-    NSString *pidServer = [NSString stringWithContentsOfFile:@"/tmp/handleBarServer.pid" encoding:NSUTF8StringEncoding error:nil];
-    NSString *pidConverter = [NSString stringWithContentsOfFile:@"/tmp/convert-daemon.pid" encoding:NSUTF8StringEncoding error:nil];
-
-    kill( [pidServer intValue], SIGKILL );
-    kill( [pidConverter intValue], SIGKILL );
-    
-    [[NSFileManager defaultManager] removeItemAtPath:@"/tmp/convert-daemon.pid" error:nil];
 }
 
 - (IBAction)startStop:(id)sender {
@@ -160,11 +167,11 @@
     NSMenuItem *s = (NSMenuItem *) sender;
     if(s.tag == 0) {
         
-        [self startAgain];
+        [self startStopConverter:@"start"];
         
     } else {
         
-        [self stopAllProccesses];
+        [self startStopConverter:@"stop"];
     }
 }
 
@@ -185,9 +192,32 @@
     [self.preferencesWindow.window setLevel: NSStatusWindowLevel];
 }
 
+-(int)executeCommand:(NSString *)cmd args:(NSArray *)arguments {
+    
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath: cmd];
+    [task setArguments: arguments];
+    
+    NSPipe *pipe = [NSPipe pipe];
+    [task setStandardOutput: pipe];
+    
+    NSFileHandle *file = [pipe fileHandleForReading];
+    
+    [task launch];
+
+    NSData *data = [file readDataToEndOfFile];
+    
+    NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+    
+    NSLog(@"%@",string);
+    NSLog(@"%d", task.processIdentifier);
+    return task.processIdentifier;
+}
+
 - (void)applicationWillTerminate:(NSNotification *)notification {
     
-    [self stopAllProccesses];
+    [self startStopConverter:@"stop"];
+    [self startStopWebserver:@"stop"];
 }
 
 @end
