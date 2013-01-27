@@ -23,6 +23,7 @@
     NSString *handleBarDir = [projectPath stringByDeletingLastPathComponent];
     NSString *configLinkFile = [NSString stringWithFormat:@"%@/configPath",handleBarDir];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"handleBar.db"];
+    NSString *configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.ini"];
     
     NSString *dirMediaDone = [NSString stringWithFormat:@"%@/media/done",appSupportPath];
     NSString *dirMediaFailed = [NSString stringWithFormat:@"%@/media/failed",appSupportPath];
@@ -41,14 +42,15 @@
 
     if(b == NO) {
         
+        NSError *err;
         NSFileManager *fileManager = [[NSFileManager alloc] init];
         
-        NSString *defaultDBPath = [NSString stringWithFormat:@"%@/handleBar.db",handleBarDir];
-        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/config.ini",handleBarDir];
-        NSString *configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.ini"];
-        NSError *err;
-        [fileManager copyItemAtPath:defaultDBPath toPath:dbFilePath error:NULL];
+        NSString *defaultDBPath = [NSString stringWithFormat:@"%@/app/default/handleBar.db",handleBarDir];
+        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/app/default/config.ini",handleBarDir];
+                
+        [fileManager copyItemAtPath:defaultDBPath toPath:dbFilePath error:&err];
         [fileManager copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
+        
         NSLog(@"%@",err);
     }
 
@@ -58,7 +60,7 @@
     }
     
     [self startStopConverter:@"start"];
-    [self performSelectorInBackground:@selector(startStopWebserver:) withObject:@"start"];
+    [self startStopWebserver:@"start"];
 }
 
 - (void)createDir:(NSString *)dir {
@@ -92,7 +94,7 @@
 	path = [[NSBundle mainBundle] bundlePath];
 	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar"];
     convertScriptUrl = [projectPath stringByAppendingPathComponent:@"/convert.py"];
-    webserverScriptUrl = [projectPath stringByAppendingPathComponent:@"/view.py"];
+    webserverScriptUrl = [projectPath stringByAppendingPathComponent:@"/web.py"];
 
 	// Handle basic error case:
 	if (convertScriptUrl == nil) {
@@ -125,18 +127,10 @@
 
 - (void)startStopWebserver:(NSString *)action {
     
+    NSString *cmd = @"/usr/bin/python";
+    NSArray *args = [NSArray arrayWithObjects:webserverScriptUrl,action, nil];
     
-   if(action == @"start") {
-       
-       NSString *cmd = @"/usr/bin/python";
-       NSArray *args = [NSArray arrayWithObjects:webserverScriptUrl,@"&", nil];
-    
-       viewPid = [self executeCommand:cmd args:args];
-       
-   } else {
-       
-       kill(viewPid, SIGKILL);
-   }
+    [self executeCommand:cmd args:args];
 }
 
 - (void)startStopConverter:(NSString *)action {
