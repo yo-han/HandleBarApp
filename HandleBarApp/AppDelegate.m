@@ -14,6 +14,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     StartAtLoginController *loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.mustacherious.HandleBarHelperApp"];
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HandleBarAutoStart"]) {
         [loginController setStartAtLogin: YES];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HandleBarAutoStart"];

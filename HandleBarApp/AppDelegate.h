@@ -10,7 +10,6 @@
 #import <ServiceManagement/ServiceManagement.h>
 
 #import "NSFileManager+DirectoryLocations.h"
-
 #import "MASPreferencesWindowController.h"
 #import "PrefIndexViewController.h"
 #import "PrefConfigViewController.h"

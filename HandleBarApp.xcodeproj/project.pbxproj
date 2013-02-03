@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0415071716B9B77F00D9AB7A /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */; };
+		0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */; };
+		0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415072A16B9CFCE00D9AB7A /* Security.framework */; };
 		04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F386F0168E642600B4CB4A /* Cocoa.framework */; };
 		04F386FB168E642600B4CB4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F386F9168E642600B4CB4A /* InfoPlist.strings */; };
 		04F386FD168E642600B4CB4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F386FC168E642600B4CB4A /* main.m */; };
@@ -46,6 +49,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		0415072A16B9CFCE00D9AB7A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0453192C169101800019BE88 /* NSFileManager+DirectoryLocations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+DirectoryLocations.h"; path = "../NSFileManager+DirectoryLocations.h"; sourceTree = "<group>"; };
 		0453192D169101800019BE88 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+DirectoryLocations.m"; path = "../NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
 		04F386EC168E642600B4CB4A /* HandleBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandleBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */,
+				0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */,
 				04F38AFF1690EC3D00B4CB4A /* ServiceManagement.framework in Frameworks */,
 				04F38716168E673100B4CB4A /* Python.framework in Frameworks */,
 				04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */,
@@ -102,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0415071716B9B77F00D9AB7A /* ScriptingBridge.framework in Frameworks */,
 				04F38AE61690EB8B00B4CB4A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,6 +120,7 @@
 		04F386E1168E642600B4CB4A = {
 			isa = PBXGroup;
 			children = (
+				0415072A16B9CFCE00D9AB7A /* Security.framework */,
 				04F38AAE168E6DD400B4CB4A /* HandleBar */,
 				04F386F6168E642600B4CB4A /* HandleBarApp */,
 				04F38AE71690EB8B00B4CB4A /* HandleBarHelperApp */,
@@ -132,6 +141,7 @@
 		04F386EF168E642600B4CB4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */,
 				04F38AFE1690EC3D00B4CB4A /* ServiceManagement.framework */,
 				04F38715168E673100B4CB4A /* Python.framework */,
 				04F386F0168E642600B4CB4A /* Cocoa.framework */,
