@@ -24,11 +24,13 @@
     
     NSStatusItem * statusItem;
     NSTimer *updateStatusTimer;
+    NSTimer *reSubTimer;
     
     NSString * projectPath;
     NSString * convertScriptUrl;
     NSString * handleBarViewUrl;
     NSString * webserverScriptUrl;
+    NSString * reSubScriptUrl;
     
     int viewPid;
 }

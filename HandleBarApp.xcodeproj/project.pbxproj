@@ -10,6 +10,7 @@
 		0415071716B9B77F00D9AB7A /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */; };
 		0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */; };
 		0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415072A16B9CFCE00D9AB7A /* Security.framework */; };
+		049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 049ACB1016C5798E007F103C /* handleBarIcon.png */; };
 		04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F386F0168E642600B4CB4A /* Cocoa.framework */; };
 		04F386FB168E642600B4CB4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F386F9168E642600B4CB4A /* InfoPlist.strings */; };
 		04F386FD168E642600B4CB4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F386FC168E642600B4CB4A /* main.m */; };
@@ -53,6 +54,7 @@
 		0415072A16B9CFCE00D9AB7A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0453192C169101800019BE88 /* NSFileManager+DirectoryLocations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+DirectoryLocations.h"; path = "../NSFileManager+DirectoryLocations.h"; sourceTree = "<group>"; };
 		0453192D169101800019BE88 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+DirectoryLocations.m"; path = "../NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
+		049ACB1016C5798E007F103C /* handleBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handleBarIcon.png; sourceTree = "<group>"; };
 		04F386EC168E642600B4CB4A /* HandleBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandleBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F386F0168E642600B4CB4A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		04F386F3168E642600B4CB4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -185,6 +187,7 @@
 		04F386F7168E642600B4CB4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				049ACB1016C5798E007F103C /* handleBarIcon.png */,
 				04F386F8168E642600B4CB4A /* HandleBarApp-Info.plist */,
 				04F386F9168E642600B4CB4A /* InfoPlist.strings */,
 				04F386FC168E642600B4CB4A /* main.m */,
@@ -306,6 +309,7 @@
 				04F38ACE16907BDD00B4CB4A /* PrefIndexViewController.xib in Resources */,
 				04F38AD416907BFD00B4CB4A /* PrefConfigViewController.xib in Resources */,
 				04F38ADE16907CCA00B4CB4A /* MASPreferencesWindow.xib in Resources */,
+				049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

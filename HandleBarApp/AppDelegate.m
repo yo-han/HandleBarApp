@@ -62,6 +62,7 @@
     
     [self startStopConverter:@"start"];
     [self startStopWebserver:@"start"];
+    [self startStopReSub:@"start"];
 }
 
 - (void)createDir:(NSString *)dir {
@@ -80,15 +81,20 @@
                                         NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:
                                                 0] : NSTemporaryDirectory();
+    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    
     return [basePath
-            stringByAppendingPathComponent:@"HandleBarApp"];
+            stringByAppendingPathComponent:appName];
 }
 
 -(void)awakeFromNib{
     
+    NSImage *icon = [NSImage imageNamed:@"handleBarIcon.png"];
+    [icon setSize:CGSizeMake(24, 12)];
+    
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];
-    [statusItem setTitle:@"Status"];
+    [statusItem setImage:icon];
     [statusItem setHighlightMode:YES];   
     
     NSString * path;
@@ -96,6 +102,7 @@
 	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar"];
     convertScriptUrl = [projectPath stringByAppendingPathComponent:@"/convert.py"];
     webserverScriptUrl = [projectPath stringByAppendingPathComponent:@"/web.py"];
+    reSubScriptUrl = [projectPath stringByAppendingPathComponent:@"/reSub.py"];
 
 	// Handle basic error case:
 	if (convertScriptUrl == nil) {
@@ -141,7 +148,7 @@
     
     [self executeCommand:cmd args:args];
     
-    if(action == @"start") {
+    if([action isEqual: @"start"]) {
         
         updateStatusTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                           target:self
@@ -168,6 +175,29 @@
         
         [self startStopConverter:@"stop"];
     }
+}
+
+- (void)startStopReSub:(NSString *)action {
+           
+    if([action isEqual: @"start"]) {
+        
+        reSubTimer = [NSTimer scheduledTimerWithTimeInterval:3600
+                                                             target:self
+                                                           selector:@selector(reSub)
+                                                           userInfo:nil
+                                                            repeats:YES];        
+    } else {
+        
+        [reSubTimer invalidate];
+    }
+}
+
+- (void)reSub {
+    
+    NSString *cmd = @"/usr/bin/python";
+    NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
+    
+    [self executeCommand:cmd args:args];
 }
 
 -(IBAction)openHandleBar:(id)sender {
