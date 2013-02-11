@@ -13,6 +13,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [self redirectConsoleLogToDocumentFolder];
+    
     StartAtLoginController *loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.mustacherious.HandleBarHelperApp"];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HandleBarAutoStart"]) {
@@ -63,6 +65,17 @@
     [self startStopConverter:@"start"];
     [self startStopWebserver:@"start"];
     [self startStopReSub:@"start"];
+}
+
+- (void) redirectConsoleLogToDocumentFolder
+{
+    NSString *currentPath = [[NSBundle mainBundle] bundlePath];
+    
+    if ([currentPath rangeOfString:@"Debug"].location == NSNotFound) {
+        
+        NSString *logPath = @"/tmp/handleBarApp.log";
+        freopen([logPath fileSystemRepresentation],"a+",stderr);
+    }
 }
 
 - (void)createDir:(NSString *)dir {
@@ -181,7 +194,7 @@
            
     if([action isEqual: @"start"]) {
         
-        reSubTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
+        reSubTimer = [NSTimer scheduledTimerWithTimeInterval:3600
                                                              target:self
                                                            selector:@selector(reSub)
                                                            userInfo:nil
@@ -196,7 +209,7 @@
     
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
-    NSLog(@"---> %@ %@", cmd, reSubScriptUrl);
+
     [self executeCommand:cmd args:args];
 }
 
@@ -234,6 +247,7 @@
     
     NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     
+    NSLog(@"%@", arguments);
     NSLog(@"%@",string);
     NSLog(@"%d", task.processIdentifier);
     
