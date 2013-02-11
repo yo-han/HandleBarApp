@@ -181,7 +181,7 @@
            
     if([action isEqual: @"start"]) {
         
-        reSubTimer = [NSTimer scheduledTimerWithTimeInterval:3600
+        reSubTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
                                                              target:self
                                                            selector:@selector(reSub)
                                                            userInfo:nil
@@ -196,7 +196,7 @@
     
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
-    
+    NSLog(@"---> %@ %@", cmd, reSubScriptUrl);
     [self executeCommand:cmd args:args];
 }
 
@@ -236,6 +236,7 @@
     
     NSLog(@"%@",string);
     NSLog(@"%d", task.processIdentifier);
+    
     return task.processIdentifier;
 }
 
