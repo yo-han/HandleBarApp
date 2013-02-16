@@ -192,24 +192,9 @@
 
 - (void)startStopReSub:(NSString *)action {
            
-    if([action isEqual: @"start"]) {
-        
-        reSubTimer = [NSTimer scheduledTimerWithTimeInterval:3600
-                                                             target:self
-                                                           selector:@selector(reSub)
-                                                           userInfo:nil
-                                                            repeats:YES];        
-    } else {
-        
-        [reSubTimer invalidate];
-    }
-}
-
-- (void)reSub {
-    
     NSString *cmd = @"/usr/bin/python";
-    NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
-
+    NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, action, nil];
+    
     [self executeCommand:cmd args:args];
 }
 
@@ -247,8 +232,8 @@
     
     NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     
-    NSLog(@"%@", arguments);
-    NSLog(@"%@",string);
+    //NSLog(@"%@", arguments);
+    //NSLog(@"%@",string);
     NSLog(@"%d", task.processIdentifier);
     
     return task.processIdentifier;
@@ -258,6 +243,7 @@
     
     [self startStopConverter:@"stop"];
     [self startStopWebserver:@"stop"];
+    [self startStopReSub:@"stop"];
 }
 
 @end
