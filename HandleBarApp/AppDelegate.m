@@ -62,9 +62,9 @@
         [appSupportPath writeToFile:configLinkFile atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     }
     
-    [self startStopConverter:@"start"];
-    [self startStopWebserver:@"start"];
-    [self startStopReSub:@"start"];
+    //[self startStopConverter:@"start"];
+    //[self startStopWebserver:@"start"];
+    [self startReSub];
 }
 
 - (void) redirectConsoleLogToDocumentFolder
@@ -190,12 +190,23 @@
     }
 }
 
-- (void)startStopReSub:(NSString *)action {
-           
+- (void)startResubTimer {
+    
+    [NSTimer scheduledTimerWithTimeInterval:3600
+                                     target:self
+                                   selector:@selector(startReSub)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+- (void)startReSub {
+
     NSString *cmd = @"/usr/bin/python";
-    NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, action, nil];
+    NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
     
     [self executeCommand:cmd args:args];
+    
+    [self startResubTimer];
 }
 
 -(IBAction)openHandleBar:(id)sender {
@@ -233,17 +244,21 @@
     NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     
     //NSLog(@"%@", arguments);
-    //NSLog(@"%@",string);
+    NSLog(@"%@",string);
     NSLog(@"%d", task.processIdentifier);
     
     return task.processIdentifier;
+}
+
+- (IBAction)showLog:(id)sender {
+    
+    [[NSWorkspace sharedWorkspace] openFile:@"/tmp/handleBarError.log"];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
     
     [self startStopConverter:@"stop"];
     [self startStopWebserver:@"stop"];
-    [self startStopReSub:@"stop"];
 }
 
 @end

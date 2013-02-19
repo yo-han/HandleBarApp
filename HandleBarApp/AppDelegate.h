@@ -39,5 +39,6 @@
 @property (strong) NSWindowController *preferencesWindow;
 
 -(IBAction)openHandleBar:(id)sender;
+- (IBAction)showLog:(id)sender;
 
 @end
