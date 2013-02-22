@@ -62,9 +62,9 @@
         [appSupportPath writeToFile:configLinkFile atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     }
     
-    //[self startStopConverter:@"start"];
-    //[self startStopWebserver:@"start"];
-    [self startReSub];
+    [self startStopConverter:@"start"];
+    [self startStopWebserver:@"start"];
+    //[self startReSub];
 }
 
 - (void) redirectConsoleLogToDocumentFolder
