@@ -64,7 +64,7 @@
     
     [self startStopConverter:@"start"];
     [self startStopWebserver:@"start"];
-    [self startReSub];
+    //[self startReSub];
 }
 
 - (void) redirectConsoleLogToDocumentFolder
