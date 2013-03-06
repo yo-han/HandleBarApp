@@ -13,7 +13,7 @@
 #import "StartAtLoginController.h"
 
 @interface PrefIndexViewController : NSViewController <MASPreferencesViewController> {
-    
+
     IBOutlet NSButton *loginCheck;
 }
 

@@ -11,4 +11,6 @@
 
 @interface PrefConfigViewController : NSViewController <MASPreferencesViewController>
 
+@property (weak) IBOutlet NSArrayController *languageController;
+
 @end

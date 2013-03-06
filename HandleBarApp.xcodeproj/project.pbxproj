@@ -11,6 +11,11 @@
 		0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */; };
 		0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415072A16B9CFCE00D9AB7A /* Security.framework */; };
 		049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 049ACB1016C5798E007F103C /* handleBarIcon.png */; };
+		04B4D96916E6AD6700BFE4AF /* PrefLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */; };
+		04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4D96A16E6B1FA00BFE4AF /* PrefLocationsViewController.xib */; };
+		04B4D97016E7588500BFE4AF /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96F16E7588500BFE4AF /* Preferences.m */; };
+		04B4D97316E7A21400BFE4AF /* FileSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D97216E7A21400BFE4AF /* FileSelect.m */; };
+		04B4D97516E7E28000BFE4AF /* languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B4D97416E7E28000BFE4AF /* languages.plist */; };
 		04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F386F0168E642600B4CB4A /* Cocoa.framework */; };
 		04F386FB168E642600B4CB4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F386F9168E642600B4CB4A /* InfoPlist.strings */; };
 		04F386FD168E642600B4CB4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F386FC168E642600B4CB4A /* main.m */; };
@@ -55,6 +60,14 @@
 		0453192C169101800019BE88 /* NSFileManager+DirectoryLocations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+DirectoryLocations.h"; path = "../NSFileManager+DirectoryLocations.h"; sourceTree = "<group>"; };
 		0453192D169101800019BE88 /* NSFileManager+DirectoryLocations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+DirectoryLocations.m"; path = "../NSFileManager+DirectoryLocations.m"; sourceTree = "<group>"; };
 		049ACB1016C5798E007F103C /* handleBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handleBarIcon.png; sourceTree = "<group>"; };
+		04B4D96716E6AD6700BFE4AF /* PrefLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefLocationsViewController.h; sourceTree = "<group>"; };
+		04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefLocationsViewController.m; sourceTree = "<group>"; };
+		04B4D96A16E6B1FA00BFE4AF /* PrefLocationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefLocationsViewController.xib; sourceTree = "<group>"; };
+		04B4D96E16E7588500BFE4AF /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		04B4D96F16E7588500BFE4AF /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
+		04B4D97116E7A21400BFE4AF /* FileSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSelect.h; sourceTree = "<group>"; };
+		04B4D97216E7A21400BFE4AF /* FileSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSelect.m; sourceTree = "<group>"; };
+		04B4D97416E7E28000BFE4AF /* languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = languages.plist; sourceTree = "<group>"; };
 		04F386EC168E642600B4CB4A /* HandleBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandleBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F386F0168E642600B4CB4A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		04F386F3168E642600B4CB4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -119,6 +132,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04B4D96C16E7580300BFE4AF /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				04B4D96E16E7588500BFE4AF /* Preferences.h */,
+				04B4D96F16E7588500BFE4AF /* Preferences.m */,
+				04F38ACC16907BDD00B4CB4A /* PrefIndexViewController.xib */,
+				04F38AD216907BFD00B4CB4A /* PrefConfigViewController.xib */,
+				04B4D96A16E6B1FA00BFE4AF /* PrefLocationsViewController.xib */,
+				04F38ACA16907BDD00B4CB4A /* PrefIndexViewController.h */,
+				04F38ACB16907BDD00B4CB4A /* PrefIndexViewController.m */,
+				04F38AD016907BFD00B4CB4A /* PrefConfigViewController.h */,
+				04F38AD116907BFD00B4CB4A /* PrefConfigViewController.m */,
+				04B4D96716E6AD6700BFE4AF /* PrefLocationsViewController.h */,
+				04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		04B4D96D16E7581500BFE4AF /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				04F38B001690EC6D00B4CB4A /* StartAtLoginController.h */,
+				04F38B011690EC6D00B4CB4A /* StartAtLoginController.m */,
+				0453192C169101800019BE88 /* NSFileManager+DirectoryLocations.h */,
+				0453192D169101800019BE88 /* NSFileManager+DirectoryLocations.m */,
+				04F38AD716907CCA00B4CB4A /* MASPreferences */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
 		04F386E1168E642600B4CB4A = {
 			isa = PBXGroup;
 			children = (
@@ -167,18 +210,11 @@
 			children = (
 				04F38702168E642600B4CB4A /* AppDelegate.h */,
 				04F38703168E642600B4CB4A /* AppDelegate.m */,
-				04F38ACA16907BDD00B4CB4A /* PrefIndexViewController.h */,
-				04F38ACB16907BDD00B4CB4A /* PrefIndexViewController.m */,
-				04F38AD016907BFD00B4CB4A /* PrefConfigViewController.h */,
-				04F38AD116907BFD00B4CB4A /* PrefConfigViewController.m */,
-				04F38B001690EC6D00B4CB4A /* StartAtLoginController.h */,
-				04F38B011690EC6D00B4CB4A /* StartAtLoginController.m */,
-				0453192C169101800019BE88 /* NSFileManager+DirectoryLocations.h */,
-				0453192D169101800019BE88 /* NSFileManager+DirectoryLocations.m */,
+				04B4D97116E7A21400BFE4AF /* FileSelect.h */,
+				04B4D97216E7A21400BFE4AF /* FileSelect.m */,
 				04F38705168E642600B4CB4A /* MainMenu.xib */,
-				04F38ACC16907BDD00B4CB4A /* PrefIndexViewController.xib */,
-				04F38AD216907BFD00B4CB4A /* PrefConfigViewController.xib */,
-				04F38AD716907CCA00B4CB4A /* MASPreferences */,
+				04B4D96C16E7580300BFE4AF /* Preferences */,
+				04B4D96D16E7581500BFE4AF /* Lib */,
 				04F386F7168E642600B4CB4A /* Supporting Files */,
 			);
 			path = HandleBarApp;
@@ -193,6 +229,7 @@
 				04F386FC168E642600B4CB4A /* main.m */,
 				04F386FE168E642600B4CB4A /* HandleBarApp-Prefix.pch */,
 				04F386FF168E642600B4CB4A /* Credits.rtf */,
+				04B4D97416E7E28000BFE4AF /* languages.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -310,6 +347,8 @@
 				04F38AD416907BFD00B4CB4A /* PrefConfigViewController.xib in Resources */,
 				04F38ADE16907CCA00B4CB4A /* MASPreferencesWindow.xib in Resources */,
 				049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */,
+				04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */,
+				04B4D97516E7E28000BFE4AF /* languages.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +375,9 @@
 				04F38ACD16907BDD00B4CB4A /* PrefIndexViewController.m in Sources */,
 				04F38AD316907BFD00B4CB4A /* PrefConfigViewController.m in Sources */,
 				04F38ADF16907CCA00B4CB4A /* MASPreferencesWindowController.m in Sources */,
+				04B4D96916E6AD6700BFE4AF /* PrefLocationsViewController.m in Sources */,
+				04B4D97016E7588500BFE4AF /* Preferences.m in Sources */,
+				04B4D97316E7A21400BFE4AF /* FileSelect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

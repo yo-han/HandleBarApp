@@ -14,14 +14,23 @@
 
 @implementation PrefConfigViewController
 
+@synthesize languageController = _languageController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+
     }
     
     return self;
+}
+
+- (void)viewWillAppear {
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"languages" ofType:@"plist"];
+    [_languageController setContent:[NSArray arrayWithContentsOfFile:plistPath]];
+    
 }
 
 -(NSString *)identifier{

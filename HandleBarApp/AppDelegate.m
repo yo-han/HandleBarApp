@@ -9,7 +9,13 @@
 #import "AppDelegate.h"
 #import <Python/Python.h>
 
+#import "StartAtLoginController.h"
+#import "NSFileManager+DirectoryLocations.h"
+#import "Preferences.h"
+
 @implementation AppDelegate
+
+@synthesize preferences;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -26,7 +32,7 @@
     NSString *handleBarDir = [projectPath stringByDeletingLastPathComponent];
     NSString *configLinkFile = [NSString stringWithFormat:@"%@/configPath",handleBarDir];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"handleBar.db"];
-    NSString *configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.ini"];
+    NSString *configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.plist"];
     
     NSString *dirMediaDone = [NSString stringWithFormat:@"%@/media/done",appSupportPath];
     NSString *dirMediaFailed = [NSString stringWithFormat:@"%@/media/failed",appSupportPath];
@@ -49,7 +55,7 @@
         NSFileManager *fileManager = [[NSFileManager alloc] init];
         
         NSString *defaultDBPath = [NSString stringWithFormat:@"%@/app/default/handleBar.db",handleBarDir];
-        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/app/default/config.ini",handleBarDir];
+        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/app/default/config.plist",handleBarDir];
                 
         [fileManager copyItemAtPath:defaultDBPath toPath:dbFilePath error:&err];
         [fileManager copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
@@ -62,6 +68,9 @@
         [appSupportPath writeToFile:configLinkFile atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     }
     
+    // Add config file to userDefaults
+    [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfFile:configFilePath]];
+
     [self startStopConverter:@"start"];
     [self startStopWebserver:@"start"];
     //[self startReSub];
@@ -215,15 +224,9 @@
 }
 
 - (IBAction)displayPreferences:(id)sender {
-    if(_preferencesWindow == nil){
-        NSViewController *prefIndexViewController = [[PrefIndexViewController alloc] initWithNibName:@"PrefIndexViewController" bundle:[NSBundle mainBundle]];
-        NSViewController *prefConfigViewController = [[PrefConfigViewController alloc] initWithNibName:@"PrefConfigViewController" bundle:[NSBundle mainBundle]];
-        NSArray *views = [NSArray arrayWithObjects:prefIndexViewController, prefConfigViewController, nil];
-        NSString *title = NSLocalizedString(@"Preferences", @"Common title for Preferences window");
-        _preferencesWindow = [[MASPreferencesWindowController alloc] initWithViewControllers:views title:title];
-    }
-    [self.preferencesWindow showWindow:self];
-    [self.preferencesWindow.window setLevel: NSStatusWindowLevel];
+    
+    preferences = [[Preferences alloc] init];
+    [preferences showPreferenceWindow];
 }
 
 -(int)executeCommand:(NSString *)cmd args:(NSArray *)arguments {

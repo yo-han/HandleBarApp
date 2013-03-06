@@ -9,11 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <ServiceManagement/ServiceManagement.h>
 
-#import "NSFileManager+DirectoryLocations.h"
-#import "MASPreferencesWindowController.h"
-#import "PrefIndexViewController.h"
-#import "PrefConfigViewController.h"
-#import "StartAtLoginController.h"
+@class Preferences;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     
@@ -36,7 +32,7 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (strong) NSWindowController *preferencesWindow;
+@property (strong) Preferences *preferences;
 
 -(IBAction)openHandleBar:(id)sender;
 - (IBAction)showLog:(id)sender;

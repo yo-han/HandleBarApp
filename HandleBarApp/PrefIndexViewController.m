@@ -49,17 +49,13 @@
     StartAtLoginController *loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.mustacherious.HandleBarHelperApp"];
 
     if ([loginCheck state]) {
-
-        if (![loginController startAtLogin]) {
+        if (![loginController startAtLogin])
             [loginController setStartAtLogin: YES];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HandleBarAutoStart"];
-        }
+        
     } else {
-
-        if ([loginController startAtLogin]) {
+        if ([loginController startAtLogin])
             [loginController setStartAtLogin:NO];
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"HandleBarAutoStart"];
-        }
+            
     }
 
 }
