@@ -10,7 +10,6 @@
 #import <Python/Python.h>
 
 #import "StartAtLoginController.h"
-#import "NSFileManager+DirectoryLocations.h"
 #import "Preferences.h"
 
 @implementation AppDelegate
@@ -32,7 +31,8 @@
     NSString *handleBarDir = [projectPath stringByDeletingLastPathComponent];
     NSString *configLinkFile = [NSString stringWithFormat:@"%@/configPath",handleBarDir];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"handleBar.db"];
-    NSString *configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.plist"];
+    
+    configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.plist"];
     
     NSString *dirMediaDone = [NSString stringWithFormat:@"%@/media/done",appSupportPath];
     NSString *dirMediaFailed = [NSString stringWithFormat:@"%@/media/failed",appSupportPath];
@@ -54,9 +54,9 @@
         NSError *err;
         NSFileManager *fileManager = [[NSFileManager alloc] init];
         
-        NSString *defaultDBPath = [NSString stringWithFormat:@"%@/app/default/handleBar.db",handleBarDir];
-        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/app/default/config.plist",handleBarDir];
-                
+        NSString *defaultDBPath = [NSString stringWithFormat:@"%@/app/default/handleBar.db",projectPath];
+        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/app/default/config.plist",projectPath];
+
         [fileManager copyItemAtPath:defaultDBPath toPath:dbFilePath error:&err];
         [fileManager copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
         
@@ -72,10 +72,7 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfFile:configFilePath]];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self
-               selector:@selector(defaultsChanged:)
-                   name:NSUserDefaultsDidChangeNotification
-                 object:nil];
+    [center addObserver:self selector:@selector(defaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
     
     [self startStopConverter:@"start"];
     [self startStopWebserver:@"start"];
@@ -83,11 +80,19 @@
 }
 
 - (void)defaultsChanged:(NSNotification *)notification {
+    
     // Get the user defaults
     NSUserDefaults *defaults = (NSUserDefaults *)[notification object];
+    NSDictionary *configFile = [NSDictionary dictionaryWithContentsOfFile:configFilePath];
+    NSMutableDictionary *config = [NSMutableDictionary dictionaryWithDictionary:[configFile copy]];
     
-    // Do something with it
-    NSLog(@"%@", [defaults objectForKey:@"SubtitleLanguageISO"]);
+    for(id key in configFile) {
+        if([defaults objectForKey:key]) {
+            [config setObject:[defaults objectForKey:key] forKey:key];
+        }
+    }
+    
+    [config writeToFile:configFilePath atomically:YES];
 }
 
 - (void) redirectConsoleLogToDocumentFolder

@@ -23,6 +23,7 @@
     NSTimer *reSubTimer;
     
     NSString * projectPath;
+    NSString * configFilePath;
     NSString * convertScriptUrl;
     NSString * handleBarViewUrl;
     NSString * webserverScriptUrl;
