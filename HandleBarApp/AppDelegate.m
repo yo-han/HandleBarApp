@@ -70,10 +70,24 @@
     
     // Add config file to userDefaults
     [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfFile:configFilePath]];
-
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(defaultsChanged:)
+                   name:NSUserDefaultsDidChangeNotification
+                 object:nil];
+    
     [self startStopConverter:@"start"];
     [self startStopWebserver:@"start"];
     //[self startReSub];
+}
+
+- (void)defaultsChanged:(NSNotification *)notification {
+    // Get the user defaults
+    NSUserDefaults *defaults = (NSUserDefaults *)[notification object];
+    
+    // Do something with it
+    NSLog(@"%@", [defaults objectForKey:@"SubtitleLanguageISO"]);
 }
 
 - (void) redirectConsoleLogToDocumentFolder
