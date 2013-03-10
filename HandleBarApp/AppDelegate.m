@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Python/Python.h>
+#import "NSFileManager+Directories.h"
 
 #import "StartAtLoginController.h"
 #import "Preferences.h"
@@ -18,7 +19,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self redirectConsoleLogToDocumentFolder];
+    [self redirectConsoleLog];
     
     StartAtLoginController *loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.mustacherious.HandleBarHelperApp"];
     
@@ -27,43 +28,38 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HandleBarAutoStart"];
     }
     
-    NSString *appSupportPath = [self applicationSupportFolder];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    NSString *appSupportPath = [fm applicationSupportFolder];
     NSString *handleBarDir = [projectPath stringByDeletingLastPathComponent];
     NSString *configLinkFile = [NSString stringWithFormat:@"%@/configPath",handleBarDir];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"handleBar.db"];
     
     configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.plist"];
     
-    NSString *dirMediaDone = [NSString stringWithFormat:@"%@/media/done",appSupportPath];
-    NSString *dirMediaFailed = [NSString stringWithFormat:@"%@/media/failed",appSupportPath];
-    NSString *dirMediaConverted = [NSString stringWithFormat:@"%@/media/converted",appSupportPath];
-    NSString *dirMediaSubtitles = [NSString stringWithFormat:@"%@/media/subtitles",appSupportPath];
-    NSString *dirMediaImages = [NSString stringWithFormat:@"%@/media/images",appSupportPath];
+    [fm getOrCreatePath:appSupportPath];
+    [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/done",appSupportPath]];
+    [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/failed",appSupportPath]];
+    [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/converted",appSupportPath]];
+    [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/subtitles",appSupportPath]];
+    [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/images",appSupportPath]];
     
-    [self createDir:appSupportPath];
-    [self createDir:dirMediaDone];
-    [self createDir:dirMediaFailed];
-    [self createDir:dirMediaConverted];
-    [self createDir:dirMediaSubtitles];
-    [self createDir:dirMediaImages];
-    
-    bool b = [[NSFileManager defaultManager] fileExistsAtPath:dbFilePath];
+    bool b = [fm fileExistsAtPath:dbFilePath];
 
     if(b == NO) {
         
         NSError *err;
-        NSFileManager *fileManager = [[NSFileManager alloc] init];
         
         NSString *defaultDBPath = [NSString stringWithFormat:@"%@/app/default/handleBar.db",projectPath];
         NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/app/default/config.plist",projectPath];
 
-        [fileManager copyItemAtPath:defaultDBPath toPath:dbFilePath error:&err];
-        [fileManager copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
+        [fm copyItemAtPath:defaultDBPath toPath:dbFilePath error:&err];
+        [fm copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
         
         NSLog(@"%@",err);
     }
 
-    if([[NSFileManager defaultManager] fileExistsAtPath:configLinkFile] == NO) {
+    if([fm fileExistsAtPath:configLinkFile] == NO) {
        
         [appSupportPath writeToFile:configLinkFile atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     }
@@ -95,7 +91,7 @@
     [config writeToFile:configFilePath atomically:YES];
 }
 
-- (void) redirectConsoleLogToDocumentFolder
+- (void) redirectConsoleLog
 {
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
     
@@ -104,28 +100,6 @@
         NSString *logPath = @"/tmp/handleBarApp.log";
         freopen([logPath fileSystemRepresentation],"a+",stderr);
     }
-}
-
-- (void)createDir:(NSString *)dir {
-    
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    
-    if(![fileManager fileExistsAtPath:dir])
-        if(![fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL])
-            NSLog(@"Error: Create folder failed %@", dir);
-}
-
-- (NSString *)applicationSupportFolder {
-    
-    NSArray *paths =
-    NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory,
-                                        NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:
-                                                0] : NSTemporaryDirectory();
-    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-    
-    return [basePath
-            stringByAppendingPathComponent:appName];
 }
 
 -(void)awakeFromNib{
