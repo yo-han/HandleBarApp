@@ -11,6 +11,7 @@
 #import "NSFileManager+Directories.h"
 
 #import "StartAtLoginController.h"
+#import "Converter.h"
 #import "Preferences.h"
 
 @implementation AppDelegate
@@ -70,9 +71,11 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(defaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
     
-    [self startStopConverter:@"start"];
-    [self startStopWebserver:@"start"];
+    //[self startStopConverter:@"start"];
+    //[self startStopWebserver:@"start"];
     //[self startReSub];
+    
+    [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
 }
 
 - (void)defaultsChanged:(NSNotification *)notification {

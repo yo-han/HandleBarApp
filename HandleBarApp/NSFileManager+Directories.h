@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSFileManager (Directories)
+@interface NSFileManager (Directories) 
 
 - (NSString *)getOrCreatePath:(NSString *)path;
 - (NSString *)applicationSupportFolder;
