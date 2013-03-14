@@ -12,6 +12,7 @@
 
 #import "StartAtLoginController.h"
 #import "Converter.h"
+#import "Util.h"
 #import "Preferences.h"
 
 @implementation AppDelegate
@@ -156,7 +157,7 @@
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:webserverScriptUrl,action, nil];
     
-    [self executeCommand:cmd args:args];
+    [Util executeCommand:cmd args:args];
 }
 
 - (void)startStopConverter:(NSString *)action {
@@ -164,7 +165,7 @@
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:convertScriptUrl,action, nil];
     
-    [self executeCommand:cmd args:args];
+    [Util executeCommand:cmd args:args];
     
     if([action isEqual: @"start"]) {
         
@@ -209,7 +210,7 @@
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
     
-    [self executeCommand:cmd args:args];
+    [Util executeCommand:cmd args:args];
     
     [self startResubTimer];
 }
@@ -223,30 +224,6 @@
     
     preferences = [[Preferences alloc] init];
     [preferences showPreferenceWindow];
-}
-
--(int)executeCommand:(NSString *)cmd args:(NSArray *)arguments {
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath: cmd];
-    [task setArguments: arguments];
-    
-    NSPipe *pipe = [NSPipe pipe];
-    [task setStandardOutput: pipe];
-    
-    NSFileHandle *file = [pipe fileHandleForReading];
-    
-    [task launch];
-
-    NSData *data = [file readDataToEndOfFile];
-    
-    NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-    
-    //NSLog(@"%@", arguments);
-    NSLog(@"%@",string);
-    NSLog(@"%d", task.processIdentifier);
-    
-    return task.processIdentifier;
 }
 
 - (IBAction)showLog:(id)sender {

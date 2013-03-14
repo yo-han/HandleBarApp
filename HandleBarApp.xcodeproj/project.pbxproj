@@ -12,6 +12,11 @@
 		0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415072A16B9CFCE00D9AB7A /* Security.framework */; };
 		043334A016ED43FC0029C2F3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433349F16ED43FC0029C2F3 /* Util.m */; };
 		043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */ = {isa = PBXBuildFile; fileRef = 043334A216ED44240029C2F3 /* NSFileManager+Directories.m */; };
+		043A043316EFDBF3001514B0 /* NSOperationQueue+CWSharedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */; };
+		043A043516EFE3FD001514B0 /* HandBrakeCLI in Resources */ = {isa = PBXBuildFile; fileRef = 043A043416EFE3FD001514B0 /* HandBrakeCLI */; };
+		043A043716EFEA41001514B0 /* SublerCLI in Resources */ = {isa = PBXBuildFile; fileRef = 043A043616EFEA41001514B0 /* SublerCLI */; };
+		043A055A16F20006001514B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043A055916F20006001514B0 /* AVFoundation.framework */; };
+		043A055C16F22434001514B0 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 043A055B16F22434001514B0 /* ffmpeg */; };
 		0443EBFE16EDE3C60090EE4A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0443EBFB16EDE3C60090EE4A /* README.md */; };
 		0443EBFF16EDE3C60090EE4A /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443EBFD16EDE3C60090EE4A /* VDKQueue.m */; };
 		0443EC0216EE7DB00090EE4A /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443EC0116EE7DB00090EE4A /* Converter.m */; };
@@ -51,7 +56,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Contents/Library/LoginItems;
-			dstSubfolderSpec = 1;
+			dstSubfolderSpec = 10;
 			files = (
 				04F38AFD1690EC0600B4CB4A /* HandleBarHelperApp.app in CopyFiles */,
 			);
@@ -66,6 +71,13 @@
 		0433349F16ED43FC0029C2F3 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		043334A116ED44240029C2F3 /* NSFileManager+Directories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Directories.h"; sourceTree = "<group>"; };
 		043334A216ED44240029C2F3 /* NSFileManager+Directories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Directories.m"; sourceTree = "<group>"; };
+		043A043116EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+CWSharedQueue.h"; sourceTree = "<group>"; };
+		043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+CWSharedQueue.m"; sourceTree = "<group>"; };
+		043A043416EFE3FD001514B0 /* HandBrakeCLI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = HandBrakeCLI; sourceTree = "<group>"; };
+		043A043616EFEA41001514B0 /* SublerCLI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = SublerCLI; sourceTree = "<group>"; };
+		043A055916F20006001514B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		043A055B16F22434001514B0 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
+		043A055F16F26111001514B0 /* Python_Pyhton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Python_Pyhton.h; sourceTree = "<group>"; };
 		0443EBFB16EDE3C60090EE4A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		0443EBFC16EDE3C60090EE4A /* VDKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDKQueue.h; sourceTree = "<group>"; };
 		0443EBFD16EDE3C60090EE4A /* VDKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
@@ -124,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043A055A16F20006001514B0 /* AVFoundation.framework in Frameworks */,
 				0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */,
 				0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */,
 				04F38AFF1690EC3D00B4CB4A /* ServiceManagement.framework in Frameworks */,
@@ -144,6 +157,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043A055D16F22446001514B0 /* Bin */ = {
+			isa = PBXGroup;
+			children = (
+				043A055B16F22434001514B0 /* ffmpeg */,
+				043A043616EFEA41001514B0 /* SublerCLI */,
+				043A043416EFE3FD001514B0 /* HandBrakeCLI */,
+			);
+			name = Bin;
+			sourceTree = "<group>";
+		};
+		043A055E16F2246F001514B0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				049ACB1016C5798E007F103C /* handleBarIcon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		0443EBFA16EDE3C60090EE4A /* VDKQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,10 +206,13 @@
 		04B4D96D16E7581500BFE4AF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				0443EBFA16EDE3C60090EE4A /* VDKQueue */,
+				043A043116EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.h */,
+				043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */,
 				04F38B001690EC6D00B4CB4A /* StartAtLoginController.h */,
 				04F38B011690EC6D00B4CB4A /* StartAtLoginController.m */,
+				0443EBFA16EDE3C60090EE4A /* VDKQueue */,
 				04F38AD716907CCA00B4CB4A /* MASPreferences */,
+				043A055D16F22446001514B0 /* Bin */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -206,6 +240,7 @@
 		04F386EF168E642600B4CB4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				043A055916F20006001514B0 /* AVFoundation.framework */,
 				0415072A16B9CFCE00D9AB7A /* Security.framework */,
 				0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */,
 				04F38AFE1690EC3D00B4CB4A /* ServiceManagement.framework */,
@@ -239,9 +274,11 @@
 				0433349F16ED43FC0029C2F3 /* Util.m */,
 				043334A116ED44240029C2F3 /* NSFileManager+Directories.h */,
 				043334A216ED44240029C2F3 /* NSFileManager+Directories.m */,
+				043A055F16F26111001514B0 /* Python_Pyhton.h */,
 				04F38705168E642600B4CB4A /* MainMenu.xib */,
 				04B4D96C16E7580300BFE4AF /* Preferences */,
 				04B4D96D16E7581500BFE4AF /* Lib */,
+				043A055E16F2246F001514B0 /* Images */,
 				04F386F7168E642600B4CB4A /* Supporting Files */,
 			);
 			path = HandleBarApp;
@@ -250,7 +287,6 @@
 		04F386F7168E642600B4CB4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				049ACB1016C5798E007F103C /* handleBarIcon.png */,
 				04F386F8168E642600B4CB4A /* HandleBarApp-Info.plist */,
 				04F386F9168E642600B4CB4A /* InfoPlist.strings */,
 				04F386FC168E642600B4CB4A /* main.m */,
@@ -377,6 +413,9 @@
 				04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */,
 				04B4D97516E7E28000BFE4AF /* languages.plist in Resources */,
 				0443EBFE16EDE3C60090EE4A /* README.md in Resources */,
+				043A043516EFE3FD001514B0 /* HandBrakeCLI in Resources */,
+				043A043716EFEA41001514B0 /* SublerCLI in Resources */,
+				043A055C16F22434001514B0 /* ffmpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043A043316EFDBF3001514B0 /* NSOperationQueue+CWSharedQueue.m in Sources */,
 				04F38B021690F14100B4CB4A /* StartAtLoginController.m in Sources */,
 				04F386FD168E642600B4CB4A /* main.m in Sources */,
 				04F38704168E642600B4CB4A /* AppDelegate.m in Sources */,
@@ -536,6 +576,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HandleBarApp/HandleBarApp-Prefix.pch";
 				INFOPLIST_FILE = "HandleBarApp/HandleBarApp-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/HandleBarApp/mp4v2\"",
+					"\"$(SRCROOT)/SublerCLI/mp4v2\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -548,6 +593,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HandleBarApp/HandleBarApp-Prefix.pch";
 				INFOPLIST_FILE = "HandleBarApp/HandleBarApp-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/HandleBarApp/mp4v2\"",
+					"\"$(SRCROOT)/SublerCLI/mp4v2\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

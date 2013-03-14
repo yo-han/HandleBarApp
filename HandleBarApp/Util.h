@@ -10,4 +10,9 @@
 
 @interface Util : NSObject
 
++ (BOOL)inDebugMode;
++ (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments;
++ (NSDictionary *)executeBashCommand:(NSString *)cmd;
++ (BOOL)trashWithPath:(NSString *)path;
+
 @end
