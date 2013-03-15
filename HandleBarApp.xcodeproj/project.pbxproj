@@ -26,6 +26,7 @@
 		04B4D97016E7588500BFE4AF /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96F16E7588500BFE4AF /* Preferences.m */; };
 		04B4D97316E7A21400BFE4AF /* FileSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D97216E7A21400BFE4AF /* FileSelect.m */; };
 		04B4D97516E7E28000BFE4AF /* languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B4D97416E7E28000BFE4AF /* languages.plist */; };
+		04B9DA8216F3B3BF00DCE173 /* MetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B9DA8116F3B3BF00DCE173 /* MetaData.m */; };
 		04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F386F0168E642600B4CB4A /* Cocoa.framework */; };
 		04F386FB168E642600B4CB4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F386F9168E642600B4CB4A /* InfoPlist.strings */; };
 		04F386FD168E642600B4CB4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F386FC168E642600B4CB4A /* main.m */; };
@@ -92,6 +93,8 @@
 		04B4D97116E7A21400BFE4AF /* FileSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSelect.h; sourceTree = "<group>"; };
 		04B4D97216E7A21400BFE4AF /* FileSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSelect.m; sourceTree = "<group>"; };
 		04B4D97416E7E28000BFE4AF /* languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = languages.plist; sourceTree = "<group>"; };
+		04B9DA8016F3B3BF00DCE173 /* MetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaData.h; sourceTree = "<group>"; };
+		04B9DA8116F3B3BF00DCE173 /* MetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaData.m; sourceTree = "<group>"; };
 		04F386EC168E642600B4CB4A /* HandleBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandleBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F386F0168E642600B4CB4A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		04F386F3168E642600B4CB4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -270,6 +273,8 @@
 				04B4D97216E7A21400BFE4AF /* FileSelect.m */,
 				0443EC0016EE7DB00090EE4A /* Converter.h */,
 				0443EC0116EE7DB00090EE4A /* Converter.m */,
+				04B9DA8016F3B3BF00DCE173 /* MetaData.h */,
+				04B9DA8116F3B3BF00DCE173 /* MetaData.m */,
 				0433349E16ED43FC0029C2F3 /* Util.h */,
 				0433349F16ED43FC0029C2F3 /* Util.m */,
 				043334A116ED44240029C2F3 /* NSFileManager+Directories.h */,
@@ -450,6 +455,7 @@
 				043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */,
 				0443EBFF16EDE3C60090EE4A /* VDKQueue.m in Sources */,
 				0443EC0216EE7DB00090EE4A /* Converter.m in Sources */,
+				04B9DA8216F3B3BF00DCE173 /* MetaData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

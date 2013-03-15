@@ -7,24 +7,40 @@
 //
 
 #import "Converter.h"
+#import "MetaData.h"
 #import "Util.h"
 
 #import "NSOperationQueue+CWSharedQueue.h"
 #import "NSFileManager+Directories.h"
 
+
 @interface Converter()
+
+@property(strong) NSFileManager *fm;
+@property(strong) NSString *appSupportPath;
+
+- (void)copyFileToNewPath:(NSString *)originalPath dir:(NSString *)newDir;
+- (NSString *)fileTypePredicateString;
+- (NSMutableArray *) findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles;
+- (NSString *)getAudioTracks:(NSString *)sourcePath;
+- (void) convert:(NSArray *) videos;
 
 @end
 
 @implementation Converter
+
+@synthesize fm, appSupportPath;
 
 - (id) initWithPaths:(NSArray *)paths {
     
     self = [super init];
 	if (self)
 	{
+        fm = [NSFileManager defaultManager];
+        appSupportPath = [fm applicationSupportFolder];
+        
 		VDKQueue *vdk = [[VDKQueue alloc] init];
-                
+        
         for(NSDictionary *path in paths) {
             [vdk addPath:[path objectForKey:@"path"] notifyingAbout:VDKQueueNotifyAboutWrite];
         }
@@ -35,13 +51,12 @@
 }
 
 -(void) VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath {
-    
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
+        
     NSURL *directoryURL = [NSURL URLWithString:fpath];
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     NSMutableArray *videoFiles = [NSMutableArray new];
     
-    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:directoryURL includingPropertiesForKeys:keys options:0 errorHandler:^(NSURL *url, NSError *error) { return YES; }];
+    NSDirectoryEnumerator *enumerator = [fm enumeratorAtURL:directoryURL includingPropertiesForKeys:keys options:0 errorHandler:^(NSURL *url, NSError *error) { return YES; }];
 
     for (NSURL *url in enumerator) {
      
@@ -74,14 +89,13 @@
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
     NSString *cmd = [currentPath stringByAppendingPathComponent:@"Contents/Resources/HandBrakeCLI"];
     
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSString *appSupportPath = [fm applicationSupportFolder];
     NSString *failedPath = [appSupportPath stringByAppendingPathComponent:@"/media/failed"];
     NSString *debugRemovePath = [appSupportPath stringByAppendingPathComponent:@"/media/done"];
+    NSString *convertedDir = [appSupportPath stringByAppendingPathComponent:@"/media/converted"];
     
     NSString *videoPath = [videos objectAtIndex:0];
-    NSString *convertPath = [NSString stringWithFormat:@"%@.m4v", [videoPath stringByDeletingPathExtension]];
-    
+    NSString *convertPath = [convertedDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4v", [[videoPath lastPathComponent] stringByDeletingPathExtension]]];
+
     NSString *audioTracks = [self getAudioTracks:videoPath];
     NSString *preset = [[NSUserDefaults standardUserDefaults] objectForKey:@"HandBrakePreset"];
     NSString *language = [[NSUserDefaults standardUserDefaults] objectForKey:@"HandBrakeLanguage"];
@@ -94,20 +108,23 @@
         
         if([Util inDebugMode]) {
             
-            NSString *newPath = [debugRemovePath stringByAppendingPathComponent:[videoPath lastPathComponent]];
-            [fm moveItemAtPath:videoPath toPath:newPath error:nil];
+            // Move original file to debug dir
+            
+            [self copyFileToNewPath:videoPath dir:debugRemovePath];
             
         } else {
             
             // Move orignal file to the trash bin
             [Util trashWithPath:videoPath];
         }
+
+        MetaData *md = [MetaData new];
+        [md setMetadataInVideo:convertPath];
         
     } else {
         
         // Move original to failed dir if m4v isn't found
-        NSString *newPath = [failedPath stringByAppendingPathComponent:[videoPath lastPathComponent]];
-        [fm moveItemAtPath:videoPath toPath:newPath error:nil];
+        [self copyFileToNewPath:videoPath dir:failedPath];
     }
 }
 
@@ -157,6 +174,12 @@
     }
     
     return [fileTypes componentsJoinedByString:@" OR "];       
+}
+
+- (void)copyFileToNewPath:(NSString *)originalPath dir:(NSString *)newDir {
+    
+    NSString *newPath = [newDir stringByAppendingPathComponent:[originalPath lastPathComponent]];
+    [fm moveItemAtPath:originalPath toPath:newPath error:nil];
 }
 
 @end
