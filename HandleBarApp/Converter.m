@@ -119,7 +119,10 @@
         }
 
         MetaData *md = [MetaData new];
-        [md setMetadataInVideo:convertPath];
+        BOOL metaDataIsSet = [md setMetadataInVideo:convertPath];
+        
+        if(metaDataIsSet == NO)
+           [self copyFileToNewPath:videoPath dir:failedPath];
         
     } else {
         

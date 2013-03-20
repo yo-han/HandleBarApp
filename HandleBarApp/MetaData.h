@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MetaData : NSObject
+@interface MetaData : NSObject <NSURLDownloadDelegate>
 
-- (void)setMetadataInVideo:(NSString *)sourcePath;
+- (BOOL)setMetadataInVideo:(NSString *)sourcePath;
 
 @end

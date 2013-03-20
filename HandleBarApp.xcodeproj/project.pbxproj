@@ -20,6 +20,19 @@
 		0443EBFE16EDE3C60090EE4A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0443EBFB16EDE3C60090EE4A /* README.md */; };
 		0443EBFF16EDE3C60090EE4A /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443EBFD16EDE3C60090EE4A /* VDKQueue.m */; };
 		0443EC0216EE7DB00090EE4A /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443EC0116EE7DB00090EE4A /* Converter.m */; };
+		044B307716F902F50093AEC9 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B307616F902F50093AEC9 /* Movie.m */; };
+		044B309016F905460093AEC9 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B307E16F905460093AEC9 /* NSString+Helper.m */; };
+		044B309116F905460093AEC9 /* iTVDb.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 044B308016F905460093AEC9 /* iTVDb.podspec */; };
+		044B309216F905460093AEC9 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 044B308116F905460093AEC9 /* LICENSE */; };
+		044B309316F905460093AEC9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 044B308216F905460093AEC9 /* README.md */; };
+		044B309416F905460093AEC9 /* TVDbClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B308416F905460093AEC9 /* TVDbClient.m */; };
+		044B309516F905460093AEC9 /* TVDbEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B308616F905460093AEC9 /* TVDbEpisode.m */; };
+		044B309616F905460093AEC9 /* TVDbImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B308816F905460093AEC9 /* TVDbImage.m */; };
+		044B309716F905460093AEC9 /* TVDbShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B308A16F905460093AEC9 /* TVDbShow.m */; };
+		044B309816F905460093AEC9 /* TVDbUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B308C16F905460093AEC9 /* TVDbUpdater.m */; };
+		044B309916F905460093AEC9 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B308F16F905460093AEC9 /* XMLReader.m */; };
+		044B309C16F905DE0093AEC9 /* TVShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B309B16F905DE0093AEC9 /* TVShow.m */; };
+		044B309F16F908510093AEC9 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B309E16F908510093AEC9 /* IMDB.m */; };
 		049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 049ACB1016C5798E007F103C /* handleBarIcon.png */; };
 		04B4D96916E6AD6700BFE4AF /* PrefLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */; };
 		04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4D96A16E6B1FA00BFE4AF /* PrefLocationsViewController.xib */; };
@@ -84,6 +97,30 @@
 		0443EBFD16EDE3C60090EE4A /* VDKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
 		0443EC0016EE7DB00090EE4A /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
 		0443EC0116EE7DB00090EE4A /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
+		044B307516F902F50093AEC9 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		044B307616F902F50093AEC9 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		044B307D16F905460093AEC9 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
+		044B307E16F905460093AEC9 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		044B307F16F905460093AEC9 /* iTVDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTVDb.h; sourceTree = "<group>"; };
+		044B308016F905460093AEC9 /* iTVDb.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iTVDb.podspec; sourceTree = "<group>"; };
+		044B308116F905460093AEC9 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		044B308216F905460093AEC9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		044B308316F905460093AEC9 /* TVDbClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbClient.h; sourceTree = "<group>"; };
+		044B308416F905460093AEC9 /* TVDbClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbClient.m; sourceTree = "<group>"; };
+		044B308516F905460093AEC9 /* TVDbEpisode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbEpisode.h; sourceTree = "<group>"; };
+		044B308616F905460093AEC9 /* TVDbEpisode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbEpisode.m; sourceTree = "<group>"; };
+		044B308716F905460093AEC9 /* TVDbImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbImage.h; sourceTree = "<group>"; };
+		044B308816F905460093AEC9 /* TVDbImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbImage.m; sourceTree = "<group>"; };
+		044B308916F905460093AEC9 /* TVDbShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbShow.h; sourceTree = "<group>"; };
+		044B308A16F905460093AEC9 /* TVDbShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbShow.m; sourceTree = "<group>"; };
+		044B308B16F905460093AEC9 /* TVDbUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbUpdater.h; sourceTree = "<group>"; };
+		044B308C16F905460093AEC9 /* TVDbUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbUpdater.m; sourceTree = "<group>"; };
+		044B308E16F905460093AEC9 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		044B308F16F905460093AEC9 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
+		044B309A16F905DE0093AEC9 /* TVShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShow.h; sourceTree = "<group>"; };
+		044B309B16F905DE0093AEC9 /* TVShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShow.m; sourceTree = "<group>"; };
+		044B309D16F908510093AEC9 /* IMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDB.h; sourceTree = "<group>"; };
+		044B309E16F908510093AEC9 /* IMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDB.m; sourceTree = "<group>"; };
 		049ACB1016C5798E007F103C /* handleBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handleBarIcon.png; sourceTree = "<group>"; };
 		04B4D96716E6AD6700BFE4AF /* PrefLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefLocationsViewController.h; sourceTree = "<group>"; };
 		04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefLocationsViewController.m; sourceTree = "<group>"; };
@@ -188,6 +225,47 @@
 			path = VDKQueue;
 			sourceTree = "<group>";
 		};
+		044B307B16F905460093AEC9 /* itvdb */ = {
+			isa = PBXGroup;
+			children = (
+				044B307C16F905460093AEC9 /* Helpers */,
+				044B307F16F905460093AEC9 /* iTVDb.h */,
+				044B308016F905460093AEC9 /* iTVDb.podspec */,
+				044B308116F905460093AEC9 /* LICENSE */,
+				044B308216F905460093AEC9 /* README.md */,
+				044B308316F905460093AEC9 /* TVDbClient.h */,
+				044B308416F905460093AEC9 /* TVDbClient.m */,
+				044B308516F905460093AEC9 /* TVDbEpisode.h */,
+				044B308616F905460093AEC9 /* TVDbEpisode.m */,
+				044B308716F905460093AEC9 /* TVDbImage.h */,
+				044B308816F905460093AEC9 /* TVDbImage.m */,
+				044B308916F905460093AEC9 /* TVDbShow.h */,
+				044B308A16F905460093AEC9 /* TVDbShow.m */,
+				044B308B16F905460093AEC9 /* TVDbUpdater.h */,
+				044B308C16F905460093AEC9 /* TVDbUpdater.m */,
+				044B308D16F905460093AEC9 /* XMLReader */,
+			);
+			path = itvdb;
+			sourceTree = "<group>";
+		};
+		044B307C16F905460093AEC9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				044B307D16F905460093AEC9 /* NSString+Helper.h */,
+				044B307E16F905460093AEC9 /* NSString+Helper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		044B308D16F905460093AEC9 /* XMLReader */ = {
+			isa = PBXGroup;
+			children = (
+				044B308E16F905460093AEC9 /* XMLReader.h */,
+				044B308F16F905460093AEC9 /* XMLReader.m */,
+			);
+			path = XMLReader;
+			sourceTree = "<group>";
+		};
 		04B4D96C16E7580300BFE4AF /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +287,9 @@
 		04B4D96D16E7581500BFE4AF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				044B309D16F908510093AEC9 /* IMDB.h */,
+				044B309E16F908510093AEC9 /* IMDB.m */,
+				044B307B16F905460093AEC9 /* itvdb */,
 				043A043116EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.h */,
 				043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */,
 				04F38B001690EC6D00B4CB4A /* StartAtLoginController.h */,
@@ -275,6 +356,10 @@
 				0443EC0116EE7DB00090EE4A /* Converter.m */,
 				04B9DA8016F3B3BF00DCE173 /* MetaData.h */,
 				04B9DA8116F3B3BF00DCE173 /* MetaData.m */,
+				044B309A16F905DE0093AEC9 /* TVShow.h */,
+				044B309B16F905DE0093AEC9 /* TVShow.m */,
+				044B307516F902F50093AEC9 /* Movie.h */,
+				044B307616F902F50093AEC9 /* Movie.m */,
 				0433349E16ED43FC0029C2F3 /* Util.h */,
 				0433349F16ED43FC0029C2F3 /* Util.m */,
 				043334A116ED44240029C2F3 /* NSFileManager+Directories.h */,
@@ -421,6 +506,9 @@
 				043A043516EFE3FD001514B0 /* HandBrakeCLI in Resources */,
 				043A043716EFEA41001514B0 /* SublerCLI in Resources */,
 				043A055C16F22434001514B0 /* ffmpeg in Resources */,
+				044B309116F905460093AEC9 /* iTVDb.podspec in Resources */,
+				044B309216F905460093AEC9 /* LICENSE in Resources */,
+				044B309316F905460093AEC9 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +544,16 @@
 				0443EBFF16EDE3C60090EE4A /* VDKQueue.m in Sources */,
 				0443EC0216EE7DB00090EE4A /* Converter.m in Sources */,
 				04B9DA8216F3B3BF00DCE173 /* MetaData.m in Sources */,
+				044B307716F902F50093AEC9 /* Movie.m in Sources */,
+				044B309016F905460093AEC9 /* NSString+Helper.m in Sources */,
+				044B309416F905460093AEC9 /* TVDbClient.m in Sources */,
+				044B309516F905460093AEC9 /* TVDbEpisode.m in Sources */,
+				044B309616F905460093AEC9 /* TVDbImage.m in Sources */,
+				044B309716F905460093AEC9 /* TVDbShow.m in Sources */,
+				044B309816F905460093AEC9 /* TVDbUpdater.m in Sources */,
+				044B309916F905460093AEC9 /* XMLReader.m in Sources */,
+				044B309C16F905DE0093AEC9 /* TVShow.m in Sources */,
+				044B309F16F908510093AEC9 /* IMDB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,11 +680,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HandleBarApp/HandleBarApp-Prefix.pch";
 				INFOPLIST_FILE = "HandleBarApp/HandleBarApp-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/HandleBarApp/mp4v2\"",
-					"\"$(SRCROOT)/SublerCLI/mp4v2\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -599,11 +693,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HandleBarApp/HandleBarApp-Prefix.pch";
 				INFOPLIST_FILE = "HandleBarApp/HandleBarApp-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/HandleBarApp/mp4v2\"",
-					"\"$(SRCROOT)/SublerCLI/mp4v2\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
