@@ -25,11 +25,6 @@
 {
     [self redirectConsoleLog];
     
-    // Testing
-    MetaData *md = [MetaData new];
-    [md setMetadataInVideo:@"/Users/johan/Library/Application Support/HandleBarApp/media/converted/Pirates.of.the.Caribbean.On.Stranger.Tides.2011.BluRay.1080p.DTS.X264_R_Knorloading.m4v"];
-    //[md setMetadataInVideo:@"/Users/johan/Library/Application Support/HandleBarApp/media/converted/Cougar.Town.S04E10.720p.HDTV.x264-IMMERSE.m4v"];
-    return;
     StartAtLoginController *loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.mustacherious.HandleBarHelperApp"];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HandleBarAutoStart"]) {

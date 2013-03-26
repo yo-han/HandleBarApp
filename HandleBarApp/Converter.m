@@ -7,8 +7,9 @@
 //
 
 #import "Converter.h"
-#import "MetaData.h"
 #import "Util.h"
+#import "iTunes.h"
+#import "MetaData.h"
 
 #import "NSOperationQueue+CWSharedQueue.h"
 #import "NSFileManager+Directories.h"
@@ -20,9 +21,11 @@
 @property(strong) NSString *appSupportPath;
 
 - (NSString *)fileTypePredicateString;
-- (NSMutableArray *) findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles;
+- (NSMutableArray *)findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles;
 - (NSString *)getAudioTracks:(NSString *)sourcePath;
-- (void) convert:(NSArray *) videos;
+- (NSString *) convert:(NSArray *) videos;
+- (void)setMetaData:(NSString *)mediaFile;
+- (void)copyToItunes:(NSString *)sourcePath;
 
 @end
 
@@ -45,7 +48,10 @@
         }
         
         vdk.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(copyToItunes:) name:@"HBMetaDataIsSet" object:nil];
 	}
+    
 	return self;
 }
 
@@ -80,10 +86,47 @@
     
     videoFiles = [NSMutableArray arrayWithArray:[videoFiles valueForKeyPath:@"@distinctUnionOfObjects.self"]];
     
-    [self performSelectorInBackgroundQueue:@selector(convert:) withObject:videoFiles];
+    __block NSString *mediaFile;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        mediaFile = [self convert:videoFiles];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setMetaData:mediaFile];
+        });
+    });
+    
+    if(mediaFile != nil)
+        NSLog(@"%@", mediaFile);
+    
+    /* MetaData *md = [MetaData new];
+     
+     BOOL metaDataIsSet = [md setMetadataInVideo:convertPath];
+     
+     if(metaDataIsSet == NO)
+     [fm copyFileToNewPath:videoPath dir:failedPath];*/
 }
 
-- (void) convert:(NSArray *) videos {
+- (void)setMetaData:(NSString *)mediaFile {
+    
+    if(mediaFile == nil)
+        return;
+    
+    MetaData *md = [MetaData new];
+     
+    BOOL metaDataIsSet = [md setMetadataInVideo:mediaFile];
+    
+    if(metaDataIsSet == NO) {
+        
+        NSString *failedPath = [appSupportPath stringByAppendingPathComponent:@"/media/failed"];
+        [fm copyFileToNewPath:mediaFile dir:failedPath];
+    }
+}
+
+- (NSString *) convert:(NSArray *) videos {
+    
+    if([videos count] == 0)
+        return nil;
     
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
     NSString *cmd = [currentPath stringByAppendingPathComponent:@"Contents/Resources/HandBrakeCLI"];
@@ -117,22 +160,32 @@
             [Util trashWithPath:videoPath];
         }
 
-        MetaData *md = [MetaData new];
-        BOOL metaDataIsSet = [md setMetadataInVideo:convertPath];
-        
-        if(metaDataIsSet == NO)
-           [fm copyFileToNewPath:videoPath dir:failedPath];
+        return convertPath;
         
     } else {
         
         // Move original to failed dir if m4v isn't found
         [fm copyFileToNewPath:videoPath dir:failedPath];
     }
+    
+    return nil;
+}
+
+- (void)copyToItunes:(NSNotification *)notification {
+    
+    if ([[notification name] isEqualToString:@"HBMetaDataIsSet"])
+    {
+        NSDictionary *userInfo = [notification userInfo];
+        NSString *path = [userInfo objectForKey:@"sourcePath"];
+        
+        iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+        iTunesTrack * track = [iTunes add:[NSArray arrayWithObject:[NSURL fileURLWithPath:path]] to:nil];
+        
+        NSLog(@"Added %@ to track: %@",path,track);
+    }
 }
 
 - (NSString *)getAudioTracks:(NSString *)sourcePath {
-    
-    //Downloads/ffmpeg -i Downloads/tv/Californication.S06E03.mov 2>&1 >/dev/null | grep -c "Audio"
     
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
     NSString *cmd = [currentPath stringByAppendingPathComponent:@"Contents/Resources/ffmpeg"];

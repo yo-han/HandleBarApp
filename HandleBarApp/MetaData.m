@@ -51,7 +51,10 @@
     if([self.videoType isEqual: kHBMovie]) {
 
         Movie *movie = [Movie getMovie:[self.guessedData objectForKey:@"title"] year:[self.guessedData objectForKey:@"year"]];
-
+       
+        if(movie.name == nil)
+            return NO;
+        
         _videoData = movie;
         
         NSString *downloadPath = NSTemporaryDirectory();
@@ -65,7 +68,7 @@
 }
 
 - (void)downloadDone:(NSString *)path {
-    
+
     NSFileManager *fm = [[NSFileManager alloc] init];
     
     NSString *appSupportPath = [fm applicationSupportFolder];
@@ -94,6 +97,11 @@
     NSArray *args = [NSArray arrayWithObjects:@"-dest", self.sourcePath, @"-metadata", metaData, @"-language", subtitleLanguage, nil];
 
     [Util executeCommand:cmd args:args];
+    
+    NSMutableDictionary* userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
+    [userInfo setObject:self.sourcePath forKey:@"sourcePath"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HBMetaDataIsSet" object:self userInfo:userInfo];
 }
 
 - (void)completeVideoData {

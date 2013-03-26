@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VDKQueue.h"
 
+
 @interface Converter : NSObject <VDKQueueDelegate>
 
 - (id) initWithPaths:(NSArray *)paths;

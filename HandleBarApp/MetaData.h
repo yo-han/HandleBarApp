@@ -11,6 +11,8 @@
 
 @interface MetaData : NSObject <DownloaderDelegate>
 
+@property (nonatomic, strong) id delegate;
+
 - (BOOL)setMetadataInVideo:(NSString *)sourcePath;
 
 @end

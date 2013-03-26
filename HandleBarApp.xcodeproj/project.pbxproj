@@ -124,6 +124,7 @@
 		044B309E16F908510093AEC9 /* IMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDB.m; sourceTree = "<group>"; };
 		0468B2D516FA73F40072A08F /* Downloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloader.h; sourceTree = "<group>"; };
 		0468B2D616FA73F50072A08F /* Downloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Downloader.m; sourceTree = "<group>"; };
+		049675EE1702428B00379E5C /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		049ACB1016C5798E007F103C /* handleBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handleBarIcon.png; sourceTree = "<group>"; };
 		04B4D96716E6AD6700BFE4AF /* PrefLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefLocationsViewController.h; sourceTree = "<group>"; };
 		04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefLocationsViewController.m; sourceTree = "<group>"; };
@@ -290,6 +291,7 @@
 		04B4D96D16E7581500BFE4AF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				049675EE1702428B00379E5C /* iTunes.h */,
 				044B309D16F908510093AEC9 /* IMDB.h */,
 				044B309E16F908510093AEC9 /* IMDB.m */,
 				044B307B16F905460093AEC9 /* itvdb */,
