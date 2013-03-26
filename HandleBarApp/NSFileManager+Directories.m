@@ -34,4 +34,14 @@
             stringByAppendingPathComponent:appName];
 }
 
+- (NSString *)copyFileToNewPath:(NSString *)originalPath dir:(NSString *)newDir {
+    
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    
+    NSString *newPath = [newDir stringByAppendingPathComponent:[originalPath lastPathComponent]];
+    [fileManager moveItemAtPath:originalPath toPath:newPath error:nil];
+    
+    return newPath;
+}
+
 @end

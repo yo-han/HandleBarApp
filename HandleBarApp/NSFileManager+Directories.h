@@ -12,5 +12,6 @@
 
 - (NSString *)getOrCreatePath:(NSString *)path;
 - (NSString *)applicationSupportFolder;
+- (NSString *)copyFileToNewPath:(NSString *)originalPath dir:(NSString *)newDir;
 
 @end

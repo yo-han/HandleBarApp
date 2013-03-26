@@ -19,7 +19,6 @@
 @property(strong) NSFileManager *fm;
 @property(strong) NSString *appSupportPath;
 
-- (void)copyFileToNewPath:(NSString *)originalPath dir:(NSString *)newDir;
 - (NSString *)fileTypePredicateString;
 - (NSMutableArray *) findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles;
 - (NSString *)getAudioTracks:(NSString *)sourcePath;
@@ -110,7 +109,7 @@
             
             // Move original file to debug dir
             
-            [self copyFileToNewPath:videoPath dir:debugRemovePath];
+            [fm copyFileToNewPath:videoPath dir:debugRemovePath];
             
         } else {
             
@@ -122,12 +121,12 @@
         BOOL metaDataIsSet = [md setMetadataInVideo:convertPath];
         
         if(metaDataIsSet == NO)
-           [self copyFileToNewPath:videoPath dir:failedPath];
+           [fm copyFileToNewPath:videoPath dir:failedPath];
         
     } else {
         
         // Move original to failed dir if m4v isn't found
-        [self copyFileToNewPath:videoPath dir:failedPath];
+        [fm copyFileToNewPath:videoPath dir:failedPath];
     }
 }
 
@@ -177,12 +176,6 @@
     }
     
     return [fileTypes componentsJoinedByString:@" OR "];       
-}
-
-- (void)copyFileToNewPath:(NSString *)originalPath dir:(NSString *)newDir {
-    
-    NSString *newPath = [newDir stringByAppendingPathComponent:[originalPath lastPathComponent]];
-    [fm moveItemAtPath:originalPath toPath:newPath error:nil];
 }
 
 @end

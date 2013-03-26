@@ -9,6 +9,7 @@
 #import "MetaData.h"
 #import "Movie.h"
 #import "Util.h"
+#import "NSFileManager+Directories.h"
 
 #define kHBMovie @"movie"
 #define kHBTVShow @"episode"
@@ -65,7 +66,14 @@
 
 - (void)downloadDone:(NSString *)path {
     
-    _artworkPath = path;
+    NSFileManager *fm = [[NSFileManager alloc] init];
+    
+    NSString *appSupportPath = [fm applicationSupportFolder];
+    NSString *newPath = [appSupportPath stringByAppendingPathComponent:@"media/images"];
+    
+    NSString *artworkPath = [fm copyFileToNewPath:path dir:newPath];
+    
+    _artworkPath = artworkPath;
     
     [self tagVideo];
 }
@@ -82,8 +90,9 @@
     NSString *metaData = [self.videoData getMetaStringWith:self.videoData];
     
     // -source needs the subtitle path later, when we are ready for it
-    NSArray *args = [NSArray arrayWithObjects:@"-dest", self.sourcePath, @"-source", @"", @"-metadata", metaData, @"-language", subtitleLanguage, nil];
-    
+    // @"-source", @""
+    NSArray *args = [NSArray arrayWithObjects:@"-dest", self.sourcePath, @"-metadata", metaData, @"-language", subtitleLanguage, nil];
+
     [Util executeCommand:cmd args:args];
 }
 
@@ -91,9 +100,9 @@
     
     [_videoData setArtworkPath:self.artworkPath];
     [_videoData setSourcePath:self.sourcePath];
-    
-    if([[self.guessedData objectForKey:@"type"] isEqualToString:@"1080p"] || [[self.guessedData objectForKey:@"type"] isEqualToString:@"720p"])
-        [_videoData setHd:YES];
+
+    if([[self.guessedData objectForKey:@"screenSize"] isEqualToString:@"1080p"] || [[self.guessedData objectForKey:@"screenSize"] isEqualToString:@"720p"])
+        [_videoData setHd:[NSNumber numberWithBool:YES]];
 }
 
 - (void)guessVideoData:(NSString *)sourcePath {
