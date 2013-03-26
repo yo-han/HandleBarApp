@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Downloader.h"
 
-@interface MetaData : NSObject <NSURLDownloadDelegate>
+@interface MetaData : NSObject <DownloaderDelegate>
 
 - (BOOL)setMetadataInVideo:(NSString *)sourcePath;
 

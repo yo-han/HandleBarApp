@@ -11,23 +11,11 @@
 
 @interface Movie()
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *image;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *description;
-@property (nonatomic, strong) NSString *rating;
-@property (nonatomic, strong) NSString *releaseDate;
-@property (nonatomic, strong) NSString *director;
-@property (nonatomic, strong) NSString *cast;
-@property (nonatomic, strong) NSString *genre;
-@property (nonatomic, strong) NSString *imdbId;
-@property (nonatomic, strong) NSString *year;
-
 @end
 
 @implementation Movie
 
-@synthesize title, image, name, description, rating, releaseDate, director, cast, genre, imdbId, year;
+@synthesize title, image, name, description, rating, releaseDate, director, cast, genre, imdbId, year, artworkPath, sourcePath, hd;
 
 + (Movie *)getMovie:(NSString *)movieTitle year:(NSString *)year {
     
@@ -36,7 +24,7 @@
 
     if(movieData == nil)
         return nil;
-    
+
     Movie *movie = [Movie new];
     movie.title = [movieData objectForKey:@"Title"];
     movie.image = [movieData objectForKey:@"Poster"];
@@ -49,8 +37,21 @@
     movie.genre = [movieData objectForKey:@"Genre"];
     movie.imdbId = [movieData objectForKey:@"imdbID"];
     movie.year = year;
+    movie.artworkPath = @"";
+    movie.sourcePath = @"";
+    movie.hd = NO;
     
     return movie;
+}
+
+- (NSString *)getMetaStringWith:(Movie *)movie; {
+    
+    NSString *originalFilename = [movie.sourcePath lastPathComponent];
+    NSString *tags = @"{Artwork:%@}, {HD Video:%@}, {Name:'%@'}, {Director:'%@'}, {Cast:'%@'}, {Genre:'%@'}, {Release Date:%@}, {Description:'%@'}, {Long Description:'%@'}, {Rating:%@}, {contentID:%@}, {Media Kind:Movie}, {Comments:Original filename %@}";
+    
+    NSString *tagged = [NSString stringWithFormat:tags, movie.artworkPath, movie.hd, movie.name, movie.director, movie.cast, movie.releaseDate, movie.description, movie.description, movie.rating, movie.imdbId, originalFilename];
+    
+    return tagged;
 }
 
 -(NSString *)description {
