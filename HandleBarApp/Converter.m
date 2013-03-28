@@ -17,6 +17,7 @@
 
 @interface Converter()
 
+@property(strong) dispatch_queue_t convertQueue;
 @property(strong) NSFileManager *fm;
 @property(strong) NSString *appSupportPath;
 
@@ -32,6 +33,7 @@
 @implementation Converter
 
 @synthesize fm, appSupportPath;
+@synthesize convertQueue=_convertQueue;
 
 - (id) initWithPaths:(NSArray *)paths {
     
@@ -48,6 +50,8 @@
         }
         
         vdk.delegate = self;
+        
+        _convertQueue = dispatch_queue_create("hb.convert.queue", NULL);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(copyToItunes:) name:@"HBMetaDataIsSet" object:nil];
 	}
@@ -87,24 +91,15 @@
     videoFiles = [NSMutableArray arrayWithArray:[videoFiles valueForKeyPath:@"@distinctUnionOfObjects.self"]];
     
     __block NSString *mediaFile;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       
+    dispatch_async(self.convertQueue, ^{
+        
         mediaFile = [self convert:videoFiles];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setMetaData:mediaFile];
         });
     });
-    
-    if(mediaFile != nil)
-        NSLog(@"%@", mediaFile);
-    
-    /* MetaData *md = [MetaData new];
-     
-     BOOL metaDataIsSet = [md setMetadataInVideo:convertPath];
-     
-     if(metaDataIsSet == NO)
-     [fm copyFileToNewPath:videoPath dir:failedPath];*/
 }
 
 - (void)setMetaData:(NSString *)mediaFile {

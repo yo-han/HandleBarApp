@@ -33,7 +33,9 @@
     }
     
     [self.preferencesWindow showWindow:self];
-    [self.preferencesWindow.window setLevel: NSModalPanelWindowLevel];
+    [self.preferencesWindow.window setLevel: NSNormalWindowLevel];
     
+    [NSApp activateIgnoringOtherApps:YES];
 }
+
 @end

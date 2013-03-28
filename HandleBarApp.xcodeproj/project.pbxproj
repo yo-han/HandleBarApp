@@ -41,6 +41,8 @@
 		04B4D97316E7A21400BFE4AF /* FileSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D97216E7A21400BFE4AF /* FileSelect.m */; };
 		04B4D97516E7E28000BFE4AF /* languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B4D97416E7E28000BFE4AF /* languages.plist */; };
 		04B9DA8216F3B3BF00DCE173 /* MetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B9DA8116F3B3BF00DCE173 /* MetaData.m */; };
+		04EAB28D1704A6C6004EF64D /* config-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04EAB28B1704A6C6004EF64D /* config-example.plist */; };
+		04EAB28E1704A6C6004EF64D /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04EAB28C1704A6C6004EF64D /* config.plist */; };
 		04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F386F0168E642600B4CB4A /* Cocoa.framework */; };
 		04F386FB168E642600B4CB4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F386F9168E642600B4CB4A /* InfoPlist.strings */; };
 		04F386FD168E642600B4CB4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F386FC168E642600B4CB4A /* main.m */; };
@@ -136,6 +138,8 @@
 		04B4D97416E7E28000BFE4AF /* languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = languages.plist; sourceTree = "<group>"; };
 		04B9DA8016F3B3BF00DCE173 /* MetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaData.h; sourceTree = "<group>"; };
 		04B9DA8116F3B3BF00DCE173 /* MetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaData.m; sourceTree = "<group>"; };
+		04EAB28B1704A6C6004EF64D /* config-example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-example.plist"; sourceTree = "<group>"; };
+		04EAB28C1704A6C6004EF64D /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		04F386EC168E642600B4CB4A /* HandleBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandleBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F386F0168E642600B4CB4A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		04F386F3168E642600B4CB4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -384,6 +388,8 @@
 		04F386F7168E642600B4CB4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				04EAB28B1704A6C6004EF64D /* config-example.plist */,
+				04EAB28C1704A6C6004EF64D /* config.plist */,
 				04F386F8168E642600B4CB4A /* HandleBarApp-Info.plist */,
 				04F386F9168E642600B4CB4A /* InfoPlist.strings */,
 				04F386FC168E642600B4CB4A /* main.m */,
@@ -516,6 +522,8 @@
 				044B309116F905460093AEC9 /* iTVDb.podspec in Resources */,
 				044B309216F905460093AEC9 /* LICENSE in Resources */,
 				044B309316F905460093AEC9 /* README.md in Resources */,
+				04EAB28D1704A6C6004EF64D /* config-example.plist in Resources */,
+				04EAB28E1704A6C6004EF64D /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

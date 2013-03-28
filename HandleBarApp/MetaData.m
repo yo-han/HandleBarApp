@@ -8,6 +8,7 @@
 
 #import "MetaData.h"
 #import "Movie.h"
+#import "TVShow.h"
 #import "Util.h"
 #import "NSFileManager+Directories.h"
 
@@ -61,7 +62,16 @@
         [dl downloadWithUrl:movie.image path:downloadPath];
     }
     else {
-        NSLog(@"Bazinga");
+        
+        TVShow *tvShow = [TVShow getShow:self.guessedData];
+        
+        if(tvShow == nil)
+            return NO;
+        
+        _videoData = tvShow;
+        
+        NSString *downloadPath = NSTemporaryDirectory();
+        [dl downloadWithUrl:tvShow.image path:downloadPath];
     }
     
     return YES;
@@ -100,7 +110,7 @@
     
     NSMutableDictionary* userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
     [userInfo setObject:self.sourcePath forKey:@"sourcePath"];
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"HBMetaDataIsSet" object:self userInfo:userInfo];
 }
 

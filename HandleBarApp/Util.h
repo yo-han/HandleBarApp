@@ -14,5 +14,6 @@
 + (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments;
 + (NSDictionary *)executeBashCommand:(NSString *)cmd;
 + (BOOL)trashWithPath:(NSString *)path;
++ (NSDictionary *)getConfigFile;
 
 @end

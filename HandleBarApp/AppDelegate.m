@@ -24,7 +24,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self redirectConsoleLog];
-    
+        
     StartAtLoginController *loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.mustacherious.HandleBarHelperApp"];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HandleBarAutoStart"]) {
