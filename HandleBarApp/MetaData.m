@@ -38,12 +38,10 @@
 - (BOOL)setMetadataInVideo:(NSString *)sourcePath {
 
     _sourcePath = sourcePath;
+    _artworkPath = @"";
     
     [self guessVideoData:sourcePath];
-    
-    Downloader *dl = [[Downloader alloc] init];
-    dl.delegate = self;
-    
+       
     _videoType = [self.guessedData objectForKey:@"type"];
 
     if(self.videoType == nil)
@@ -56,12 +54,11 @@
         if(movie.name == nil)
             return NO;
         
-        _videoData = movie;
+        _videoData = movie;        
         
-        NSString *downloadPath = NSTemporaryDirectory();
-        [dl downloadWithUrl:movie.image path:downloadPath];
-    }
-    else {
+        [self downloadArtwork:movie.image];
+        
+    } else {
         
         TVShow *tvShow = [TVShow getShow:self.guessedData];
         
@@ -70,13 +67,27 @@
         
         _videoData = tvShow;
         
-        NSString *downloadPath = NSTemporaryDirectory();
-        [dl downloadWithUrl:tvShow.image path:downloadPath];
+        [self downloadArtwork:tvShow.image];
     }
     
     return YES;
 }
-
+        
+- (void)downloadArtwork:(NSString *)image {
+    
+    Downloader *dl = [[Downloader alloc] init];
+    dl.delegate = self;
+    
+    if(image != nil) {
+        
+        NSString *downloadPath = NSTemporaryDirectory();
+        [dl downloadWithUrl:image path:downloadPath];
+        
+    } else {
+        [self tagVideo];
+    }
+}
+ 
 - (void)downloadDone:(NSString *)path {
 
     NSFileManager *fm = [[NSFileManager alloc] init];
@@ -101,7 +112,7 @@
     NSString *subtitleLanguage = [[NSUserDefaults standardUserDefaults] objectForKey:@"SubtitleLanguage"];
     
     NSString *metaData = [self.videoData getMetaStringWith:self.videoData];
-    
+
     // -source needs the subtitle path later, when we are ready for it
     // @"-source", @""
     NSArray *args = [NSArray arrayWithObjects:@"-dest", self.sourcePath, @"-metadata", metaData, @"-language", subtitleLanguage, nil];

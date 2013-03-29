@@ -29,7 +29,10 @@
     showResult = [TVDbShow findById:showResult.showId];
     
     TVDbEpisode *episode = [TVDbEpisode findByShowId:showResult.showId seasonNumber:[showData objectForKey:@"season"] episodeNumber:[showData objectForKey:@"episodeNumber"]];
-
+    
+    if(episode.title == nil)
+        return nil;
+    
     TVShow *show = [TVShow new];
     show.title = showResult.title;
     show.image = showResult.poster;
