@@ -111,6 +111,9 @@
     NSString *cmd = [currentPath stringByAppendingPathComponent:@"Contents/Resources/SublerCLI"];
     NSString *subtitleLanguage = [[NSUserDefaults standardUserDefaults] objectForKey:@"SubtitleLanguage"];
     
+    if(subtitleLanguage == nil)
+        subtitleLanguage = @"English";
+    
     NSString *metaData = [self.videoData getMetaStringWith:self.videoData];
 
     // -source needs the subtitle path later, when we are ready for it

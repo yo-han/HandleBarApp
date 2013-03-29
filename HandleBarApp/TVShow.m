@@ -10,6 +10,12 @@
 #import "iTVdb.h"
 #import "Util.h"
 
+@interface TVShow()
+
++ (NSString *) optimizeShowNameForSearch:(NSString *)showName;
+
+@end
+
 @implementation TVShow
 
 @synthesize title, image, name, season, episode, episodeId, plot, rating, releaseDate, network, cast, genre, imdbId, year, artworkPath, sourcePath, hd;
@@ -17,7 +23,7 @@
 + (TVShow *)getShow:(NSDictionary *)showData {
     
     NSDictionary *config = [Util getConfigFile];
-    NSString *showName = [showData objectForKey:@"series"];
+    NSString *showName = [self optimizeShowNameForSearch:[showData objectForKey:@"series"]];
     
     [[TVDbClient sharedInstance] setApiKey:[config objectForKey:@"tvdbApiKey"]];
     NSMutableArray *shows = [TVDbShow findByName:showName];
@@ -32,7 +38,7 @@
     
     if(episode.title == nil)
         return nil;
-    
+
     TVShow *show = [TVShow new];
     show.title = showResult.title;
     show.image = showResult.poster;
@@ -62,6 +68,14 @@
     NSString *tagged = [NSString stringWithFormat:tags, show.artworkPath, show.hd, show.title, show.name, show.episode, show.season, show.episodeId, show.network, show.cast, show.genre, show.releaseDate, show.plot, show.plot, show.rating, show.imdbId, originalFilename];
 
     return tagged;
+}
+
++ (NSString *) optimizeShowNameForSearch:(NSString *)showName {
+    
+    if([showName isEqualToString:@"Archer"])
+        return @"Archer 2009";
+    else
+        return showName;
 }
 
 -(NSString *)description {
