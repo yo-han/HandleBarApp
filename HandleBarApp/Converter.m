@@ -177,6 +177,8 @@
         iTunesTrack * track = [iTunes add:[NSArray arrayWithObject:[NSURL fileURLWithPath:path]] to:nil];
         
         NSLog(@"Added %@ to track: %@",path,track);
+        
+        [Util trashWithPath:path];
     }
 }
 

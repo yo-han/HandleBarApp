@@ -75,7 +75,7 @@
     [center addObserver:self selector:@selector(defaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
     
     //[self startStopConverter:@"start"];
-    //[self startStopWebserver:@"start"];
+    [self startStopWebserver:@"start"];
     //[self startReSub];
     
     [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
