@@ -13,7 +13,8 @@
 
 #import "NSOperationQueue+CWSharedQueue.h"
 #import "NSFileManager+Directories.h"
-
+#import "SCEvents.h"
+#import "SCEvent.h"
 
 @interface Converter()
 
@@ -43,14 +44,8 @@
         fm = [NSFileManager defaultManager];
         appSupportPath = [fm applicationSupportFolder];
         
-		VDKQueue *vdk = [[VDKQueue alloc] init];
-        
-        for(NSDictionary *path in paths) {
-            [vdk addPath:[path objectForKey:@"path"] notifyingAbout:VDKQueueNotifyAboutWrite];
-        }
-        
-        vdk.delegate = self;
-        
+        [self setupEventListener:paths];
+       
         _convertQueue = dispatch_queue_create("hb.convert.queue", NULL);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(copyToItunes:) name:@"HBMetaDataIsSet" object:nil];
@@ -59,39 +54,65 @@
 	return self;
 }
 
--(void) VDKQueue:(VDKQueue *)queue receivedNotification:(NSString*)noteName forPath:(NSString*)fpath {
-        
-    NSURL *directoryURL = [NSURL URLWithString:fpath];
+- (void)setupEventListener:(NSArray *)searchPaths
+{
+	if (_events) return;
+	
+    _events = [[SCEvents alloc] init];
+    
+    [_events setDelegate:self];
+    
+    NSMutableArray *paths = [NSMutableArray arrayWithArray:[self arrayWithPaths:searchPaths]];
+    //NSMutableArray *excludePaths = [NSMutableArray arrayWithObject:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads/tmp"]];
+    
+	//[_events setExcludedPaths:excludePaths];
+	[_events startWatchingPaths:paths];
+    
+	// Display a description of the stream
+	//NSLog(@"%@", [_events streamDescription]);
+}
+
+/**
+ * This is the only method to be implemented to conform to the SCEventListenerProtocol.
+ * As this is only an example the event received is simply printed to the console.
+ *
+ * @param pathwatcher The SCEvents instance that received the event
+ * @param event       The actual event
+ */
+- (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
+{
+    
+    NSURL *directoryURL = [NSURL URLWithString:event._eventPath];
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     NSMutableArray *videoFiles = [NSMutableArray new];
     
     NSDirectoryEnumerator *enumerator = [fm enumeratorAtURL:directoryURL includingPropertiesForKeys:keys options:0 errorHandler:^(NSURL *url, NSError *error) { return YES; }];
-
+    
     for (NSURL *url in enumerator) {
-     
+        
         NSError *error;
         NSNumber *isDirectory = nil;
         NSNumber *isHidden = nil;
-             
+        
         [url getResourceValue:&isHidden forKey:NSURLIsHiddenKey error:&error];
-
+        
         if (![url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:&error]) {
-             NSLog(@"error while scanning dir");
+            NSLog(@"error while scanning dir");
         }
-         
+        
         if ([isDirectory boolValue]) {
-
+            
             videoFiles = [self findVideoFiles:[NSString stringWithFormat:@"%@/",[url path]] array:videoFiles];
         }
     }
     
     if([videoFiles count] == 0)
-        videoFiles = [self findVideoFiles:fpath array:videoFiles];
+        videoFiles = [self findVideoFiles:event._eventPath array:videoFiles];
     
     videoFiles = [NSMutableArray arrayWithArray:[videoFiles valueForKeyPath:@"@distinctUnionOfObjects.self"]];
     
     __block NSString *mediaFile;
-       
+    
     dispatch_async(self.convertQueue, ^{
         
         mediaFile = [self convert:videoFiles];
@@ -207,7 +228,7 @@
     
     for(NSString *file in files) {
         
-        NSString *f = [NSString stringWithFormat:@"%@%@",path, file];
+        NSString *f = [NSString stringWithFormat:@"%@/%@",path, file];
         [videosFiles addObject:f];
     }
     
@@ -225,7 +246,18 @@
         [fileTypes addObject:predicate];
     }
     
-    return [fileTypes componentsJoinedByString:@" OR "];       
+    return [fileTypes componentsJoinedByString:@" OR "];
+}
+
+- (NSArray *)arrayWithPaths:(NSArray *)paths {
+    
+    NSMutableArray *pathList = [NSMutableArray new];
+    
+    for(NSDictionary *path in paths) {
+        [pathList addObject:[path objectForKey:@"path"]];
+    }
+    
+    return pathList;
 }
 
 @end

@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VDKQueue.h"
+#import "SCEventListenerProtocol.h"
 
-
-@interface Converter : NSObject <VDKQueueDelegate>
+@interface Converter : NSObject <SCEventListenerProtocol>
+{
+	SCEvents *_events;
+}
 
 - (id) initWithPaths:(NSArray *)paths;
 
