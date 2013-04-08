@@ -15,7 +15,7 @@
     return (BOOL) [[NSUserDefaults standardUserDefaults] boolForKey:@"Debug"];
 }
 
-+ (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments {
++ (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments notifyStdOut:(BOOL)notifyStdOut {
     
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath: cmd];
@@ -26,11 +26,23 @@
     
     NSFileHandle *file = [pipe fileHandleForReading];
     
-    [task launch];
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSData *inData = nil;
+
+    [task launch];    
     
-    NSData *data = [file readDataToEndOfFile];
-    NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+    if(notifyStdOut == YES) {
+        while ((inData = [file availableData]) && [inData length]) {
+            [data appendData:inData];
+            [self logEncodingStatus:[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding]];
+        }
+    }
+        
+    [task waitUntilExit];
     
+    NSData *fdata = [file readDataToEndOfFile];
+    NSString *string = [[NSString alloc] initWithData: fdata encoding: NSUTF8StringEncoding];
+
     NSDictionary *response = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:task.processIdentifier], string, nil] forKeys:[NSArray arrayWithObjects:@"pid", @"response", nil]];
     
     return response;
@@ -94,6 +106,12 @@
     }
     
     return plist;
+}
+
++ (void) logEncodingStatus:(NSString *)output {
+    
+    NSArray *chunks = [output componentsSeparatedByString: @"\r"];
+    [[chunks lastObject] writeToFile:@"/tmp/handleBarEncode.status" atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 @end

@@ -25,7 +25,7 @@
 - (NSString *)fileTypePredicateString;
 - (NSMutableArray *)findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles;
 - (NSString *)getAudioTracks:(NSString *)sourcePath;
-- (NSString *) convert:(NSArray *) videos;
+- (NSString *) convert:(NSArray *) videos directory:(NSString *)directory;
 - (void)setMetaData:(NSString *)mediaFile;
 - (void)copyToItunes:(NSString *)sourcePath;
 
@@ -86,6 +86,10 @@
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     NSMutableArray *videoFiles = [NSMutableArray new];
     
+    // If the file is removed or the URL is just missing stop the execution.
+    if(directoryURL == nil)
+        return;
+    
     NSDirectoryEnumerator *enumerator = [fm enumeratorAtURL:directoryURL includingPropertiesForKeys:keys options:0 errorHandler:^(NSURL *url, NSError *error) { return YES; }];
     
     for (NSURL *url in enumerator) {
@@ -115,7 +119,7 @@
     
     dispatch_async(self.convertQueue, ^{
         
-        mediaFile = [self convert:videoFiles];
+        mediaFile = [self convert:videoFiles directory:[directoryURL description]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setMetaData:mediaFile];
@@ -143,7 +147,7 @@
     }
 }
 
-- (NSString *) convert:(NSArray *) videos {
+- (NSString *) convert:(NSArray *) videos directory:(NSString *)directory {
     
     if([videos count] == 0)
         return nil;
@@ -162,10 +166,10 @@
     NSString *preset = [[NSUserDefaults standardUserDefaults] objectForKey:@"HandBrakePreset"];
     NSString *language = [[NSUserDefaults standardUserDefaults] objectForKey:@"HandBrakeLanguage"];
         
-    NSArray *args = [NSArray arrayWithObjects:@"-i", videoPath, @"-o", convertPath, @"--audio", audioTracks, @"--preset", preset, @"--native-language", language, @"--native-dub", @"1>", @"/tmp/handleBarEncode.status", nil];
+    NSArray *args = [NSArray arrayWithObjects:@"-i", videoPath, @"-o", convertPath, @"--audio", audioTracks, @"--preset", preset, @"--native-language", language, @"--native-dub", nil];
     
-    [Util executeCommand:cmd args:args];
-    
+    [Util executeCommand:cmd args:args notifyStdOut:YES];
+
     if([fm fileExistsAtPath:convertPath]) {
         
         if([Util inDebugMode]) {
@@ -178,6 +182,14 @@
             
             // Move orignal file to the trash bin
             [Util trashWithPath:videoPath];
+        }
+        
+        // Remove all files left behind
+        NSArray *pathComponents = [[videoPath stringByReplacingOccurrencesOfString:directory withString:@""] pathComponents];
+        if(pathComponents.count > 2) {
+
+            NSString *dir = [directory stringByAppendingPathComponent:[pathComponents objectAtIndex:1]];
+            [Util trashWithPath:dir];
         }
 
         return convertPath;

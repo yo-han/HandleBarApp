@@ -11,9 +11,10 @@
 @interface Util : NSObject
 
 + (BOOL)inDebugMode;
-+ (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments;
++ (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments notifyStdOut:(BOOL)notifyStdOut;
 + (NSDictionary *)executeBashCommand:(NSString *)cmd;
 + (BOOL)trashWithPath:(NSString *)path;
 + (NSDictionary *)getConfigFile;
++ (void) logEncodingStatus:(NSString *)output;
 
 @end
