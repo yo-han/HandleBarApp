@@ -137,6 +137,10 @@
         NSString *failedPath = [appSupportPath stringByAppendingPathComponent:@"/media/failed"];
         [fm copyFileToNewPath:mediaFile dir:failedPath];
     }
+    
+    if(![Util inDebugMode]) {
+        [Util trashWithPath:mediaFile];
+    }
 }
 
 - (NSString *) convert:(NSArray *) videos {
