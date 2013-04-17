@@ -141,10 +141,6 @@
         NSString *failedPath = [appSupportPath stringByAppendingPathComponent:@"/media/failed"];
         [fm copyFileToNewPath:mediaFile dir:failedPath];
     }
-    
-    if(![Util inDebugMode]) {
-        [Util trashWithPath:mediaFile];
-    }
 }
 
 - (NSString *) convert:(NSArray *) videos directory:(NSString *)directory {
@@ -215,7 +211,10 @@
         
         NSLog(@"Added %@ to track: %@",path,track);
         
-        [Util trashWithPath:path];
+        if(![Util inDebugMode]) {
+            NSLog(@"Remove copy in coverted dir");
+            [Util trashWithPath:path];
+        }
     }
 }
 
