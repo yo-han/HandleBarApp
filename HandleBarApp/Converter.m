@@ -21,6 +21,7 @@
 @property(strong) dispatch_queue_t convertQueue;
 @property(strong) NSFileManager *fm;
 @property(strong) NSString *appSupportPath;
+@property(strong) NSMutableSet *convertedFiles;
 
 - (NSString *)fileTypePredicateString;
 - (NSMutableArray *)findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles;
@@ -33,7 +34,7 @@
 
 @implementation Converter
 
-@synthesize fm, appSupportPath;
+@synthesize fm, appSupportPath, convertedFiles;
 @synthesize convertQueue=_convertQueue;
 
 - (id) initWithPaths:(NSArray *)paths {
@@ -43,6 +44,7 @@
 	{
         fm = [NSFileManager defaultManager];
         appSupportPath = [fm applicationSupportFolder];
+        convertedFiles = [NSMutableSet set];
         
         [self setupEventListener:paths];
        
@@ -110,22 +112,25 @@
             videoFiles = [self findVideoFiles:[NSString stringWithFormat:@"%@/",[url path]] array:videoFiles];
         }
     }
-    
+
     if([videoFiles count] == 0)
         videoFiles = [self findVideoFiles:event._eventPath array:videoFiles];
-    
+
     filteredVideoFiles = [self arrayUnique:videoFiles];
-    
+
     __block NSString *mediaFile;
     
     dispatch_async(self.convertQueue, ^{
-        
+              
         mediaFile = [self convert:filteredVideoFiles directory:[directoryURL description]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setMetaData:mediaFile];
         });
     });
+    
+    if([filteredVideoFiles count] == 0)
+       [convertedFiles removeAllObjects];
 }
 
 - (void)setMetaData:(NSString *)mediaFile {
@@ -149,6 +154,14 @@
     if([videos count] == 0)
         return nil;
     
+    NSString *videoPath = [videos objectAtIndex:0];
+    
+    if([convertedFiles containsObject:videoPath]) {
+        return nil;
+    } else {
+        [convertedFiles addObject:videoPath];
+    }
+    
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
     NSString *cmd = [currentPath stringByAppendingPathComponent:@"Contents/Resources/HandBrakeCLI"];
     
@@ -156,7 +169,6 @@
     NSString *debugRemovePath = [appSupportPath stringByAppendingPathComponent:@"/media/done"];
     NSString *convertedDir = [appSupportPath stringByAppendingPathComponent:@"/media/converted"];
     
-    NSString *videoPath = [videos objectAtIndex:0];
     NSString *convertPath = [convertedDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.m4v", [[videoPath lastPathComponent] stringByDeletingPathExtension]]];
 
     NSString *audioTracks = [self getAudioTracks:videoPath];
@@ -211,10 +223,14 @@
         iTunesTrack * track = [iTunes add:[NSArray arrayWithObject:[NSURL fileURLWithPath:path]] to:nil];
         
         NSLog(@"Added %@ to track: %@",path,track);
-        
+        NSLog(@"Debug mode: %d",[Util inDebugMode]);
         if(![Util inDebugMode]) {
             NSLog(@"Remove copy in coverted dir");
             [Util trashWithPath:path];
+        } else {
+            
+            NSString *debugRemovePath = [appSupportPath stringByAppendingPathComponent:@"/media/done"];
+            [fm copyFileToNewPath:path dir:debugRemovePath];
         }
     }
 }
