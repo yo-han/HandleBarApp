@@ -15,25 +15,56 @@
     return (BOOL) [[NSUserDefaults standardUserDefaults] boolForKey:@"Debug"];
 }
 
-+ (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments {
-    
++ (NSDictionary *)executeCommand:(NSString *)cmd args:(NSArray *)arguments notifyStdOut:(BOOL)notifyStdOut {
+        
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath: cmd];
     [task setArguments: arguments];
     
-    NSPipe *pipe = [NSPipe pipe];
-    [task setStandardOutput: pipe];
+    NSPipe *stdPipe = [NSPipe pipe];
+    NSPipe *errPipe = [NSPipe pipe];
     
-    NSFileHandle *file = [pipe fileHandleForReading];
+   [task setStandardOutput: stdPipe];
+   [task setStandardError: errPipe];
     
+    NSFileHandle *fileStd = [stdPipe fileHandleForReading];
+    
+    __weak __block NSData *readData;
+
     [task launch];
     
-    NSData *data = [file readDataToEndOfFile];
-    NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+    if(notifyStdOut == YES) {
+                  
+        while ((readData = [fileStd availableData]) && [readData length]){
+            
+            @autoreleasepool
+            {
+                NSString *logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
+                [self logEncodingStatus:logString];
+                
+                logString = nil;
+                readData = nil;
+            }
+        }
+    }
+        
+    [task waitUntilExit];
     
-    NSDictionary *response = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:task.processIdentifier], string, nil] forKeys:[NSArray arrayWithObjects:@"pid", @"response", nil]];
+    NSDictionary *response;
+           
+    NSData *fdata = [fileStd readDataToEndOfFile];
+    NSString *string = [[NSString alloc] initWithData: fdata encoding: NSUTF8StringEncoding];
+
+    response = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:task.processIdentifier], string, nil] forKeys:[NSArray arrayWithObjects:@"pid", @"response", nil]];
+
+    readData = nil;
+    fdata = nil;
+    string = nil;
     
+    [fileStd closeFile];
+
     return response;
+
 }
 
 + (NSDictionary *)executeBashCommand:(NSString *)cmd {
@@ -94,6 +125,12 @@
     }
     
     return plist;
+}
+
++ (void) logEncodingStatus:(NSString *)output {
+    
+    NSArray *chunks = [output componentsSeparatedByString: @"\r"];
+    [[chunks lastObject] writeToFile:@"/tmp/handleBarEncode.status" atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 @end

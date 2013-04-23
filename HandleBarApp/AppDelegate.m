@@ -75,7 +75,7 @@
     [center addObserver:self selector:@selector(defaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
     
     //[self startStopConverter:@"start"];
-    //[self startStopWebserver:@"start"];
+    [self startStopWebserver:@"start"];
     //[self startReSub];
     
     [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
@@ -159,7 +159,7 @@
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:webserverScriptUrl,action, nil];
     
-    [Util executeCommand:cmd args:args];
+    [Util executeCommand:cmd args:args notifyStdOut:NO];
 }
 
 - (void)startStopConverter:(NSString *)action {
@@ -167,7 +167,7 @@
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:convertScriptUrl,action, nil];
     
-    [Util executeCommand:cmd args:args];
+    [Util executeCommand:cmd args:args notifyStdOut:NO];
     
     if([action isEqual: @"start"]) {
         
@@ -212,14 +212,14 @@
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
     
-    [Util executeCommand:cmd args:args];
+    [Util executeCommand:cmd args:args notifyStdOut:NO];
     
     [self startResubTimer];
 }
 
 -(IBAction)openHandleBar:(id)sender {
-       
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:handleBarViewUrl]];
+
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8082"]];
 }
 
 - (IBAction)displayPreferences:(id)sender {

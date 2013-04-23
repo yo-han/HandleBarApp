@@ -10,6 +10,9 @@
 		0415071716B9B77F00D9AB7A /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */; };
 		0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */; };
 		0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0415072A16B9CFCE00D9AB7A /* Security.framework */; };
+		04158F9F170CD2F8004D3F8B /* SCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04158F9B170CD2F8004D3F8B /* SCEvent.m */; };
+		04158FA0170CD2F8004D3F8B /* SCEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 04158F9E170CD2F8004D3F8B /* SCEvents.m */; };
+		04158FA3170CD32E004D3F8B /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04158FA2170CD32E004D3F8B /* CoreServices.framework */; };
 		043334A016ED43FC0029C2F3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433349F16ED43FC0029C2F3 /* Util.m */; };
 		043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */ = {isa = PBXBuildFile; fileRef = 043334A216ED44240029C2F3 /* NSFileManager+Directories.m */; };
 		043A043316EFDBF3001514B0 /* NSOperationQueue+CWSharedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */; };
@@ -17,8 +20,6 @@
 		043A043716EFEA41001514B0 /* SublerCLI in Resources */ = {isa = PBXBuildFile; fileRef = 043A043616EFEA41001514B0 /* SublerCLI */; };
 		043A055A16F20006001514B0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043A055916F20006001514B0 /* AVFoundation.framework */; };
 		043A055C16F22434001514B0 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 043A055B16F22434001514B0 /* ffmpeg */; };
-		0443EBFE16EDE3C60090EE4A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0443EBFB16EDE3C60090EE4A /* README.md */; };
-		0443EBFF16EDE3C60090EE4A /* VDKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443EBFD16EDE3C60090EE4A /* VDKQueue.m */; };
 		0443EC0216EE7DB00090EE4A /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443EC0116EE7DB00090EE4A /* Converter.m */; };
 		044B307716F902F50093AEC9 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B307616F902F50093AEC9 /* Movie.m */; };
 		044B309016F905460093AEC9 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B307E16F905460093AEC9 /* NSString+Helper.m */; };
@@ -84,6 +85,13 @@
 /* Begin PBXFileReference section */
 		0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		0415072A16B9CFCE00D9AB7A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		04158F99170CD2F8004D3F8B /* SCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCConstants.h; sourceTree = "<group>"; };
+		04158F9A170CD2F8004D3F8B /* SCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCEvent.h; sourceTree = "<group>"; };
+		04158F9B170CD2F8004D3F8B /* SCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCEvent.m; sourceTree = "<group>"; };
+		04158F9C170CD2F8004D3F8B /* SCEventListenerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCEventListenerProtocol.h; sourceTree = "<group>"; };
+		04158F9D170CD2F8004D3F8B /* SCEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCEvents.h; sourceTree = "<group>"; };
+		04158F9E170CD2F8004D3F8B /* SCEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCEvents.m; sourceTree = "<group>"; };
+		04158FA2170CD32E004D3F8B /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0433349E16ED43FC0029C2F3 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		0433349F16ED43FC0029C2F3 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		043334A116ED44240029C2F3 /* NSFileManager+Directories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Directories.h"; sourceTree = "<group>"; };
@@ -95,9 +103,6 @@
 		043A055916F20006001514B0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		043A055B16F22434001514B0 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		043A055F16F26111001514B0 /* Python_Pyhton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Python_Pyhton.h; sourceTree = "<group>"; };
-		0443EBFB16EDE3C60090EE4A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		0443EBFC16EDE3C60090EE4A /* VDKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDKQueue.h; sourceTree = "<group>"; };
-		0443EBFD16EDE3C60090EE4A /* VDKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDKQueue.m; sourceTree = "<group>"; };
 		0443EC0016EE7DB00090EE4A /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
 		0443EC0116EE7DB00090EE4A /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
 		044B307516F902F50093AEC9 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -184,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04158FA3170CD32E004D3F8B /* CoreServices.framework in Frameworks */,
 				043A055A16F20006001514B0 /* AVFoundation.framework in Frameworks */,
 				0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */,
 				0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */,
@@ -205,6 +211,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04158FA1170CD2FF004D3F8B /* SCEvents */ = {
+			isa = PBXGroup;
+			children = (
+				04158F99170CD2F8004D3F8B /* SCConstants.h */,
+				04158F9A170CD2F8004D3F8B /* SCEvent.h */,
+				04158F9B170CD2F8004D3F8B /* SCEvent.m */,
+				04158F9C170CD2F8004D3F8B /* SCEventListenerProtocol.h */,
+				04158F9D170CD2F8004D3F8B /* SCEvents.h */,
+				04158F9E170CD2F8004D3F8B /* SCEvents.m */,
+			);
+			name = SCEvents;
+			sourceTree = "<group>";
+		};
 		043A055D16F22446001514B0 /* Bin */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,16 +240,6 @@
 				049ACB1016C5798E007F103C /* handleBarIcon.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		0443EBFA16EDE3C60090EE4A /* VDKQueue */ = {
-			isa = PBXGroup;
-			children = (
-				0443EBFB16EDE3C60090EE4A /* README.md */,
-				0443EBFC16EDE3C60090EE4A /* VDKQueue.h */,
-				0443EBFD16EDE3C60090EE4A /* VDKQueue.m */,
-			);
-			path = VDKQueue;
 			sourceTree = "<group>";
 		};
 		044B307B16F905460093AEC9 /* itvdb */ = {
@@ -303,7 +312,7 @@
 				043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */,
 				04F38B001690EC6D00B4CB4A /* StartAtLoginController.h */,
 				04F38B011690EC6D00B4CB4A /* StartAtLoginController.m */,
-				0443EBFA16EDE3C60090EE4A /* VDKQueue */,
+				04158FA1170CD2FF004D3F8B /* SCEvents */,
 				04F38AD716907CCA00B4CB4A /* MASPreferences */,
 				043A055D16F22446001514B0 /* Bin */,
 			);
@@ -333,6 +342,7 @@
 		04F386EF168E642600B4CB4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04158FA2170CD32E004D3F8B /* CoreServices.framework */,
 				043A055916F20006001514B0 /* AVFoundation.framework */,
 				0415072A16B9CFCE00D9AB7A /* Security.framework */,
 				0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */,
@@ -515,7 +525,6 @@
 				049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */,
 				04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */,
 				04B4D97516E7E28000BFE4AF /* languages.plist in Resources */,
-				0443EBFE16EDE3C60090EE4A /* README.md in Resources */,
 				043A043516EFE3FD001514B0 /* HandBrakeCLI in Resources */,
 				043A043716EFEA41001514B0 /* SublerCLI in Resources */,
 				043A055C16F22434001514B0 /* ffmpeg in Resources */,
@@ -556,7 +565,6 @@
 				04B4D97316E7A21400BFE4AF /* FileSelect.m in Sources */,
 				043334A016ED43FC0029C2F3 /* Util.m in Sources */,
 				043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */,
-				0443EBFF16EDE3C60090EE4A /* VDKQueue.m in Sources */,
 				0443EC0216EE7DB00090EE4A /* Converter.m in Sources */,
 				04B9DA8216F3B3BF00DCE173 /* MetaData.m in Sources */,
 				044B307716F902F50093AEC9 /* Movie.m in Sources */,
@@ -570,6 +578,8 @@
 				044B309C16F905DE0093AEC9 /* TVShow.m in Sources */,
 				044B309F16F908510093AEC9 /* IMDB.m in Sources */,
 				0468B2D716FA73F50072A08F /* Downloader.m in Sources */,
+				04158F9F170CD2F8004D3F8B /* SCEvent.m in Sources */,
+				04158FA0170CD2F8004D3F8B /* SCEvents.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

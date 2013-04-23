@@ -120,7 +120,7 @@
     // @"-source", @""
     NSArray *args = [NSArray arrayWithObjects:@"-dest", self.sourcePath, @"-metadata", metaData, @"-language", subtitleLanguage, nil];
 
-    [Util executeCommand:cmd args:args];
+    [Util executeCommand:cmd args:args notifyStdOut:NO];
     
     NSMutableDictionary* userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
     [userInfo setObject:self.sourcePath forKey:@"sourcePath"];
@@ -145,8 +145,11 @@
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:scriptPath, sourcePath, nil];
     
-    NSDictionary *resp = [Util executeCommand:cmd args:args];
+    NSDictionary *resp = [Util executeCommand:cmd args:args notifyStdOut:NO];
     NSString *json = [resp objectForKey:@"response"];
+    
+    if(json == nil)
+        return;
     
     _guessedData = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:nil error:nil];
 }
