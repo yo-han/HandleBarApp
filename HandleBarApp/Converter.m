@@ -63,7 +63,8 @@
         
     NSURL *directoryURL = [NSURL URLWithString:fpath];
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
-    NSMutableArray *videoFiles = [NSMutableArray new];
+    NSMutableArray *videoFiles = [NSMutableArray array];
+    NSArray *filteredVideoFiles = [NSArray array];
     
     NSDirectoryEnumerator *enumerator = [fm enumeratorAtURL:directoryURL includingPropertiesForKeys:keys options:0 errorHandler:^(NSURL *url, NSError *error) { return YES; }];
 
@@ -88,13 +89,13 @@
     if([videoFiles count] == 0)
         videoFiles = [self findVideoFiles:fpath array:videoFiles];
     
-    videoFiles = [NSMutableArray arrayWithArray:[videoFiles valueForKeyPath:@"@distinctUnionOfObjects.self"]];
+    filteredVideoFiles = [self arrayUnique:videoFiles];
     
     __block NSString *mediaFile;
        
     dispatch_async(self.convertQueue, ^{
         
-        mediaFile = [self convert:videoFiles];
+        mediaFile = [self convert:filteredVideoFiles];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setMetaData:mediaFile];
@@ -224,6 +225,20 @@
     }
     
     return [fileTypes componentsJoinedByString:@" OR "];       
+}
+
+- (NSArray *)arrayUnique:(NSArray *)array {
+    
+    NSMutableSet* existingNames = [NSMutableSet set];
+    NSMutableArray* filteredArray = [NSMutableArray array];
+    for (NSString* path in array) {
+        if (![existingNames containsObject:path]) {
+            [existingNames addObject:path];
+            [filteredArray addObject:path];
+        }
+    }
+    
+    return filteredArray;
 }
 
 @end
