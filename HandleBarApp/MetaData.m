@@ -10,6 +10,7 @@
 #import "Movie.h"
 #import "TVShow.h"
 #import "Util.h"
+#import "iTunes.h"
 #import "NSFileManager+Directories.h"
 
 #define kHBMovie @"movie"
@@ -122,10 +123,26 @@
 
     [Util executeCommand:cmd args:args notifyStdOut:NO];
     
-    NSMutableDictionary* userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
-    [userInfo setObject:self.sourcePath forKey:@"sourcePath"];
+    [self copyToItunes:self.sourcePath];
+}
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"HBMetaDataIsSet" object:self userInfo:userInfo];
+- (void)copyToItunes:(NSString *)path {
+    
+    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    iTunesTrack * track = [iTunes add:[NSArray arrayWithObject:[NSURL fileURLWithPath:path]] to:nil];
+    
+    NSLog(@"Added %@ to track: %@",path,track);
+    NSLog(@"Debug mode: %d",[Util inDebugMode]);
+    if(![Util inDebugMode]) {
+        NSLog(@"Remove copy in coverted dir");
+        [Util trashWithPath:path];
+    } else {
+        
+        NSFileManager *fm = [NSFileManager defaultManager];
+       
+        NSString *debugRemovePath = [[fm applicationSupportFolder] stringByAppendingPathComponent:@"/media/done"];
+        [fm copyFileToNewPath:path dir:debugRemovePath];
+    }
 }
 
 - (void)completeVideoData {

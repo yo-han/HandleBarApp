@@ -49,8 +49,6 @@
         [self setupEventListener:paths];
        
         _convertQueue = dispatch_queue_create("hb.convert.queue", NULL);
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(copyToItunes:) name:@"HBMetaDataIsSet" object:nil];
 	}
     
 	return self;
@@ -112,7 +110,9 @@
             videoFiles = [self findVideoFiles:[NSString stringWithFormat:@"%@/",[url path]] array:videoFiles];
         }
     }
-
+    
+    NSLog(@"Check for not-converted video files event fired");
+    
     if([videoFiles count] == 0)
         videoFiles = [self findVideoFiles:event._eventPath array:videoFiles];
 
@@ -129,8 +129,11 @@
         });
     });
     
-    if([filteredVideoFiles count] == 0)
-       [convertedFiles removeAllObjects];
+    if([filteredVideoFiles count] == 0) {
+        
+        NSLog(@"Clean up the 'allready converted files' list");
+        [convertedFiles removeAllObjects];
+    }
 }
 
 - (void)setMetaData:(NSString *)mediaFile {
@@ -157,8 +160,13 @@
     NSString *videoPath = [videos objectAtIndex:0];
     
     if([convertedFiles containsObject:videoPath]) {
+        
+        NSLog(@"Converted already: %@",  videoPath);
         return nil;
+        
     } else {
+        
+        NSLog(@"Not converted yet, let's go: %@",  videoPath);
         [convertedFiles addObject:videoPath];
     }
     
@@ -210,29 +218,6 @@
     }
     
     return nil;
-}
-
-- (void)copyToItunes:(NSNotification *)notification {
-    
-    if ([[notification name] isEqualToString:@"HBMetaDataIsSet"])
-    {
-        NSDictionary *userInfo = [notification userInfo];
-        NSString *path = [userInfo objectForKey:@"sourcePath"];
-        
-        iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-        iTunesTrack * track = [iTunes add:[NSArray arrayWithObject:[NSURL fileURLWithPath:path]] to:nil];
-        
-        NSLog(@"Added %@ to track: %@",path,track);
-        NSLog(@"Debug mode: %d",[Util inDebugMode]);
-        if(![Util inDebugMode]) {
-            NSLog(@"Remove copy in coverted dir");
-            [Util trashWithPath:path];
-        } else {
-            
-            NSString *debugRemovePath = [appSupportPath stringByAppendingPathComponent:@"/media/done"];
-            [fm copyFileToNewPath:path dir:debugRemovePath];
-        }
-    }
 }
 
 - (NSString *)getAudioTracks:(NSString *)sourcePath {
