@@ -22,19 +22,19 @@
 @property(strong) NSFileManager *fm;
 @property(strong) NSString *appSupportPath;
 @property(strong) NSMutableSet *convertedFiles;
+@property(strong) NSMutableArray *queuedVideoFiles;
 
 - (NSString *)fileTypePredicateString;
 - (NSMutableArray *)findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles;
 - (NSString *)getAudioTracks:(NSString *)sourcePath;
-- (NSString *) convert:(NSArray *) videos directory:(NSString *)directory;
+- (NSString *) convert:(NSString *) videoPath directory:(NSString *)directory;
 - (void)setMetaData:(NSString *)mediaFile;
-- (void)copyToItunes:(NSString *)sourcePath;
 
 @end
 
 @implementation Converter
 
-@synthesize fm, appSupportPath, convertedFiles;
+@synthesize fm, appSupportPath, convertedFiles, queuedVideoFiles;
 @synthesize convertQueue=_convertQueue;
 
 - (id) initWithPaths:(NSArray *)paths {
@@ -45,6 +45,7 @@
         fm = [NSFileManager defaultManager];
         appSupportPath = [fm applicationSupportFolder];
         convertedFiles = [NSMutableSet set];
+        queuedVideoFiles = [NSMutableArray array];
         
         [self setupEventListener:paths];
        
@@ -63,30 +64,16 @@
     [_events setDelegate:self];
     
     NSMutableArray *paths = [NSMutableArray arrayWithArray:[self arrayWithPaths:searchPaths]];
-    //NSMutableArray *excludePaths = [NSMutableArray arrayWithObject:[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads/tmp"]];
     
-	//[_events setExcludedPaths:excludePaths];
 	[_events startWatchingPaths:paths];
-    
-	// Display a description of the stream
-	//NSLog(@"%@", [_events streamDescription]);
 }
 
-/**
- * This is the only method to be implemented to conform to the SCEventListenerProtocol.
- * As this is only an example the event received is simply printed to the console.
- *
- * @param pathwatcher The SCEvents instance that received the event
- * @param event       The actual event
- */
 - (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
-{
-    
+{    
     NSURL *directoryURL = [NSURL URLWithString:event._eventPath];
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     NSMutableArray *videoFiles = [NSMutableArray array];
-    NSArray *filteredVideoFiles = [NSArray array];
-    
+
     // If the file is removed or the URL is just missing stop the execution.
     if(directoryURL == nil)
         return;
@@ -116,20 +103,28 @@
     if([videoFiles count] == 0)
         videoFiles = [self findVideoFiles:event._eventPath array:videoFiles];
 
-    filteredVideoFiles = [self arrayUnique:videoFiles];
-
+    self.queuedVideoFiles = [self arrayUnique:videoFiles queue:self.queuedVideoFiles];
+    NSLog(@"%@", self.queuedVideoFiles);
     __block NSString *mediaFile;
     
     dispatch_async(self.convertQueue, ^{
-              
-        mediaFile = [self convert:filteredVideoFiles directory:[directoryURL description]];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self setMetaData:mediaFile];
-        });
+        if([self.queuedVideoFiles count] != 0) {
+            
+            NSString *videoPath = [self.queuedVideoFiles objectAtIndex:0];
+            
+            mediaFile = [self convert:videoPath directory:[directoryURL description]];
+            
+            [self.queuedVideoFiles removeObjectAtIndex:0];
+            [convertedFiles addObject:videoPath];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setMetaData:mediaFile];
+            });
+        }
     });
     
-    if([filteredVideoFiles count] == 0) {
+    if([self.queuedVideoFiles count] == 0) {
         
         NSLog(@"Clean up the 'allready converted files' list");
         [convertedFiles removeAllObjects];
@@ -152,12 +147,7 @@
     }
 }
 
-- (NSString *) convert:(NSArray *) videos directory:(NSString *)directory {
-    
-    if([videos count] == 0)
-        return nil;
-    
-    NSString *videoPath = [videos objectAtIndex:0];
+- (NSString *) convert:(NSString *) videoPath directory:(NSString *)directory {
     
     if([convertedFiles containsObject:videoPath]) {
         
@@ -165,9 +155,7 @@
         return nil;
         
     } else {
-        
         NSLog(@"Not converted yet, let's go: %@",  videoPath);
-        [convertedFiles addObject:videoPath];
     }
     
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
@@ -277,11 +265,19 @@
     return pathList;
 }
 
-- (NSArray *)arrayUnique:(NSArray *)array {
+- (NSMutableArray *)arrayUnique:(NSArray *)array queue:(NSMutableArray *)queue {
     
     NSMutableSet* existingNames = [NSMutableSet set];
     NSMutableArray* filteredArray = [NSMutableArray array];
-    for (NSString* path in array) {
+    
+    [queue addObjectsFromArray:array];
+    
+    for (NSString* path in queue) {
+        
+        NSRange textRange = [path rangeOfString:@"_UNPACK_"];
+        if(textRange.location != NSNotFound)
+            continue;
+        
         if (![existingNames containsObject:path]) {
             [existingNames addObject:path];
             [filteredArray addObject:path];
