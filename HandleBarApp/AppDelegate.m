@@ -83,6 +83,7 @@
         return;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(converterIsRunning:) name:@"updateConvertETA" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateQueueMenu:) name:@"updateQueueMenu" object:nil];
 
 }
 
@@ -165,6 +166,22 @@
     }
     
     [self updateStatusMenu:string];
+}
+
+- (void)updateQueueMenu:(NSNotification *)notification {
+    
+    NSDictionary *dict = notification.userInfo;
+    NSArray *queue = [dict objectForKey:@"queue"];
+    
+    [queueMenu removeAllItems];
+    
+    if([queue count] > 0) {
+        for(NSString *path in queue) {
+            [queueMenu addItemWithTitle:path action:nil keyEquivalent:@""];
+        }
+    } else {
+        [queueMenu addItemWithTitle:@"empty" action:nil keyEquivalent:@""];
+    }
 }
 
 - (void)startStopWebserver:(NSString *)action {
