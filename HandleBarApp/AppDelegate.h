@@ -10,15 +10,16 @@
 #import <ServiceManagement/ServiceManagement.h>
 
 @class Preferences;
+@class StatusItemView;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     
     IBOutlet NSMenu *statusMenu;
-    IBOutlet NSMenuItem * startStop;
-    IBOutlet NSMenuItem * running;
     IBOutlet NSButton *loginCheck;
     
     NSStatusItem * statusItem;
+    StatusItemView *statusItemView;
+    
     NSTimer *updateStatusTimer;
     NSTimer *reSubTimer;
     

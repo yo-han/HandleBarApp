@@ -13,6 +13,7 @@
 		04158F9F170CD2F8004D3F8B /* SCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04158F9B170CD2F8004D3F8B /* SCEvent.m */; };
 		04158FA0170CD2F8004D3F8B /* SCEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 04158F9E170CD2F8004D3F8B /* SCEvents.m */; };
 		04158FA3170CD32E004D3F8B /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04158FA2170CD32E004D3F8B /* CoreServices.framework */; };
+		041A551A172BF4C30097A07B /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A5519172BF4C30097A07B /* StatusItemView.m */; };
 		043334A016ED43FC0029C2F3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433349F16ED43FC0029C2F3 /* Util.m */; };
 		043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */ = {isa = PBXBuildFile; fileRef = 043334A216ED44240029C2F3 /* NSFileManager+Directories.m */; };
 		043A043316EFDBF3001514B0 /* NSOperationQueue+CWSharedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */; };
@@ -92,6 +93,8 @@
 		04158F9D170CD2F8004D3F8B /* SCEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCEvents.h; sourceTree = "<group>"; };
 		04158F9E170CD2F8004D3F8B /* SCEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCEvents.m; sourceTree = "<group>"; };
 		04158FA2170CD32E004D3F8B /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		041A5518172BF4C30097A07B /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
+		041A5519172BF4C30097A07B /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
 		0433349E16ED43FC0029C2F3 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		0433349F16ED43FC0029C2F3 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		043334A116ED44240029C2F3 /* NSFileManager+Directories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Directories.h"; sourceTree = "<group>"; };
@@ -304,6 +307,8 @@
 		04B4D96D16E7581500BFE4AF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				04B4D97116E7A21400BFE4AF /* FileSelect.h */,
+				04B4D97216E7A21400BFE4AF /* FileSelect.m */,
 				049675EE1702428B00379E5C /* iTunes.h */,
 				044B309D16F908510093AEC9 /* IMDB.h */,
 				044B309E16F908510093AEC9 /* IMDB.m */,
@@ -369,8 +374,6 @@
 			children = (
 				04F38702168E642600B4CB4A /* AppDelegate.h */,
 				04F38703168E642600B4CB4A /* AppDelegate.m */,
-				04B4D97116E7A21400BFE4AF /* FileSelect.h */,
-				04B4D97216E7A21400BFE4AF /* FileSelect.m */,
 				0443EC0016EE7DB00090EE4A /* Converter.h */,
 				0443EC0116EE7DB00090EE4A /* Converter.m */,
 				04B9DA8016F3B3BF00DCE173 /* MetaData.h */,
@@ -381,6 +384,8 @@
 				044B307616F902F50093AEC9 /* Movie.m */,
 				0433349E16ED43FC0029C2F3 /* Util.h */,
 				0433349F16ED43FC0029C2F3 /* Util.m */,
+				041A5518172BF4C30097A07B /* StatusItemView.h */,
+				041A5519172BF4C30097A07B /* StatusItemView.m */,
 				043334A116ED44240029C2F3 /* NSFileManager+Directories.h */,
 				043334A216ED44240029C2F3 /* NSFileManager+Directories.m */,
 				0468B2D516FA73F40072A08F /* Downloader.h */,
@@ -580,6 +585,7 @@
 				0468B2D716FA73F50072A08F /* Downloader.m in Sources */,
 				04158F9F170CD2F8004D3F8B /* SCEvent.m in Sources */,
 				04158FA0170CD2F8004D3F8B /* SCEvents.m in Sources */,
+				041A551A172BF4C30097A07B /* StatusItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
