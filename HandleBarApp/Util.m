@@ -28,24 +28,31 @@
    [task setStandardError: errPipe];
     
     NSFileHandle *fileStd = [stdPipe fileHandleForReading];
-    
-    __weak __block NSData *readData;
 
     [task launch];
     
     if(notifyStdOut == YES) {
-                  
-        while ((readData = [fileStd availableData]) && [readData length]){
+        
+        __block NSData *readData;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
             
-            @autoreleasepool
-            {
-                NSString *logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
-                [self logEncodingStatus:logString];
-                
-                logString = nil;
-                readData = nil;
+            NSString *logString = nil;
+            while ((readData = [fileStd availableData]) && [readData length]){
+               
+                @autoreleasepool
+                {
+                    sleep(1);
+                    
+                    logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
+                    [self logEncodingStatus:logString];
+                    logString = nil;
+                }
             }
-        }
+            
+            readData = nil;
+                
+        });
     }
         
     [task waitUntilExit];
@@ -57,7 +64,6 @@
 
     response = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithInt:task.processIdentifier], string, nil] forKeys:[NSArray arrayWithObjects:@"pid", @"response", nil]];
 
-    readData = nil;
     fdata = nil;
     string = nil;
     
@@ -65,6 +71,11 @@
 
     return response;
 
+}
+
++ (void) getData: (NSNotification *)aNotification
+{
+    NSLog(@"notification received");
 }
 
 + (NSDictionary *)executeBashCommand:(NSString *)cmd {
@@ -131,6 +142,14 @@
     
     NSArray *chunks = [output componentsSeparatedByString: @"\r"];
     [[chunks lastObject] writeToFile:@"/tmp/handleBarEncode.status" atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+    NSMutableDictionary *info = [NSMutableDictionary dictionary];
+    [info setObject:[chunks lastObject] forKey:@"eta"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateConvertETA" object:nil userInfo:info];
+    
+    chunks = nil;
+    output = nil;
 }
 
 @end

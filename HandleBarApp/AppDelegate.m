@@ -14,6 +14,7 @@
 #import "Converter.h"
 #import "Util.h"
 #import "Preferences.h"
+#import "StatusItemView.h"
 
 #import "MetaData.h"
 
@@ -73,12 +74,16 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(defaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
-    
-    //[self startStopConverter:@"start"];
+
     [self startStopWebserver:@"start"];
-    //[self startReSub];
     
-    [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
+    Converter *cnv = [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
+    
+    if(!cnv)
+        return;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(converterIsRunning:) name:@"updateConvertETA" object:nil];
+
 }
 
 - (void)defaultsChanged:(NSNotification *)notification {
@@ -115,43 +120,57 @@
     
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];
-    [statusItem setImage:icon];
-    [statusItem setHighlightMode:YES];   
+    
+    [self updateStatusMenu:nil];
     
     NSString * path;
 	path = [[NSBundle mainBundle] bundlePath];
 	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar"];
-    convertScriptUrl = [projectPath stringByAppendingPathComponent:@"/convert.py"];
     webserverScriptUrl = [projectPath stringByAppendingPathComponent:@"/web.py"];
-    reSubScriptUrl = [projectPath stringByAppendingPathComponent:@"/reSub.py"];
+    
+    /*
+     updateStatusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                         target:self
+                                                       selector:@selector(converterIsRunning)
+                                                       userInfo:nil
+                                                        repeats:YES];
+    
+    [[NSRunLoop currentRunLoop] addTimer:updateStatusTimer forMode:NSEventTrackingRunLoopMode];*/
 
-	// Handle basic error case:
-	if (convertScriptUrl == nil) {
-        NSLog(@"No python file found in: %@", convertScriptUrl);
-		exit(-1);
-	}
 }
 
-- (void)converterIsRunning {
+- (void)updateStatusMenu:(NSString *)eta {
     
-    NSString *pidConverter = [NSString stringWithContentsOfFile:@"/tmp/convert-daemon.pid"	encoding:NSUTF8StringEncoding error:nil];
+    float width = 30.0;
+    float height = [[NSStatusBar systemStatusBar] thickness];
     
-    if(pidConverter == nil) {
-        [running setTitle:@"Not running"];
-        [startStop setTitle:@"Start"];
-        [startStop setTag:0];
+    if(eta != nil) 
+        width = 110.0;
+    
+    NSRect viewFrame = NSMakeRect(0, 0, width, height);
+    
+    statusItemView = [[StatusItemView alloc] initWithFrame:viewFrame controller:self];
+    statusItemView.statusItem = statusItem;
+    [statusItemView setTitle:eta];
+    
+    [statusItem setView:statusItemView];
+        
+    [statusMenu update];
+}
+
+- (void)converterIsRunning:(NSNotification *)notification {
+
+    NSString *string = [NSString stringWithContentsOfFile:@"/tmp/handleBarEncode.status" encoding:NSUTF8StringEncoding error:NULL];
+    
+    NSRange textRange = [string rangeOfString:@"ETA "];
+    if(textRange.location != NSNotFound) {
+        NSRange r = NSMakeRange(textRange.location + 4, 9);
+        string = [string substringWithRange:r];
     } else {
-        [running setTitle:@"Idle"];
-        [startStop setTitle:@"Stop"];
-        [startStop setTag:1];
+        string = nil;
     }
     
-    NSString *convertStatus = [NSString stringWithContentsOfFile:@"/tmp/handleBarCurrentStatus"	encoding:NSUTF8StringEncoding error:nil];
-    
-    if(convertStatus != nil)
-        [running setTitle:convertStatus];
-    
-    [statusMenu update];
+    [self updateStatusMenu:string];
 }
 
 - (void)startStopWebserver:(NSString *)action {
@@ -160,61 +179,6 @@
     NSArray *args = [NSArray arrayWithObjects:webserverScriptUrl,action, nil];
     
     [Util executeCommand:cmd args:args notifyStdOut:NO];
-}
-
-- (void)startStopConverter:(NSString *)action {
-    
-    NSString *cmd = @"/usr/bin/python";
-    NSArray *args = [NSArray arrayWithObjects:convertScriptUrl,action, nil];
-    
-    [Util executeCommand:cmd args:args notifyStdOut:NO];
-    
-    if([action isEqual: @"start"]) {
-        
-        updateStatusTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                          target:self
-                                                        selector:@selector(converterIsRunning)
-                                                        userInfo:nil
-                                                         repeats:YES];
-        
-        [[NSRunLoop currentRunLoop] addTimer:updateStatusTimer forMode:NSEventTrackingRunLoopMode];
-        
-    } else {
-        
-        [updateStatusTimer invalidate];
-    }
-}
-
-- (IBAction)startStop:(id)sender {
-    
-    NSMenuItem *s = (NSMenuItem *) sender;
-    if(s.tag == 0) {
-        
-        [self startStopConverter:@"start"];
-        
-    } else {
-        
-        [self startStopConverter:@"stop"];
-    }
-}
-
-- (void)startResubTimer {
-    
-    [NSTimer scheduledTimerWithTimeInterval:3600
-                                     target:self
-                                   selector:@selector(startReSub)
-                                   userInfo:nil
-                                    repeats:YES];
-}
-
-- (void)startReSub {
-
-    NSString *cmd = @"/usr/bin/python";
-    NSArray *args = [NSArray arrayWithObjects:reSubScriptUrl, nil];
-    
-    [Util executeCommand:cmd args:args notifyStdOut:NO];
-    
-    [self startResubTimer];
 }
 
 -(IBAction)openHandleBar:(id)sender {
@@ -235,7 +199,6 @@
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
     
-    [self startStopConverter:@"stop"];
     [self startStopWebserver:@"stop"];
 }
 
