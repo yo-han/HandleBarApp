@@ -33,26 +33,19 @@
     
     if(notifyStdOut == YES) {
         
-        __block NSData *readData;
+        NSData *readData;
+        NSString *logString = nil;
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        while ((readData = [fileStd availableData]) && [readData length]){
             
-            NSString *logString = nil;
-            while ((readData = [fileStd availableData]) && [readData length]){
-               
-                @autoreleasepool
-                {
-                    sleep(1);
-                    
-                    logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
-                    [self logEncodingStatus:logString];
-                    logString = nil;
-                }
-            }
+            sleep(1);
             
-            readData = nil;
-                
-        });
+            logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
+            [self logEncodingStatus:logString];
+            logString = nil;
+        }
+        
+        readData = nil;
     }
         
     [task waitUntilExit];

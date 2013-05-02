@@ -79,7 +79,7 @@
 
     [[statusItem menu] setDelegate:(id) self];
     [statusItem popUpStatusItemMenu:[statusItem menu]];
-    [self setNeedsDisplay:YES];
+    //[self setNeedsDisplay:YES];
 }
 
 - (void)rightMouseDown:(NSEvent *)event {

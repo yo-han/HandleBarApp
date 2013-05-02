@@ -104,25 +104,30 @@
         videoFiles = [self findVideoFiles:event._eventPath array:videoFiles];
 
     self.queuedVideoFiles = [self arrayUnique:videoFiles queue:self.queuedVideoFiles];
+    
     NSLog(@"%@", self.queuedVideoFiles);
+    
     __block NSString *mediaFile;
     
-    dispatch_async(self.convertQueue, ^{
-        
-        if([self.queuedVideoFiles count] != 0) {
+    @autoreleasepool
+    {
+        dispatch_async(self.convertQueue, ^{
             
-            NSString *videoPath = [self.queuedVideoFiles objectAtIndex:0];
-            
-            mediaFile = [self convert:videoPath directory:[directoryURL description]];
-            
-            [self.queuedVideoFiles removeObjectAtIndex:0];
-            [convertedFiles addObject:videoPath];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self setMetaData:mediaFile];
-            });
-        }
-    });
+            if([self.queuedVideoFiles count] != 0) {
+                
+                NSString *videoPath = [self.queuedVideoFiles objectAtIndex:0];
+                
+                mediaFile = [self convert:videoPath directory:[directoryURL description]];
+                
+                [self.queuedVideoFiles removeObjectAtIndex:0];
+                [convertedFiles addObject:videoPath];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setMetaData:mediaFile];
+                });
+            }
+        });
+    }
     
     if([self.queuedVideoFiles count] == 0) {
         

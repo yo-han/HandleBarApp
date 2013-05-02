@@ -127,16 +127,6 @@
 	path = [[NSBundle mainBundle] bundlePath];
 	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar"];
     webserverScriptUrl = [projectPath stringByAppendingPathComponent:@"/web.py"];
-    
-    /*
-     updateStatusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                         target:self
-                                                       selector:@selector(converterIsRunning)
-                                                       userInfo:nil
-                                                        repeats:YES];
-    
-    [[NSRunLoop currentRunLoop] addTimer:updateStatusTimer forMode:NSEventTrackingRunLoopMode];*/
-
 }
 
 - (void)updateStatusMenu:(NSString *)eta {
@@ -160,14 +150,17 @@
 
 - (void)converterIsRunning:(NSNotification *)notification {
 
-    NSString *string = [NSString stringWithContentsOfFile:@"/tmp/handleBarEncode.status" encoding:NSUTF8StringEncoding error:NULL];
+    NSString *etaString = [NSString stringWithContentsOfFile:@"/tmp/handleBarEncode.status" encoding:NSUTF8StringEncoding error:NULL];
+    NSString *string = nil;
     
-    NSRange textRange = [string rangeOfString:@"ETA "];
+    NSRange textRange = [etaString rangeOfString:@"ETA "];
     if(textRange.location != NSNotFound) {
+        
         NSRange r = NSMakeRange(textRange.location + 4, 9);
-        string = [string substringWithRange:r];
-    } else {
-        string = nil;
+        string = [etaString substringWithRange:r];
+        
+        if([string isEqualToString:@"00h00m00s"])
+            string = nil;
     }
     
     [self updateStatusMenu:string];
