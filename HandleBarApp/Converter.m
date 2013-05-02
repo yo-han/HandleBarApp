@@ -98,10 +98,11 @@
         }
     }
     
-    NSLog(@"Check for not-converted video files event fired");
+    NSLog(@"Check for not-converted video files event fired by: %@", event._eventPath);
     
-    if([videoFiles count] == 0)
-        videoFiles = [self findVideoFiles:event._eventPath array:videoFiles];
+    // Add files from the directory root which are not in a directory to. Could be manually
+    // added files there.
+    videoFiles = [self findVideoFiles:event._eventPath array:videoFiles];
 
     self.queuedVideoFiles = [self arrayUnique:videoFiles queue:self.queuedVideoFiles];
     
