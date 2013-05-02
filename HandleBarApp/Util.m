@@ -35,10 +35,13 @@
         
         NSData *readData;
         NSString *logString = nil;
+        int i = 1;
         
         while ((readData = [fileStd availableData]) && [readData length]){
             
-            sleep(1);
+            i++;
+            if ((i % 2) != 0)
+                continue;
             
             logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
             [self logEncodingStatus:logString];
@@ -132,17 +135,20 @@
 }
 
 + (void) logEncodingStatus:(NSString *)output {
-    
+
     NSArray *chunks = [output componentsSeparatedByString: @"\r"];
-    [[chunks lastObject] writeToFile:@"/tmp/handleBarEncode.status" atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    NSString *etaString = [chunks lastObject];
     
-    NSMutableDictionary *info = [NSMutableDictionary dictionary];
-    [info setObject:[chunks lastObject] forKey:@"eta"];
+    [etaString writeToFile:@"/tmp/handleBarEncode.status" atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateConvertETA" object:nil userInfo:info];
-    
-    chunks = nil;
-    output = nil;
+    NSRange textRange = [etaString rangeOfString:@"ETA "];
+    if(textRange.location != NSNotFound) {
+        
+        NSMutableDictionary *info = [NSMutableDictionary dictionary];
+        [info setObject:etaString forKey:@"eta"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateConvertETA" object:nil userInfo:info];
+    }
 }
 
 @end

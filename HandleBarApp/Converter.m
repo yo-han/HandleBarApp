@@ -122,6 +122,11 @@
                 [self.queuedVideoFiles removeObjectAtIndex:0];
                 [convertedFiles addObject:videoPath];
                 
+                NSMutableDictionary *info = [NSMutableDictionary dictionary];
+                [info setObject:@"" forKey:@"eta"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateConvertETA" object:nil userInfo:info];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self setMetaData:mediaFile];
                 });
@@ -199,7 +204,10 @@
         if(pathComponents.count > 2) {
 
             NSString *dir = [directory stringByAppendingPathComponent:[pathComponents objectAtIndex:1]];
-            [Util trashWithPath:dir];
+            NSArray *filesFound = [self findVideoFiles:dir array:[NSMutableArray array]];
+            
+            if([filesFound count] == 0)
+                [Util trashWithPath:dir];
         }
 
         return convertPath;

@@ -150,7 +150,8 @@
 
 - (void)converterIsRunning:(NSNotification *)notification {
 
-    NSString *etaString = [NSString stringWithContentsOfFile:@"/tmp/handleBarEncode.status" encoding:NSUTF8StringEncoding error:NULL];
+    NSDictionary *dict = notification.userInfo;
+    NSString *etaString = [dict objectForKey:@"eta"];
     NSString *string = nil;
     
     NSRange textRange = [etaString rangeOfString:@"ETA "];
