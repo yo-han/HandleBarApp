@@ -106,6 +106,11 @@
 
     self.queuedVideoFiles = [self arrayUnique:videoFiles queue:self.queuedVideoFiles];
     
+    NSMutableDictionary *info = [NSMutableDictionary dictionary];
+    [info setObject:self.queuedVideoFiles forKey:@"queue"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateQueueMenu" object:nil userInfo:info];
+    
     NSLog(@"%@", self.queuedVideoFiles);
     
     __block NSString *mediaFile;

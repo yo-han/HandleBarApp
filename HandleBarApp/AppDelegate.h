@@ -15,6 +15,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     
     IBOutlet NSMenu *statusMenu;
+    IBOutlet NSMenu *queueMenu;
     IBOutlet NSButton *loginCheck;
     
     NSStatusItem * statusItem;
