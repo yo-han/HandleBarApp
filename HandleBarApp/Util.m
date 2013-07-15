@@ -33,8 +33,8 @@
     
     if(notifyStdOut == YES) {
         
-        NSData *readData;
-        NSString *logString = nil;
+        __weak NSData *readData;
+        __weak NSString *logString = nil;
         int i = 1;
         
         while ((readData = [fileStd availableData]) && [readData length]){
@@ -45,7 +45,6 @@
             
             logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
             [self logEncodingStatus:logString];
-            logString = nil;
         }
         
         readData = nil;

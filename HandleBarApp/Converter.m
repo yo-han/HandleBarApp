@@ -111,9 +111,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"updateQueueMenu" object:nil userInfo:info];
     
-    NSLog(@"%@", self.queuedVideoFiles);
-    
-    __block __weak NSString *mediaFile;
+    __block NSString *mediaFile;
     
     @autoreleasepool
     {
