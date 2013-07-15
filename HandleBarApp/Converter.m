@@ -113,7 +113,7 @@
     
     NSLog(@"%@", self.queuedVideoFiles);
     
-    __block NSString *mediaFile;
+    __block __weak NSString *mediaFile;
     
     @autoreleasepool
     {
