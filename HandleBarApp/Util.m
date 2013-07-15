@@ -33,11 +33,13 @@
     
     if(notifyStdOut == YES) {
         
-        __weak NSData *readData;
-        __weak NSString *logString = nil;
+        NSData *readData;
+        NSString *logString = nil;
         int i = 1;
         
         while ((readData = [fileStd availableData]) && [readData length]){
+            
+            logString = nil;
             
             i++;
             if ((i % 2) != 0)
