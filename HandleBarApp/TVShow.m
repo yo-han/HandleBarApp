@@ -76,6 +76,8 @@
         return @"Archer 2009";
     else if([showName isEqualToString:@"Touch"])
         return @"Touch (2012)";
+    else if([showName isEqualToString:@"The Newsroom"])
+        return @"The Newsroom (2012)";
     else
         return showName;
 }
