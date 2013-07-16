@@ -34,14 +34,14 @@
     if(notifyStdOut == YES) {
         
         NSData *readData;
-        NSString *logString = nil;
         int i = 1;
         
         while ((readData = [fileStd availableData]) && [readData length]){
             
             @autoreleasepool
             {
-            
+                NSString *logString = nil;
+                
                 i++;
                 if ((i % 2) != 0)
                     continue;
