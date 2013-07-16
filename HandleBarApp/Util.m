@@ -39,14 +39,16 @@
         
         while ((readData = [fileStd availableData]) && [readData length]){
             
-            logString = nil;
+            @autoreleasepool
+            {
             
-            i++;
-            if ((i % 2) != 0)
-                continue;
-            
-            logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
-            [self logEncodingStatus:logString];
+                i++;
+                if ((i % 2) != 0)
+                    continue;
+                
+                logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
+                [self logEncodingStatus:logString];
+            }
         }
         
         readData = nil;
