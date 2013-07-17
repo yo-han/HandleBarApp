@@ -35,23 +35,26 @@
         
         NSData *readData;
         NSString *logString = nil;
+        
         int i = 1;
         
-        while ((readData = [fileStd availableData]) && [readData length]){
-            
-            @autoreleasepool
-            {
-            
-                i++;
-                if ((i % 2) != 0)
-                    continue;
-                
-                logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
-                [self logEncodingStatus:logString];
+        while (1) {
+            @autoreleasepool {
+                if ((readData = [fileStd availableData]) && [readData length]) {
+                    
+                    i++;
+                    if ((i % 2) != 0)
+                        continue;
+                    
+                    logString = [[NSString alloc] initWithData: readData encoding: NSUTF8StringEncoding];
+                    [self logEncodingStatus:logString];
+               
+                    readData = nil;
+                } else {
+                    break;
+                }
             }
         }
-        
-        readData = nil;
     }
         
     [task waitUntilExit];
