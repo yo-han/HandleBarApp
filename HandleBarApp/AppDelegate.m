@@ -74,8 +74,6 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(defaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
-
-    [self startStopWebserver:@"start"];
     
     Converter *cnv = [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
     
@@ -127,7 +125,6 @@
     NSString * path;
 	path = [[NSBundle mainBundle] bundlePath];
 	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar"];
-    webserverScriptUrl = [projectPath stringByAppendingPathComponent:@"/web.py"];
 }
 
 - (void)updateStatusMenu:(NSString *)eta {
@@ -184,19 +181,6 @@
     }
 }
 
-- (void)startStopWebserver:(NSString *)action {
-    
-    NSString *cmd = @"/usr/bin/python";
-    NSArray *args = [NSArray arrayWithObjects:webserverScriptUrl,action, nil];
-    
-    [Util executeCommand:cmd args:args notifyStdOut:NO];
-}
-
--(IBAction)openHandleBar:(id)sender {
-
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://localhost:8082"]];
-}
-
 - (IBAction)displayPreferences:(id)sender {
     
     preferences = [[Preferences alloc] init];
@@ -210,7 +194,7 @@
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
     
-    [self startStopWebserver:@"stop"];
+    // Do some terminator stuff
 }
 
 @end

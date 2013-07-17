@@ -37,7 +37,6 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (strong) Preferences *preferences;
 
--(IBAction)openHandleBar:(id)sender;
 - (IBAction)showLog:(id)sender;
 
 @end

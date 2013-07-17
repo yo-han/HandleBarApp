@@ -157,7 +157,7 @@
 - (void)guessVideoData:(NSString *)sourcePath {
     
     NSString *path = [[NSBundle mainBundle] bundlePath];
-    NSString *scriptPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar/guess.py"];
+    NSString *scriptPath = [path stringByAppendingPathComponent:@"Contents/Resources/python/guess.py"];
     
     NSString *cmd = @"/usr/bin/python";
     NSArray *args = [NSArray arrayWithObjects:scriptPath, sourcePath, nil];
