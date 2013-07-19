@@ -33,43 +33,48 @@
 - (void)dealloc
 {
     controller = nil;
+    statusItem = nil;
+    title = nil;
+    image = nil;
 }
 
 - (void)drawRect:(NSRect)rect {
     
-    // Draw background if appropriate.
-    if (clicked) {
-        [[NSColor selectedMenuItemColor] set];
-        NSRectFill(rect);
-    }
+    @autoreleasepool {
+        // Draw background if appropriate.
+        if (clicked) {
+            [[NSColor selectedMenuItemColor] set];
+            NSRectFill(rect);
+        }
 
-    NSString *text = title;
-    
-    NSColor *textColor = [NSColor controlTextColor];
-    if (clicked) {
-        textColor = [NSColor selectedMenuItemTextColor];
+        NSString *text = title;
+        
+        NSColor *textColor = [NSColor controlTextColor];
+        if (clicked) {
+            textColor = [NSColor selectedMenuItemTextColor];
+        }
+        
+        NSFont *msgFont = [NSFont menuBarFontOfSize:12.0];
+        NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+        [paraStyle setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+        [paraStyle setAlignment:NSCenterTextAlignment];
+        [paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+        NSMutableDictionary *msgAttrs = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         msgFont, NSFontAttributeName,
+                                         textColor, NSForegroundColorAttributeName,
+                                         paraStyle, NSParagraphStyleAttributeName,
+                                         nil];
+        
+        NSSize msgSize = [text sizeWithAttributes:msgAttrs];
+        NSRect msgRect = NSMakeRect(0, 0, msgSize.width, msgSize.height);
+        NSRect imgRect = NSMakeRect(2, 5, 24, 12);
+        
+        msgRect.origin.x = ([self frame].size.width - msgSize.width) - 5;
+        msgRect.origin.y = 4;
+        
+        [text drawInRect:msgRect withAttributes:msgAttrs];
+        [image drawInRect:imgRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
     }
-    
-    NSFont *msgFont = [NSFont menuBarFontOfSize:12.0];
-    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-    [paraStyle setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-    [paraStyle setAlignment:NSCenterTextAlignment];
-    [paraStyle setLineBreakMode:NSLineBreakByTruncatingTail];
-    NSMutableDictionary *msgAttrs = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                     msgFont, NSFontAttributeName,
-                                     textColor, NSForegroundColorAttributeName,
-                                     paraStyle, NSParagraphStyleAttributeName,
-                                     nil];
-    
-    NSSize msgSize = [text sizeWithAttributes:msgAttrs];
-    NSRect msgRect = NSMakeRect(0, 0, msgSize.width, msgSize.height);
-    NSRect imgRect = NSMakeRect(2, 5, 24, 12);
-    
-    msgRect.origin.x = ([self frame].size.width - msgSize.width) - 5;
-    msgRect.origin.y = 4;
-    
-    [text drawInRect:msgRect withAttributes:msgAttrs];
-    [image drawInRect:imgRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
 }
 
 
