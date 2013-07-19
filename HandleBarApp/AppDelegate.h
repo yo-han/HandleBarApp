@@ -21,6 +21,8 @@
     NSStatusItem * statusItem;
     StatusItemView *statusItemView;
     
+    NSView *appIcon;
+    
     NSTimer *updateStatusTimer;
     NSTimer *reSubTimer;
     

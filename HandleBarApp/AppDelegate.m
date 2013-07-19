@@ -17,6 +17,7 @@
 #import "StatusItemView.h"
 
 #import "MetaData.h"
+#import "AppIcon.h"
 
 @implementation AppDelegate
 
@@ -82,7 +83,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(converterIsRunning:) name:@"updateConvertETA" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateQueueMenu:) name:@"updateQueueMenu" object:nil];
-
+    
+    //appIcon = [[AppIcon alloc] init];
+    
+    //[[NSApp dockTile] setContentView:appIcon];
+    //[[NSApp dockTile] display];
+    [[NSApp dockTile] setBadgeLabel:@"11"];
 }
 
 - (void)defaultsChanged:(NSNotification *)notification {
@@ -162,7 +168,9 @@
             string = nil;
     }
     
-    [self updateStatusMenu:string];
+    //[self updateStatusMenu:string];
+    
+    [[[NSApplication sharedApplication] dockTile] setContentView:appIcon];
 }
 
 - (void)updateQueueMenu:(NSNotification *)notification {
