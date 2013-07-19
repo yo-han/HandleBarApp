@@ -137,13 +137,18 @@
     
     NSRect viewFrame = NSMakeRect(0, 0, width, height);
     
-    statusItemView = [[StatusItemView alloc] initWithFrame:viewFrame controller:self];
-    statusItemView.statusItem = statusItem;
-    [statusItemView setTitle:eta];
-    
-    [statusItem setView:statusItemView];
+    @autoreleasepool {
         
-    [statusMenu update];
+        if(statusItemView.frame.size.width != width)
+            statusItemView = [[StatusItemView alloc] initWithFrame:viewFrame controller:self];
+        
+        statusItemView.statusItem = statusItem;
+        [statusItemView setTitle:eta];
+    
+        [statusItem setView:statusItemView];
+        
+        [statusMenu update];
+    }
 }
 
 - (void)converterIsRunning:(NSNotification *)notification {
