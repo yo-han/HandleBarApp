@@ -173,7 +173,7 @@
             string = nil;
     }
     
-    //[self updateStatusMenu:string];
+    [self updateStatusMenu:string];
     
     [[[NSApplication sharedApplication] dockTile] setContentView:appIcon];
 }
