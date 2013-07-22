@@ -20,6 +20,8 @@
     
     NSStatusItem * statusItem;
     StatusItemView *statusItemView;
+    StatusItemView *statusItemViewSmall;
+    StatusItemView *statusItemViewLarge;
     
     NSView *appIcon;
     

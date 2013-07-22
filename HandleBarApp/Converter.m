@@ -106,6 +106,8 @@
 
     self.queuedVideoFiles = [self arrayUnique:videoFiles queue:self.queuedVideoFiles];
     
+    [self updateIconBage];
+    
     NSMutableDictionary *info = [NSMutableDictionary dictionary];
     [info setObject:self.queuedVideoFiles forKey:@"queue"];
     
@@ -159,6 +161,18 @@
         NSString *failedPath = [appSupportPath stringByAppendingPathComponent:@"/media/failed"];
         [fm copyFileToNewPath:mediaFile dir:failedPath];
     }
+    
+    [self updateIconBage];
+}
+
+- (void) updateIconBage {
+    
+    NSInteger queueLength = [self.queuedVideoFiles count];
+    
+    if(queueLength > 0)
+        [[NSApp dockTile] setBadgeLabel:[NSString stringWithFormat:@"%ld", queueLength]];
+    else
+        [[NSApp dockTile] setBadgeLabel:@""];
 }
 
 - (NSString *) convert:(NSString *) videoPath directory:(NSString *)directory {

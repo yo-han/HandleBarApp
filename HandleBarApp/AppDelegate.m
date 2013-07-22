@@ -26,14 +26,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self redirectConsoleLog];
-    
-    StartAtLoginController *loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.mustacherious.HandleBarHelperApp"];
-    
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HandleBarAutoStart"]) {
-        [loginController setStartAtLogin: YES];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HandleBarAutoStart"];
-    }
-    
+        
     NSFileManager *fm = [NSFileManager defaultManager];
     
     NSString *appSupportPath = [fm applicationSupportFolder];
@@ -83,12 +76,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(converterIsRunning:) name:@"updateConvertETA" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateQueueMenu:) name:@"updateQueueMenu" object:nil];
-    
-    //appIcon = [[AppIcon alloc] init];
-    
-    //[[NSApp dockTile] setContentView:appIcon];
-    //[[NSApp dockTile] display];
-    [[NSApp dockTile] setBadgeLabel:@"11"];
 }
 
 - (void)defaultsChanged:(NSNotification *)notification {
@@ -118,13 +105,13 @@
     }
 }
 
--(void)awakeFromNib{
-    
-    NSImage *icon = [NSImage imageNamed:@"handleBarIcon.png"];
-    [icon setSize:CGSizeMake(24, 12)];
+-(void)awakeFromNib {
     
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];
+    
+    statusItemViewSmall = [[StatusItemView alloc] initWithFrame:NSMakeRect(0, 0, 30.0, [[NSStatusBar systemStatusBar] thickness]) controller:self];
+    statusItemViewLarge = [[StatusItemView alloc] initWithFrame:NSMakeRect(0, 0, 110.0, [[NSStatusBar systemStatusBar] thickness]) controller:self];
     
     [self updateStatusMenu:nil];
     
@@ -135,24 +122,18 @@
 
 - (void)updateStatusMenu:(NSString *)eta {
     
-    float width = 30.0;
-    float height = [[NSStatusBar systemStatusBar] thickness];
-    
+    BOOL large = NO;
     if(eta != nil) 
-        width = 110.0;
-    
-    NSRect viewFrame = NSMakeRect(0, 0, width, height);
+        large = YES;
     
     @autoreleasepool {
-        
-        if(statusItemView.frame.size.width != width)
-            statusItemView = [[StatusItemView alloc] initWithFrame:viewFrame controller:self];
+              
+        statusItemView = (large) ? statusItemViewLarge : statusItemViewSmall;
         
         statusItemView.statusItem = statusItem;
         [statusItemView setTitle:eta];
-    
-        [statusItem setView:statusItemView];
         
+        [statusItem setView:statusItemView];
         [statusMenu update];
     }
 }
