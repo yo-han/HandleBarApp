@@ -12,6 +12,10 @@
 		04158F9F170CD2F8004D3F8B /* SCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04158F9B170CD2F8004D3F8B /* SCEvent.m */; };
 		04158FA0170CD2F8004D3F8B /* SCEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 04158F9E170CD2F8004D3F8B /* SCEvents.m */; };
 		04158FA3170CD32E004D3F8B /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04158FA2170CD32E004D3F8B /* CoreServices.framework */; };
+		0416E47917A06ADE007755BA /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0416E47817A06ADE007755BA /* Sparkle.framework */; };
+		0416E47E17A06B88007755BA /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0416E47817A06ADE007755BA /* Sparkle.framework */; };
+		0416E48017A0707F007755BA /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0416E47F17A0707F007755BA /* config.plist */; };
+		0416E48217A0719A007755BA /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0416E48117A0719A007755BA /* dsa_pub.pem */; };
 		041A551A172BF4C30097A07B /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A5519172BF4C30097A07B /* StatusItemView.m */; };
 		043334A016ED43FC0029C2F3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433349F16ED43FC0029C2F3 /* Util.m */; };
 		043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */ = {isa = PBXBuildFile; fileRef = 043334A216ED44240029C2F3 /* NSFileManager+Directories.m */; };
@@ -35,7 +39,6 @@
 		044B309C16F905DE0093AEC9 /* TVShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B309B16F905DE0093AEC9 /* TVShow.m */; };
 		044B309F16F908510093AEC9 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B309E16F908510093AEC9 /* IMDB.m */; };
 		0468B2D716FA73F50072A08F /* Downloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B2D616FA73F50072A08F /* Downloader.m */; };
-		0493765317972C2A003D9874 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0493765217972C2A003D9874 /* config.plist */; };
 		049378F317973AC0003D9874 /* python in Resources */ = {isa = PBXBuildFile; fileRef = 049378F217973AC0003D9874 /* python */; };
 		049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 049ACB1016C5798E007F103C /* handleBarIcon.png */; };
 		04B4D96916E6AD6700BFE4AF /* PrefLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */; };
@@ -65,12 +68,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		04F38AFC1690EBD600B4CB4A /* CopyFiles */ = {
+		0416E47D17A06B82007755BA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = Contents/Library/LoginItems;
+			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0416E47E17A06B88007755BA /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +90,9 @@
 		04158F9D170CD2F8004D3F8B /* SCEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCEvents.h; sourceTree = "<group>"; };
 		04158F9E170CD2F8004D3F8B /* SCEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCEvents.m; sourceTree = "<group>"; };
 		04158FA2170CD32E004D3F8B /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		0416E47817A06ADE007755BA /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		0416E47F17A0707F007755BA /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = config.plist; path = "../../HandleBarMenulet-NonGit/config.plist"; sourceTree = "<group>"; };
+		0416E48117A0719A007755BA /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = "../../HandleBarMenulet-NonGit/dsa_pub.pem"; sourceTree = "<group>"; };
 		041A5518172BF4C30097A07B /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		041A5519172BF4C30097A07B /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
 		0433349E16ED43FC0029C2F3 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
@@ -127,7 +134,6 @@
 		044B309E16F908510093AEC9 /* IMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDB.m; sourceTree = "<group>"; };
 		0468B2D516FA73F40072A08F /* Downloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloader.h; sourceTree = "<group>"; };
 		0468B2D616FA73F50072A08F /* Downloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Downloader.m; sourceTree = "<group>"; };
-		0493765217972C2A003D9874 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		049378F217973AC0003D9874 /* python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = python; path = HandleBarApp/python; sourceTree = "<group>"; };
 		049675EE1702428B00379E5C /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		049ACB1016C5798E007F103C /* handleBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handleBarIcon.png; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 				04F38AFF1690EC3D00B4CB4A /* ServiceManagement.framework in Frameworks */,
 				04F38716168E673100B4CB4A /* Python.framework in Frameworks */,
 				04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */,
+				0416E47917A06ADE007755BA /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +331,7 @@
 		04F386EF168E642600B4CB4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0416E47817A06ADE007755BA /* Sparkle.framework */,
 				04158FA2170CD32E004D3F8B /* CoreServices.framework */,
 				043A055916F20006001514B0 /* AVFoundation.framework */,
 				0415072A16B9CFCE00D9AB7A /* Security.framework */,
@@ -382,7 +390,8 @@
 		04F386F7168E642600B4CB4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0493765217972C2A003D9874 /* config.plist */,
+				0416E48117A0719A007755BA /* dsa_pub.pem */,
+				0416E47F17A0707F007755BA /* config.plist */,
 				04EAB28B1704A6C6004EF64D /* config-example.plist */,
 				04F386F8168E642600B4CB4A /* HandleBarApp-Info.plist */,
 				04F386F9168E642600B4CB4A /* InfoPlist.strings */,
@@ -416,7 +425,7 @@
 				04F386E8168E642600B4CB4A /* Sources */,
 				04F386E9168E642600B4CB4A /* Frameworks */,
 				04F386EA168E642600B4CB4A /* Resources */,
-				04F38AFC1690EBD600B4CB4A /* CopyFiles */,
+				0416E47D17A06B82007755BA /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -475,8 +484,9 @@
 				044B309216F905460093AEC9 /* LICENSE in Resources */,
 				044B309316F905460093AEC9 /* README.md in Resources */,
 				04EAB28D1704A6C6004EF64D /* config-example.plist in Resources */,
-				0493765317972C2A003D9874 /* config.plist in Resources */,
 				04DD72FB1799AB4D0037F50E /* HandleBar-DockIcon.icns in Resources */,
+				0416E48017A0707F007755BA /* config.plist in Resources */,
+				0416E48217A0719A007755BA /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +616,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Sparkle-cktmvqjzwfqkyvcnjxikxzqhjaus/Build/Products/Debug\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HandleBarApp/HandleBarApp-Prefix.pch";
 				INFOPLIST_FILE = "HandleBarApp/HandleBarApp-Info.plist";
@@ -619,6 +634,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Sparkle-cktmvqjzwfqkyvcnjxikxzqhjaus/Build/Products/Debug\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HandleBarApp/HandleBarApp-Prefix.pch";
 				INFOPLIST_FILE = "HandleBarApp/HandleBarApp-Info.plist";
