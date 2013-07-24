@@ -32,5 +32,9 @@
 	<false/>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
+	<key>SUFeedURL</key>
+	<string>http://yo-han.github.io/HandleBarApp/updates.xml</string>
 </dict>
 </plist>
