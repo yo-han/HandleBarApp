@@ -75,6 +75,9 @@
     
     NSArray *movies = [list filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(Type == %@)", @"movie"]];
     
+    if([movies count] == 0)
+        return nil;
+    
     return [movies objectAtIndex:0];
 }
 
