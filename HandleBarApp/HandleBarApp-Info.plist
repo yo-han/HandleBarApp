@@ -28,8 +28,6 @@
 	<string>Copyright © 2012 Mustacherious. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
-	<key>LSUIElement</key>
-	<false/>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUPublicDSAKeyFile</key>
