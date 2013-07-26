@@ -66,6 +66,8 @@
     NSMutableArray *paths = [NSMutableArray arrayWithArray:[self arrayWithPaths:searchPaths]];
     
 	[_events startWatchingPaths:paths];
+    
+    [NSTimer timerWithTimeInterval:1800 target:self selector:@selector(flushEventStreamSync) userInfo:nil repeats:YES];
 }
 
 - (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
