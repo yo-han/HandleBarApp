@@ -140,23 +140,24 @@
 
 - (void)converterIsRunning:(NSNotification *)notification {
 
-    NSDictionary *dict = notification.userInfo;
-    NSString *etaString = [dict objectForKey:@"eta"];
-    NSString *string = nil;
-    
-    NSRange textRange = [etaString rangeOfString:@"ETA "];
-    if(textRange.location != NSNotFound) {
+    @autoreleasepool {
         
-        NSRange r = NSMakeRange(textRange.location + 4, 9);
-        string = [etaString substringWithRange:r];
+        NSDictionary *dict = notification.userInfo;
+        NSString *etaString = [dict objectForKey:@"eta"];
+        NSString *string = nil;
         
-        if([string isEqualToString:@"00h00m00s"])
-            string = nil;
+        NSRange textRange = [etaString rangeOfString:@"ETA "];
+        if(textRange.location != NSNotFound) {
+            
+            NSRange r = NSMakeRange(textRange.location + 4, 9);
+            string = [etaString substringWithRange:r];
+            
+            if([string isEqualToString:@"00h00m00s"])
+                string = nil;
+        }
+        
+        [self updateStatusMenu:string];
     }
-    
-    [self updateStatusMenu:string];
-    
-    [[[NSApplication sharedApplication] dockTile] setContentView:appIcon];
 }
 
 - (void)updateQueueMenu:(NSNotification *)notification {
