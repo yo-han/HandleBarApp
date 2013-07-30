@@ -16,5 +16,6 @@
 + (BOOL)trashWithPath:(NSString *)path;
 + (NSDictionary *)getConfigFile;
 + (void) logEncodingStatus:(NSString *)output;
++ (BOOL)processIsRunning:(NSString *)aProcess;
 
 @end

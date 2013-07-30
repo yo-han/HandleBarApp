@@ -15,5 +15,6 @@
 }
 
 - (id) initWithPaths:(NSArray *)paths;
+- (void)triggerMediaCheck;
 
 @end

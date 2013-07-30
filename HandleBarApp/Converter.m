@@ -67,7 +67,21 @@
     
 	[_events startWatchingPaths:paths];
     
-    [NSTimer timerWithTimeInterval:1800 target:self selector:@selector(flushEventStreamSync) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(triggerMediaCheck) userInfo:nil repeats:YES];
+}
+
+- (void)triggerMediaCheck {
+    
+    if([self.queuedVideoFiles count] == 0 || [Util processIsRunning:@"HandBrakeCLI"])
+        return;
+        
+    NSArray *paths = _events._watchedPaths;
+    
+    for(NSString *path in paths) {
+     
+        SCEvent *event = [SCEvent eventWithEventId:42 eventDate:[NSDate date] eventPath:path eventFlags:nil];
+        [self pathWatcher:_events eventOccurred:event];
+    }
 }
 
 - (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
@@ -117,31 +131,35 @@
     
     __block NSString *mediaFile;
     
-    @autoreleasepool
-    {
-        dispatch_async(self.convertQueue, ^{
+    dispatch_async(self.convertQueue, ^{
+        
+        if([self.queuedVideoFiles count] != 0) {
             
-            if([self.queuedVideoFiles count] != 0) {
+            NSString *videoPath = [self.queuedVideoFiles objectAtIndex:0];
+            
+            mediaFile = [self convert:videoPath directory:[directoryURL description]];
+            
+            [self.queuedVideoFiles removeObjectAtIndex:0];
+            [convertedFiles addObject:videoPath];
+            
+            NSMutableDictionary *info = [NSMutableDictionary dictionary];
+            [info setObject:@"" forKey:@"eta"];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateConvertETA" object:nil userInfo:info];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
                 
-                NSString *videoPath = [self.queuedVideoFiles objectAtIndex:0];
+                if([Util inDebugMode])
+                    NSLog(@"Set metada for file: %@", mediaFile);
                 
-                mediaFile = [self convert:videoPath directory:[directoryURL description]];
-                
-                [self.queuedVideoFiles removeObjectAtIndex:0];
-                [convertedFiles addObject:videoPath];
-                
-                NSMutableDictionary *info = [NSMutableDictionary dictionary];
-                [info setObject:@"" forKey:@"eta"];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateConvertETA" object:nil userInfo:info];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self setMetaData:mediaFile];
-                });
-            }
-        });
-    }
-    
+                [self setMetaData:mediaFile];
+            });
+        }
+        
+        if([Util inDebugMode])
+            NSLog(@"End of queue item");
+    });
+        
     if([self.queuedVideoFiles count] == 0) {
         
         NSLog(@"Clean up the 'allready converted files' list");
@@ -160,11 +178,14 @@
     
     if(metaDataIsSet == NO) {
         
+        if([Util inDebugMode])
+            NSLog(@"No metada found for file: %@", mediaFile);
+        
         NSString *failedPath = [appSupportPath stringByAppendingPathComponent:@"/media/failed"];
         [fm copyFileToNewPath:mediaFile dir:failedPath];
     }
     
-    [self updateIconBage];
+    //[self updateIconBage];
 }
 
 - (void) updateIconBage {
@@ -209,9 +230,10 @@
         
         if([Util inDebugMode]) {
             
-            // Move original file to debug dir
+            // DEPRECATED: Not anymore. Maybe later when we have to retry a lot.
             
-            [fm copyFileToNewPath:videoPath dir:debugRemovePath];
+            // Move original file to debug dir
+            //[fm copyFileToNewPath:videoPath dir:debugRemovePath];
             
         } else {
             
@@ -311,7 +333,7 @@
         if(textRange.location != NSNotFound)
             continue;
         
-        if (![existingNames containsObject:path]) {
+        if (![existingNames containsObject:path] && [fm fileExistsAtPath:path]) {
             [existingNames addObject:path];
             [filteredArray addObject:path];
         }

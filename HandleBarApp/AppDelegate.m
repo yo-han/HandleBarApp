@@ -150,6 +150,9 @@
         if(textRange.location != NSNotFound) {
             
             NSRange r = NSMakeRange(textRange.location + 4, 9);
+            if(textRange.length < 9)
+                return;
+            
             string = [etaString substringWithRange:r];
             
             if([string isEqualToString:@"00h00m00s"])

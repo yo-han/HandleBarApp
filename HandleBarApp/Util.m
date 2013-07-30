@@ -157,4 +157,11 @@
     }
 }
 
++(BOOL)processIsRunning:(NSString *)aProcess{
+    
+    NSDictionary *dict = [self executeBashCommand:[NSString stringWithFormat:@"ps -ef | grep \"%@\" | grep -v grep", aProcess]];
+    
+    return ([[dict objectForKey:@"response"] isEqualToString:@""]) ? NO : YES;
+}
+
 @end
