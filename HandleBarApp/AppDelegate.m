@@ -50,7 +50,7 @@
         
         NSString *defaultDBPath = [NSString stringWithFormat:@"%@/handleBar.db",projectPath];
         NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/config.plist",projectPath];
-        NSLog(@"%@", defaultDBPath);
+
         [fm copyItemAtPath:defaultDBPath toPath:dbFilePath error:&err];
         [fm copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
         
@@ -144,12 +144,13 @@
         NSDictionary *dict = notification.userInfo;
         NSString *etaString = [dict objectForKey:@"eta"];
         NSString *string = nil;
-        
+  
         NSRange textRange = [etaString rangeOfString:@"ETA "];
         if(textRange.location != NSNotFound) {
-            
+              
             NSRange r = NSMakeRange(textRange.location + 4, 9);
-            if(textRange.length < 9)
+            
+            if(r.length < 9)
                 return;
             
             string = [etaString substringWithRange:r];
