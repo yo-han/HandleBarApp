@@ -85,6 +85,8 @@
 	<string>nl</string>
 	<key>SubtitleLanguageIndex</key>
 	<integer>1</integer>
+	<key>tvdbApiKey</key>
+	<string>1CA97717717AEA4F</string>
 	<key>SubtitlePath</key>
 	<string>media/subtitles</string>
 </dict>

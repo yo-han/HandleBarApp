@@ -18,6 +18,7 @@
 		041A551A172BF4C30097A07B /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A5519172BF4C30097A07B /* StatusItemView.m */; };
 		043334A016ED43FC0029C2F3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433349F16ED43FC0029C2F3 /* Util.m */; };
 		043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */ = {isa = PBXBuildFile; fileRef = 043334A216ED44240029C2F3 /* NSFileManager+Directories.m */; };
+		043942A217CF9C6B009C160F /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 043942A117CF9C6B009C160F /* config.plist */; };
 		043A043316EFDBF3001514B0 /* NSOperationQueue+CWSharedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */; };
 		043A043516EFE3FD001514B0 /* HandBrakeCLI in Resources */ = {isa = PBXBuildFile; fileRef = 043A043416EFE3FD001514B0 /* HandBrakeCLI */; };
 		043A043716EFEA41001514B0 /* SublerCLI in Resources */ = {isa = PBXBuildFile; fileRef = 043A043616EFEA41001514B0 /* SublerCLI */; };
@@ -97,6 +98,7 @@
 		0433349F16ED43FC0029C2F3 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		043334A116ED44240029C2F3 /* NSFileManager+Directories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Directories.h"; sourceTree = "<group>"; };
 		043334A216ED44240029C2F3 /* NSFileManager+Directories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Directories.m"; sourceTree = "<group>"; };
+		043942A117CF9C6B009C160F /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		043A043116EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+CWSharedQueue.h"; sourceTree = "<group>"; };
 		043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+CWSharedQueue.m"; sourceTree = "<group>"; };
 		043A043416EFE3FD001514B0 /* HandBrakeCLI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = HandBrakeCLI; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 		04F386F7168E642600B4CB4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				043942A117CF9C6B009C160F /* config.plist */,
 				04EB88C417CF93A60033FBD4 /* handleBar.db */,
 				0416E48117A0719A007755BA /* dsa_pub.pem */,
 				04F386F8168E642600B4CB4A /* HandleBarApp-Info.plist */,
@@ -483,6 +486,7 @@
 				044B309316F905460093AEC9 /* README.md in Resources */,
 				04DD72FB1799AB4D0037F50E /* HandleBar-DockIcon.icns in Resources */,
 				0416E48217A0719A007755BA /* dsa_pub.pem in Resources */,
+				043942A217CF9C6B009C160F /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
