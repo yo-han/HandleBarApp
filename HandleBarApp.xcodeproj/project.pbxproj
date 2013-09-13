@@ -14,11 +14,11 @@
 		04158FA3170CD32E004D3F8B /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04158FA2170CD32E004D3F8B /* CoreServices.framework */; };
 		0416E47917A06ADE007755BA /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0416E47817A06ADE007755BA /* Sparkle.framework */; };
 		0416E47E17A06B88007755BA /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0416E47817A06ADE007755BA /* Sparkle.framework */; };
-		0416E48017A0707F007755BA /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0416E47F17A0707F007755BA /* config.plist */; };
 		0416E48217A0719A007755BA /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0416E48117A0719A007755BA /* dsa_pub.pem */; };
 		041A551A172BF4C30097A07B /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 041A5519172BF4C30097A07B /* StatusItemView.m */; };
 		043334A016ED43FC0029C2F3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433349F16ED43FC0029C2F3 /* Util.m */; };
 		043334A316ED44240029C2F3 /* NSFileManager+Directories.m in Sources */ = {isa = PBXBuildFile; fileRef = 043334A216ED44240029C2F3 /* NSFileManager+Directories.m */; };
+		043942A217CF9C6B009C160F /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 043942A117CF9C6B009C160F /* config.plist */; };
 		043A043316EFDBF3001514B0 /* NSOperationQueue+CWSharedQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */; };
 		043A043516EFE3FD001514B0 /* HandBrakeCLI in Resources */ = {isa = PBXBuildFile; fileRef = 043A043416EFE3FD001514B0 /* HandBrakeCLI */; };
 		043A043716EFEA41001514B0 /* SublerCLI in Resources */ = {isa = PBXBuildFile; fileRef = 043A043616EFEA41001514B0 /* SublerCLI */; };
@@ -41,6 +41,7 @@
 		0468B2D716FA73F50072A08F /* Downloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B2D616FA73F50072A08F /* Downloader.m */; };
 		049378F317973AC0003D9874 /* python in Resources */ = {isa = PBXBuildFile; fileRef = 049378F217973AC0003D9874 /* python */; };
 		049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 049ACB1016C5798E007F103C /* handleBarIcon.png */; };
+		04A75DD017CF949C00764A0F /* handleBar.db in Resources */ = {isa = PBXBuildFile; fileRef = 04EB88C417CF93A60033FBD4 /* handleBar.db */; };
 		04B4D96916E6AD6700BFE4AF /* PrefLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */; };
 		04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4D96A16E6B1FA00BFE4AF /* PrefLocationsViewController.xib */; };
 		04B4D97016E7588500BFE4AF /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96F16E7588500BFE4AF /* Preferences.m */; };
@@ -49,7 +50,6 @@
 		04B9DA8216F3B3BF00DCE173 /* MetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B9DA8116F3B3BF00DCE173 /* MetaData.m */; };
 		04DD72FB1799AB4D0037F50E /* HandleBar-DockIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 04DD72FA1799AB4D0037F50E /* HandleBar-DockIcon.icns */; };
 		04DD73001799AEAC0037F50E /* AppIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD72FF1799AEAC0037F50E /* AppIcon.m */; };
-		04EAB28D1704A6C6004EF64D /* config-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04EAB28B1704A6C6004EF64D /* config-example.plist */; };
 		04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F386F0168E642600B4CB4A /* Cocoa.framework */; };
 		04F386FB168E642600B4CB4A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F386F9168E642600B4CB4A /* InfoPlist.strings */; };
 		04F386FD168E642600B4CB4A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F386FC168E642600B4CB4A /* main.m */; };
@@ -91,7 +91,6 @@
 		04158F9E170CD2F8004D3F8B /* SCEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCEvents.m; sourceTree = "<group>"; };
 		04158FA2170CD32E004D3F8B /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0416E47817A06ADE007755BA /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		0416E47F17A0707F007755BA /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = config.plist; path = "../../HandleBarMenulet-NonGit/config.plist"; sourceTree = "<group>"; };
 		0416E48117A0719A007755BA /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = "../../HandleBarMenulet-NonGit/dsa_pub.pem"; sourceTree = "<group>"; };
 		041A5518172BF4C30097A07B /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		041A5519172BF4C30097A07B /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
@@ -99,6 +98,7 @@
 		0433349F16ED43FC0029C2F3 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		043334A116ED44240029C2F3 /* NSFileManager+Directories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Directories.h"; sourceTree = "<group>"; };
 		043334A216ED44240029C2F3 /* NSFileManager+Directories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Directories.m"; sourceTree = "<group>"; };
+		043942A117CF9C6B009C160F /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		043A043116EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSOperationQueue+CWSharedQueue.h"; sourceTree = "<group>"; };
 		043A043216EFDBDF001514B0 /* NSOperationQueue+CWSharedQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSOperationQueue+CWSharedQueue.m"; sourceTree = "<group>"; };
 		043A043416EFE3FD001514B0 /* HandBrakeCLI */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = HandBrakeCLI; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		04DD72FA1799AB4D0037F50E /* HandleBar-DockIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "HandleBar-DockIcon.icns"; sourceTree = "<group>"; };
 		04DD72FE1799AEAC0037F50E /* AppIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppIcon.h; sourceTree = "<group>"; };
 		04DD72FF1799AEAC0037F50E /* AppIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppIcon.m; sourceTree = "<group>"; };
-		04EAB28B1704A6C6004EF64D /* config-example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-example.plist"; sourceTree = "<group>"; };
+		04EB88C417CF93A60033FBD4 /* handleBar.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = handleBar.db; sourceTree = "<group>"; };
 		04F386EC168E642600B4CB4A /* HandleBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandleBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F386F0168E642600B4CB4A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		04F386F3168E642600B4CB4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -390,9 +390,9 @@
 		04F386F7168E642600B4CB4A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				043942A117CF9C6B009C160F /* config.plist */,
+				04EB88C417CF93A60033FBD4 /* handleBar.db */,
 				0416E48117A0719A007755BA /* dsa_pub.pem */,
-				0416E47F17A0707F007755BA /* config.plist */,
-				04EAB28B1704A6C6004EF64D /* config-example.plist */,
 				04F386F8168E642600B4CB4A /* HandleBarApp-Info.plist */,
 				04F386F9168E642600B4CB4A /* InfoPlist.strings */,
 				04F386FC168E642600B4CB4A /* main.m */,
@@ -467,6 +467,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A75DD017CF949C00764A0F /* handleBar.db in Resources */,
 				049378F317973AC0003D9874 /* python in Resources */,
 				04F386FB168E642600B4CB4A /* InfoPlist.strings in Resources */,
 				04F38701168E642600B4CB4A /* Credits.rtf in Resources */,
@@ -483,10 +484,9 @@
 				044B309116F905460093AEC9 /* iTVDb.podspec in Resources */,
 				044B309216F905460093AEC9 /* LICENSE in Resources */,
 				044B309316F905460093AEC9 /* README.md in Resources */,
-				04EAB28D1704A6C6004EF64D /* config-example.plist in Resources */,
 				04DD72FB1799AB4D0037F50E /* HandleBar-DockIcon.icns in Resources */,
-				0416E48017A0707F007755BA /* config.plist in Resources */,
 				0416E48217A0719A007755BA /* dsa_pub.pem in Resources */,
+				043942A217CF9C6B009C160F /* config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

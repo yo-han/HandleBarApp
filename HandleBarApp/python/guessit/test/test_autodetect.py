@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # GuessIt - A library for guessing information from filenames
-# Copyright (c) 2012 Nicolas Wack <wackou@gmail.com>
+# Copyright (c) 2011-2012 Nicolas Wack <wackou@gmail.com>
 #
 # GuessIt is free software; you can redistribute it and/or modify it under
 # the terms of the Lesser GNU General Public License as published by
@@ -18,25 +18,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from __future__ import unicode_literals
-from guessit.patterns import sep
-import re
-import logging
 
-log = logging.getLogger(__name__)
+from guessittest import *
+
+class TestAutoDetect(TestGuessit):
+    def testAutoDetect(self):
+        self.checkMinimumFieldsCorrect(filetype='autodetect',
+                                       filename='autodetect.yaml',
+                                       remove_type=False)
 
 
-def process(mtree):
-    for node in mtree.unidentified_leaves():
-        indices = []
+suite = allTests(TestAutoDetect)
 
-        didx = 0
-        pattern = re.compile(sep + '-' + sep)
-        match = pattern.search(node.value)
-        while match:
-            span = match.span()
-            indices.extend([ span[0], span[1] ])
-            match = pattern.search(node.value, span[1])
-
-        if indices:
-            node.partition(indices)
+if __name__ == '__main__':
+    TextTestRunner(verbosity=2).run(suite)

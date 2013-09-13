@@ -30,8 +30,7 @@
     NSFileManager *fm = [NSFileManager defaultManager];
     
     NSString *appSupportPath = [fm applicationSupportFolder];
-    NSString *handleBarDir = [projectPath stringByDeletingLastPathComponent];
-    NSString *configLinkFile = [NSString stringWithFormat:@"%@/configPath",handleBarDir];
+    NSString *configLinkFile = [NSString stringWithFormat:@"%@/configPath",projectPath];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"handleBar.db"];
     
     configFilePath = [appSupportPath stringByAppendingPathComponent:@"config.plist"];
@@ -49,8 +48,8 @@
         
         NSError *err;
         
-        NSString *defaultDBPath = [NSString stringWithFormat:@"%@/app/default/handleBar.db",projectPath];
-        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/app/default/config.plist",projectPath];
+        NSString *defaultDBPath = [NSString stringWithFormat:@"%@/handleBar.db",projectPath];
+        NSString *defaultConfigPath = [NSString stringWithFormat:@"%@/config.plist",projectPath];
 
         [fm copyItemAtPath:defaultDBPath toPath:dbFilePath error:&err];
         [fm copyItemAtPath:defaultConfigPath toPath:configFilePath error:&err];
@@ -117,7 +116,7 @@
     
     NSString * path;
 	path = [[NSBundle mainBundle] bundlePath];
-	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources/HandleBar"];
+	projectPath = [path stringByAppendingPathComponent:@"Contents/Resources"];
 }
 
 - (void)updateStatusMenu:(NSString *)eta {
@@ -145,10 +144,10 @@
         NSDictionary *dict = notification.userInfo;
         NSString *etaString = [dict objectForKey:@"eta"];
         NSString *string = nil;
-        
+  
         NSRange textRange = [etaString rangeOfString:@"ETA "];
         if(textRange.location != NSNotFound) {
-            
+           
             NSRange r = NSMakeRange(textRange.location + 4, etaString.length - (textRange.location + 6));
             
             string = [etaString substringWithRange:r];

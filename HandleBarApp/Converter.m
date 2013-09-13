@@ -86,14 +86,14 @@
 
 - (void)pathWatcher:(SCEvents *)pathWatcher eventOccurred:(SCEvent *)event
 {    
-    NSURL *directoryURL = [NSURL URLWithString:event._eventPath];
+    NSURL *directoryURL = [NSURL URLWithString:[event._eventPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     NSMutableArray *videoFiles = [NSMutableArray array];
 
     // If the file is removed or the URL is just missing stop the execution.
     if(directoryURL == nil)
         return;
-    
+     
     NSDirectoryEnumerator *enumerator = [fm enumeratorAtURL:directoryURL includingPropertiesForKeys:keys options:0 errorHandler:^(NSURL *url, NSError *error) { return YES; }];
     
     for (NSURL *url in enumerator) {
@@ -284,7 +284,7 @@
 }
 
 - (NSMutableArray *) findVideoFiles:(NSString *)path array:(NSMutableArray *)videosFiles {
-    
+   
     NSArray *dirFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
     NSArray *files = [dirFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[self fileTypePredicateString]]];
     
@@ -301,7 +301,7 @@
     
     NSArray *fileTypesConfig = [[NSUserDefaults standardUserDefaults] objectForKey:@"FileTypes"];
     NSMutableArray *fileTypes = [[NSMutableArray alloc] init];
-    
+
     for(NSDictionary *fileType in fileTypesConfig) {
         
         NSString *predicate = [NSString stringWithFormat:@"(self ENDSWITH '%@')", [[fileType objectForKey:@"file"] stringByReplacingOccurrencesOfString:@"*" withString:@""]];

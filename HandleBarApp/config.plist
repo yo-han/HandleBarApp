@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Debug</key>
+	<false/>
+	<key>DebugFailedPath</key>
+	<string>media/failed</string>
+	<key>DebugRemovePath</key>
+	<string>media/done</string>
+	<key>FileTypes</key>
+	<array>
+		<dict>
+			<key>file</key>
+			<string>*.mkv</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.wmv</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.mov</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.avi</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.m2ts</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.mp4</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.iso</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.mpg</string>
+		</dict>
+		<dict>
+			<key>file</key>
+			<string>*.ts</string>
+		</dict>
+	</array>
+	<key>HandBrakeLanguage</key>
+	<string>eng</string>
+	<key>HandBrakeLanguageIndex</key>
+	<integer>0</integer>
+	<key>HandBrakePreset</key>
+	<string>AppleTV 3</string>
+	<key>MediaPaths</key>
+	<array>
+		<dict>
+			<key>path</key>
+			<string>/Users/johan/Downloads/tv</string>
+		</dict>
+		<dict>
+			<key>path</key>
+			<string>/Users/johan/Downloads/movies</string>
+		</dict>
+	</array>
+	<key>NotificationOn</key>
+	<true/>
+	<key>ReSubSearchPaths</key>
+	<array>
+		<dict>
+			<key>path</key>
+			<string>/Users/johan/Music/iTunes/iTunes Media/TV Shows</string>
+		</dict>
+		<dict>
+			<key>path</key>
+			<string>/Users/johan/Music/iTunes/iTunes Media/Movies</string>
+		</dict>
+	</array>
+	<key>ReadyPath</key>
+	<string>media/converted</string>
+	<key>SubtitleLanguage</key>
+	<string>Nederlands</string>
+	<key>SubtitleLanguageISO</key>
+	<string>nl</string>
+	<key>SubtitleLanguageIndex</key>
+	<integer>1</integer>
+	<key>tvdbApiKey</key>
+	<string>1CA97717717AEA4F</string>
+	<key>SubtitlePath</key>
+	<string>media/subtitles</string>
+</dict>
+</plist>

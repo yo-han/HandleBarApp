@@ -85,6 +85,7 @@
     NSMutableArray *paths = [NSMutableArray arrayWithArray:[ud objectForKey:udKey]];
     
     fileName = [[NSString stringWithFormat:@"%@",fileName] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
+    fileName = [fileName stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [paths addObject:[NSMutableDictionary dictionaryWithObject:fileName forKey:@"path"]];
     
     [ud setObject:paths forKey:udKey];
