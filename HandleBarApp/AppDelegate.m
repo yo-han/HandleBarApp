@@ -149,9 +149,7 @@
         NSRange textRange = [etaString rangeOfString:@"ETA "];
         if(textRange.location != NSNotFound) {
             
-            NSRange r = NSMakeRange(textRange.location + 4, 9);
-            if(textRange.length < 9)
-                return;
+            NSRange r = NSMakeRange(textRange.location + 4, etaString.length - (textRange.location + 6));
             
             string = [etaString substringWithRange:r];
             

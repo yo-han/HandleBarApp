@@ -139,7 +139,9 @@
             
             mediaFile = [self convert:videoPath directory:[directoryURL description]];
             
-            [self.queuedVideoFiles removeObjectAtIndex:0];
+            if([self.queuedVideoFiles count] != 0)
+                [self.queuedVideoFiles removeObjectAtIndex:0];
+            
             [convertedFiles addObject:videoPath];
             
             NSMutableDictionary *info = [NSMutableDictionary dictionary];
