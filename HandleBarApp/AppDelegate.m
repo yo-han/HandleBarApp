@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <Python/Python.h>
 #import "NSFileManager+Directories.h"
 
 #import "StartAtLoginController.h"

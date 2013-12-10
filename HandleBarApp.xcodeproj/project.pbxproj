@@ -56,7 +56,6 @@
 		04F38701168E642600B4CB4A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 04F386FF168E642600B4CB4A /* Credits.rtf */; };
 		04F38704168E642600B4CB4A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F38703168E642600B4CB4A /* AppDelegate.m */; };
 		04F38707168E642600B4CB4A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F38705168E642600B4CB4A /* MainMenu.xib */; };
-		04F38716168E673100B4CB4A /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F38715168E673100B4CB4A /* Python.framework */; };
 		04F38ACD16907BDD00B4CB4A /* PrefIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F38ACB16907BDD00B4CB4A /* PrefIndexViewController.m */; };
 		04F38ACE16907BDD00B4CB4A /* PrefIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F38ACC16907BDD00B4CB4A /* PrefIndexViewController.xib */; };
 		04F38AD316907BFD00B4CB4A /* PrefConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F38AD116907BFD00B4CB4A /* PrefConfigViewController.m */; };
@@ -164,7 +163,6 @@
 		04F38702168E642600B4CB4A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		04F38703168E642600B4CB4A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		04F38706168E642600B4CB4A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		04F38715168E673100B4CB4A /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
 		04F38ACA16907BDD00B4CB4A /* PrefIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefIndexViewController.h; sourceTree = "<group>"; };
 		04F38ACB16907BDD00B4CB4A /* PrefIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefIndexViewController.m; sourceTree = "<group>"; };
 		04F38ACC16907BDD00B4CB4A /* PrefIndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefIndexViewController.xib; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 				0415072B16B9CFCE00D9AB7A /* Security.framework in Frameworks */,
 				0415071A16B9B94C00D9AB7A /* ScriptingBridge.framework in Frameworks */,
 				04F38AFF1690EC3D00B4CB4A /* ServiceManagement.framework in Frameworks */,
-				04F38716168E673100B4CB4A /* Python.framework in Frameworks */,
 				04F386F1168E642600B4CB4A /* Cocoa.framework in Frameworks */,
 				0416E47917A06ADE007755BA /* Sparkle.framework in Frameworks */,
 			);
@@ -337,7 +334,6 @@
 				0415072A16B9CFCE00D9AB7A /* Security.framework */,
 				0415071616B9B77F00D9AB7A /* ScriptingBridge.framework */,
 				04F38AFE1690EC3D00B4CB4A /* ServiceManagement.framework */,
-				04F38715168E673100B4CB4A /* Python.framework */,
 				04F386F0168E642600B4CB4A /* Cocoa.framework */,
 				04F386F2168E642600B4CB4A /* Other Frameworks */,
 			);
