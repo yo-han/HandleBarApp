@@ -31,7 +31,7 @@
     movie.name = [movieData objectForKey:@"Title"];
     movie.plot = [movieData objectForKey:@"Plot"];
     movie.rating = [movieData objectForKey:@"Rated"];
-    movie.releaseDate = [movieData objectForKey:@"Released"];
+    movie.releaseDate = [movieData objectForKey:@"Year"];
     movie.director = [movieData objectForKey:@"Director"];
     movie.cast = [movieData objectForKey:@"Actors"];
     movie.genre = [movieData objectForKey:@"Genre"];
@@ -45,7 +45,7 @@
 }
 
 - (NSString *)getMetaStringWith:(Movie *)movie; {
-    
+
     NSString *originalFilename = [movie.sourcePath lastPathComponent];    
     NSString *tags = @"{Artwork: %@}{HD Video:%@}{Name:%@}{Director:%@}{Cast:%@}{Genre:%@}{Release Date:%@}{Description:%@}{Long Description:%@}{Rating:%@}{Encoded By:imdbId:%@}{Media Kind:Movie}{Comments:Original filename %@}";
 
