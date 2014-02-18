@@ -18,6 +18,6 @@
 
 @protocol FileSelectDelegate
 
--(void)didSelectFile:(NSString *)fileName;
+-(void)didSelectFile:(NSURL *)fileName;
 
 @end

@@ -10,7 +10,7 @@
 
 @interface FileSelect()
 
--(void)didSelectFile:(NSString *)fileName;
+-(void)didSelectFile:(NSURL *)fileName;
 
 @end
 
@@ -39,18 +39,20 @@
         // Get an array containing the full filenames of all
         // files and directories selected.
         NSArray* files = [openDlg URLs];
-        
+
         // Loop through all the files and process them.
         for( i = 0; i < [files count]; i++ )
         {
-            NSString *fileName = [files objectAtIndex:i];
+            NSString *s = [NSString stringWithFormat:@"%@", [files objectAtIndex:i]];
+            NSURL *fileName = [NSURL URLWithString:s];
+            
             [self didSelectFile:fileName];
         }
     }
 
 }
 
--(void)didSelectFile:(NSString *)fileName {
+-(void)didSelectFile:(NSURL *)fileName {
 
     if(_delegate && [_delegate respondsToSelector:@selector(didSelectFile:)]) {
         [_delegate didSelectFile:fileName];

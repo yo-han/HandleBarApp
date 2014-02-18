@@ -23,15 +23,15 @@
 
 - (NSString *)applicationSupportFolder {
     
-    NSArray *paths =
-    NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory,
-                                        NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:
-                                                0] : NSTemporaryDirectory();
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex: 0] : NSTemporaryDirectory();
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
     
-    return [basePath
-            stringByAppendingPathComponent:appName];
+    NSString *appSupportPath = [basePath stringByAppendingPathComponent:appName];
+    
+    [self getOrCreatePath:appSupportPath];
+    
+    return appSupportPath;    
 }
 
 - (NSString *)copyFileToNewPath:(NSString *)originalPath dir:(NSString *)newDir {

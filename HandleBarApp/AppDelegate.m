@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "NSFileManager+Directories.h"
-
-#import "StartAtLoginController.h"
 #import "Converter.h"
 #import "Util.h"
 #import "Preferences.h"
@@ -25,7 +23,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self redirectConsoleLog];
-        
+  
     NSFileManager *fm = [NSFileManager defaultManager];
     
     NSString *appSupportPath = [fm applicationSupportFolder];
@@ -40,7 +38,7 @@
     [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/converted",appSupportPath]];
     [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/subtitles",appSupportPath]];
     [fm getOrCreatePath:[NSString stringWithFormat:@"%@/media/images",appSupportPath]];
-    
+
     bool b = [fm fileExistsAtPath:dbFilePath];
 
     if(b == NO) {
@@ -67,13 +65,25 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(defaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
     
-    Converter *cnv = [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
+    cnv = [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
     
-    if(!cnv)
+    if(!cnv) {
+        NSLog(@"Converter failed to load");
         return;
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(converterIsRunning:) name:@"updateConvertETA" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateQueueMenu:) name:@"updateQueueMenu" object:nil];
+    
+    NSLog(@"Loaded and ready to go.");
+}
+
+- (void)reloadConverter {
+    
+    [cnv stopEventListener];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithContentsOfFile:configFilePath]];
+    cnv = [[Converter alloc] initWithPaths:[[NSUserDefaults standardUserDefaults] objectForKey:@"MediaPaths"]];
 }
 
 - (void)defaultsChanged:(NSNotification *)notification {

@@ -11,6 +11,7 @@
 
 @class Preferences;
 @class StatusItemView;
+@class Converter;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate> {
     
@@ -22,6 +23,7 @@
     StatusItemView *statusItemView;
     StatusItemView *statusItemViewSmall;
     StatusItemView *statusItemViewLarge;
+    Converter *cnv;
     
     NSView *appIcon;
     
@@ -42,5 +44,6 @@
 @property (strong) Preferences *preferences;
 
 - (IBAction)showLog:(id)sender;
+- (void)reloadConverter;
 
 @end

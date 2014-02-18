@@ -8,6 +8,7 @@
 
 #import "PrefLocationsViewController.h"
 #import "FileSelect.h"
+#import "AppDelegate.h"
 
 #define UserDefaultKeysByTab [NSArray arrayWithObjects: @"MediaPaths",@"ReSubSearchPaths",nil]
 
@@ -77,18 +78,19 @@
     [fs openDialog];
 }
 
-- (void)didSelectFile:(NSString *)fileName {
+- (void)didSelectFile:(NSURL *)fileName {
 
     NSString *udKey = [UserDefaultKeysByTab objectAtIndex:(int) self.activeTab];
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSMutableArray *paths = [NSMutableArray arrayWithArray:[ud objectForKey:udKey]];
-    
-    fileName = [[NSString stringWithFormat:@"%@",fileName] stringByReplacingOccurrencesOfString:@"file://localhost" withString:@""];
-    fileName = [fileName stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [paths addObject:[NSMutableDictionary dictionaryWithObject:fileName forKey:@"path"]];
-    
+
+    NSString *path = [fileName relativePath];
+
+    [paths addObject:[NSMutableDictionary dictionaryWithObject:path forKey:@"path"]];
     [ud setObject:paths forKey:udKey];
+    
+    [(AppDelegate *)[[NSApplication sharedApplication] delegate] reloadConverter];
 }
 
 @end

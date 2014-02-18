@@ -16,5 +16,6 @@
 
 - (id) initWithPaths:(NSArray *)paths;
 - (void)triggerMediaCheck;
+- (void)stopEventListener;
 
 @end

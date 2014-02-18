@@ -67,7 +67,16 @@
     
 	[_events startWatchingPaths:paths];
     
+    NSLog(@"Watch paths: %@", paths);
+    
     [NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(triggerMediaCheck) userInfo:nil repeats:YES];
+}
+
+- (void)stopEventListener {
+    
+    [_events stopWatchingPaths];
+    
+    _convertQueue = nil;
 }
 
 - (void)triggerMediaCheck {
@@ -89,7 +98,9 @@
     NSURL *directoryURL = [NSURL URLWithString:[event._eventPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSArray *keys = [NSArray arrayWithObject:NSURLIsDirectoryKey];
     NSMutableArray *videoFiles = [NSMutableArray array];
-
+    
+    NSLog(@"Event occured on path: %@", directoryURL);
+    
     // If the file is removed or the URL is just missing stop the execution.
     if(directoryURL == nil)
         return;
