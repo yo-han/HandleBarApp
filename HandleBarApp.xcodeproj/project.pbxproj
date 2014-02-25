@@ -40,7 +40,8 @@
 		044B309F16F908510093AEC9 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 044B309E16F908510093AEC9 /* IMDB.m */; };
 		0468B2D716FA73F50072A08F /* Downloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B2D616FA73F50072A08F /* Downloader.m */; };
 		049378F317973AC0003D9874 /* python in Resources */ = {isa = PBXBuildFile; fileRef = 049378F217973AC0003D9874 /* python */; };
-		049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 049ACB1016C5798E007F103C /* handleBarIcon.png */; };
+		0493936618BD3D2F00CC6F55 /* hat.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0493936518BD3D2F00CC6F55 /* hat.icns */; };
+		0493936818BD3DD800CC6F55 /* handleBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0493936718BD3DD800CC6F55 /* handleBarIcon.png */; };
 		04A75DD017CF949C00764A0F /* handleBar.db in Resources */ = {isa = PBXBuildFile; fileRef = 04EB88C417CF93A60033FBD4 /* handleBar.db */; };
 		04B4D96916E6AD6700BFE4AF /* PrefLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */; };
 		04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4D96A16E6B1FA00BFE4AF /* PrefLocationsViewController.xib */; };
@@ -134,8 +135,9 @@
 		0468B2D516FA73F40072A08F /* Downloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloader.h; sourceTree = "<group>"; };
 		0468B2D616FA73F50072A08F /* Downloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Downloader.m; sourceTree = "<group>"; };
 		049378F217973AC0003D9874 /* python */ = {isa = PBXFileReference; lastKnownFileType = folder; name = python; path = HandleBarApp/python; sourceTree = "<group>"; };
+		0493936518BD3D2F00CC6F55 /* hat.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = hat.icns; sourceTree = "<group>"; };
+		0493936718BD3DD800CC6F55 /* handleBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handleBarIcon.png; sourceTree = "<group>"; };
 		049675EE1702428B00379E5C /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
-		049ACB1016C5798E007F103C /* handleBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handleBarIcon.png; sourceTree = "<group>"; };
 		04B4D96716E6AD6700BFE4AF /* PrefLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefLocationsViewController.h; sourceTree = "<group>"; };
 		04B4D96816E6AD6700BFE4AF /* PrefLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefLocationsViewController.m; sourceTree = "<group>"; };
 		04B4D96A16E6B1FA00BFE4AF /* PrefLocationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefLocationsViewController.xib; sourceTree = "<group>"; };
@@ -222,8 +224,9 @@
 		043A055E16F2246F001514B0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0493936718BD3DD800CC6F55 /* handleBarIcon.png */,
+				0493936518BD3D2F00CC6F55 /* hat.icns */,
 				04DD72FA1799AB4D0037F50E /* HandleBar-DockIcon.icns */,
-				049ACB1016C5798E007F103C /* handleBarIcon.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -471,11 +474,12 @@
 				04F38ACE16907BDD00B4CB4A /* PrefIndexViewController.xib in Resources */,
 				04F38AD416907BFD00B4CB4A /* PrefConfigViewController.xib in Resources */,
 				04F38ADE16907CCA00B4CB4A /* MASPreferencesWindow.xib in Resources */,
-				049ACB1116C5798E007F103C /* handleBarIcon.png in Resources */,
+				0493936618BD3D2F00CC6F55 /* hat.icns in Resources */,
 				04B4D96B16E6B1FA00BFE4AF /* PrefLocationsViewController.xib in Resources */,
 				04B4D97516E7E28000BFE4AF /* languages.plist in Resources */,
 				043A043516EFE3FD001514B0 /* HandBrakeCLI in Resources */,
 				043A043716EFEA41001514B0 /* SublerCLI in Resources */,
+				0493936818BD3DD800CC6F55 /* handleBarIcon.png in Resources */,
 				043A055C16F22434001514B0 /* ffmpeg in Resources */,
 				044B309116F905460093AEC9 /* iTVDb.podspec in Resources */,
 				044B309216F905460093AEC9 /* LICENSE in Resources */,

@@ -21,7 +21,7 @@
         title = @"";
         
         image= [NSImage imageNamed:@"handleBarIcon.png"];
-        [image setSize:CGSizeMake(24, 12)];
+        [image setSize:CGSizeMake(19, 19)];
         
         controller = ctrlr; // deliberately weak reference.
     }
@@ -67,7 +67,7 @@
         
         NSSize msgSize = [text sizeWithAttributes:msgAttrs];
         NSRect msgRect = NSMakeRect(0, 0, msgSize.width, msgSize.height);
-        NSRect imgRect = NSMakeRect(2, 5, 24, 12);
+        NSRect imgRect = NSMakeRect(2, 4, 19, 15);
         
         msgRect.origin.x = ([self frame].size.width - msgSize.width) - 5;
         msgRect.origin.y = 4;
