@@ -10,29 +10,29 @@
 	<string>HandleBarApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7ACE4826-D6B0-45E6-BF4A-4189B25719DF</key>
+		<key>8B92FE9CAE45A3A0DCEF64784FD4804BB0ECEE10</key>
 		<string>https://github.com/yo-han/HandleBarApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HandleBarApp.xcodeproj/project.xcworkspace</string>
+	<string>HandleBarApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7ACE4826-D6B0-45E6-BF4A-4189B25719DF</key>
+		<key>8B92FE9CAE45A3A0DCEF64784FD4804BB0ECEE10</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/yo-han/HandleBarApp.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7ACE4826-D6B0-45E6-BF4A-4189B25719DF</string>
+	<string>8B92FE9CAE45A3A0DCEF64784FD4804BB0ECEE10</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7ACE4826-D6B0-45E6-BF4A-4189B25719DF</string>
+			<string>8B92FE9CAE45A3A0DCEF64784FD4804BB0ECEE10</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HandleBarApp</string>
 		</dict>
